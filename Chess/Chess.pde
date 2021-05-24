@@ -6,6 +6,8 @@ PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-pie
 void setup(){
   size(800, 800);
   imagePawn = loadImage("Pawn.png");
+  
+  drawSquares();
 }
 
 void drawSquares(){
