@@ -1,11 +1,45 @@
-abstract class Piece{
-  private int row,col, colorP;
-  private boolean selected, available;
-  private ArrayList<int[]> validMoves;
+import java.util.*;
+
+public abstract class Piece{
+  private int colorP; //-1 = white
+  private int row;
+  private int col;
+  private ArrayList<Square> squares;
+  private boolean selected;
+  ArrayList<int[]> validMoves;
   
-  abstract void updateValidMoves();//updates validMoves after moving. So, selecting and deselecting only uses getValidMoves.
+  public Piece(int colour, int r, int c){
+    colorP = colour;
+    row = r;
+    col = c;
+    squares = new ArrayList<Square>();
+    selected = false;
+  }
   
-  ArrayList<int[]> getValidMoves(){
+  public int getColor(){
+    return colorP;
+  }
+  
+  public int[] getPos(){
+    int[] pos = new int[]{row, col};
+    
+    return pos;
+  }
+  
+  public void setPos(int r, int c){
+    row = r;
+    col = c;
+  }
+  
+  public void setSelected(boolean b){
+    selected = b;
+  }
+  
+  public ArrayList<int[]> getValidMoves(){
     return validMoves;
   }
+  
+  abstract void updateValidMoves();
+  abstract void click(int x, int y);
+  abstract void display();
 }
