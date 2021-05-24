@@ -1,5 +1,8 @@
 abstract class Piece{
-  int row,col, colorP;
-  boolean selected, available;
-   
+  private int row,col, colorP;
+  private boolean selected, available;
+  
+  abstract ArrayList<int[]> getValidMoves();
+  
+  
 }
