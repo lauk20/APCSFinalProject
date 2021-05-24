@@ -1,5 +1,3 @@
-import java.util.*;
-
 public abstract class Piece{
   private int colorP; //-1 = white
   private int row;

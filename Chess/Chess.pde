@@ -1,3 +1,5 @@
+import java.util.*;
+
 Piece[][] board = new Piece[8][8];
 
 int orientation = 1;
