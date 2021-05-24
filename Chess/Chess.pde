@@ -31,6 +31,20 @@ void drawSquares(){
   }
 }
 
+/*change white to black, does not have to be pure white.
+  this is so that we don't have to find white and black images
+  for the pieces, just white and then convert to black
+*/
+color invertColor(color c){
+  float red = red(c);
+  float green = green(c);
+  float blue = blue(c);
+  
+  if (red >= 200 && green >= 200 && blue >= 200){
+    return color(0,0,0);
+  }
+  return c;
+}
 
 int whosMove = -1; // -1 is white
 void draw(){
