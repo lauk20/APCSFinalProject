@@ -39,6 +39,10 @@ public abstract class Piece{
     return selected;
   }
   
+  public ArrayList<Square> getSquares(){
+    return squares;
+  }
+  
   public ArrayList<int[]> getValidMoves(){
     return validMoves;
   }
