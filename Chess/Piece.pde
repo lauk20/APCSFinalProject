@@ -35,6 +35,10 @@ public abstract class Piece{
     selected = b;
   }
   
+  public boolean isSelected(){
+    return selected;
+  }
+  
   public ArrayList<int[]> getValidMoves(){
     return validMoves;
   }
