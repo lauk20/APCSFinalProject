@@ -39,6 +39,14 @@ public abstract class Piece{
     return validMoves;
   }
   
+  public void moveTo(int row, int col){
+    board[this.row][this.col] = null;
+    this.row = row;
+    this.col = col;
+    board[row][col] = this;
+    whosMove = whosMove * -1;
+  }
+  
   abstract void updateValidMoves();
   abstract void click(int x, int y);
   abstract void display();
