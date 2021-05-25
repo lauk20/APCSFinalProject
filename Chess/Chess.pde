@@ -68,5 +68,13 @@ void draw(){
 }
 
 void mouseClicked(){
-
+  for (int i = 0; i < board.length; i++){
+    for (int j = 0; j < board[0].length; j++){
+      if (board[i][j] != null){
+        board[i][j].click(mouseX, mouseY);
+      }
+    }
+  }
+  
+  updateBoard();
 }
