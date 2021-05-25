@@ -48,6 +48,7 @@ public abstract class Piece{
     whosMove = whosMove * -1;
     board = getRotatedBoard();
     orientation = orientation * -1;
+    newThreatMaps();
     updateMoves();
   }
   
