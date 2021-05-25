@@ -15,8 +15,6 @@ public class King extends Piece{
     int col = coords[1];
     int colorP = getColor();
     
-    println(Arrays.toString(moveMatrices));
-    
     for (int[] move : moveMatrices){
       int rMove = move[0];
       int cMove = move[1];
