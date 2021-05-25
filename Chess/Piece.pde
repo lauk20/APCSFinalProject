@@ -4,7 +4,6 @@ public abstract class Piece{
   private int col;
   private ArrayList<Square> squares;
   private boolean selected;
-  private ArrayList<int[]> validMoves;
   
   public Piece(int colour, int r, int c){
     colorP = colour;
@@ -12,7 +11,7 @@ public abstract class Piece{
     col = c;
     squares = new ArrayList<Square>();
     selected = false;
-    validMoves = new ArrayList<int[]>();
+    //validMoves = new ArrayList<int[]>();
     updateValidMoves();
   }
   
@@ -43,19 +42,17 @@ public abstract class Piece{
     return squares;
   }
   
-  public ArrayList<int[]> getValidMoves(){
-    return validMoves;
-  }
-  
   public void moveTo(int row, int col){
     board[this.row][this.col] = null;
     this.row = row;
     this.col = col;
     board[row][col] = this;
     whosMove = whosMove * -1;
+    updateMoves();
   }
   
   abstract void updateValidMoves();
+  abstract ArrayList<int[]> getValidMoves();
   abstract void click(int x, int y);
   abstract void display();
 }

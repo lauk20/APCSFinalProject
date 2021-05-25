@@ -61,6 +61,16 @@ void updateBoard(){
   }
 }
 
+void updateMoves(){
+  for (Piece[] row : board){
+    for (Piece p : row){
+      if (p != null){
+        p.updateValidMoves();
+      }
+    }
+  }
+}
+
 int whosMove = -1; // -1 is white
 int orientation = 1; //orientation of the board. 1 is white on bottom of screen, -1 is black on bottom of screen
 void draw(){

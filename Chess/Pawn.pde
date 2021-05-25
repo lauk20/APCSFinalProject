@@ -1,5 +1,6 @@
 public class Pawn extends Piece{
   private boolean firstMove;
+  private ArrayList<int[]> validMoves;
 
   public Pawn(int colour, int r, int c){
     super(colour, r, c);
@@ -8,8 +9,7 @@ public class Pawn extends Piece{
   }
   
   public void updateValidMoves(){
-    ArrayList<int[]> moves = getValidMoves();
-    moves.clear();
+    ArrayList<int[]> moves = new ArrayList<int[]>();
     int[] coords = getPos();
     int row = coords[0];
     int col = coords[1];
@@ -34,11 +34,17 @@ public class Pawn extends Piece{
         moves.add(new int[]{row + colorP, col + 1});
       }
     }
+    
+    validMoves = moves;
   }
 
   public void moveTo(int row, int col){
     super.moveTo(row, col);
     firstMove = false;
+  }
+  
+  public ArrayList<int[]> getValidMoves(){
+    return validMoves;
   }
   
   public void click(int x, int y){
