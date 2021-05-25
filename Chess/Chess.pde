@@ -9,7 +9,12 @@ void setup(){
   size(800, 800);
   imagePawn = loadImage("Pawn.png");
   
-  drawSquares();
+  for (int i = 0; i < board[0].length; i++){
+    board[1][i] = new Pawn(1, 1, i);
+    board[6][i] = new Pawn(-1, 6, i);
+  }
+  
+  updateBoard();
 }
 
 void drawSquares(){
@@ -28,6 +33,18 @@ void drawSquares(){
       counterx++;
     }
     countery++;
+  }
+}
+
+void updateBoard(){
+  clear();
+  drawSquares();
+  for (int i = 0; i < board.length; i++){
+    for (int j = 0; j < board[0].length; j++){
+      if (board[i][j] != null){
+        board[i][j].display();
+      }
+    }
   }
 }
 
