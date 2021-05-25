@@ -34,6 +34,22 @@ public class Pawn extends Piece{
       }
     }
     
+    if (col != 0 && row != 0 && row != 7){
+      if (getColor() == -1){
+        whiteThreatMap[row + colorP * orientation][col - 1].add(this);
+      }else{
+        blackThreatMap[row + colorP * orientation][col - 1].add(this);
+      }
+    }
+    
+    if (col != 7 && row != 0 && row != 7){
+      if (getColor() == -1){
+        whiteThreatMap[row + colorP * orientation][col + 1].add(this);
+      }else{
+        blackThreatMap[row + colorP * orientation][col + 1].add(this);
+      }
+    }
+    
     validMoves = moves;
   }
 
