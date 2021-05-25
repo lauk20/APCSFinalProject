@@ -1,17 +1,27 @@
 import java.util.*;
 
 Piece[][] board = new Piece[8][8];
+King whiteKing;
+King blackKing;
 
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
+PImage imageKing; //https://www.clipartmax.com/middle/m2i8H7d3G6K9N4H7_chess-piece-king-queen-pawn-chess-white-king-icon/
 
 void setup(){
   size(800, 800);
   imagePawn = loadImage("Pawn.png");
+  imageKing = loadImage("King.png");
   
   for (int i = 0; i < board[0].length; i++){
     board[1][i] = new Pawn(1, 1, i);
     board[6][i] = new Pawn(-1, 6, i);
   }
+  
+  whiteKing = new King(-1, 7, 4);
+  board[7][4] = whiteKing;
+  blackKing = new King(1, 0, 4);
+  board[0][4] = blackKing;
+  
   updateBoard();
 }
 
