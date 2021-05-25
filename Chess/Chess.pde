@@ -1,16 +1,25 @@
 import java.util.*;
 
 Piece[][] board = new Piece[8][8];
+ArrayList<Piece>[][] whiteThreatMap = new ArrayList[8][8]; //squares white pieces threaten
+ArrayList<Piece>[][] blackThreatMap = new ArrayList[8][8]; //squares black pieces threaten
 int whosMove = -1; // -1 is white
 int orientation = 1; //orientation of the board. 1 is white on bottom of screen, -1 is black on bottom of screen
 King whiteKing;
 King blackKing;
+
 
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
 PImage imageKing; //https://www.clipartmax.com/middle/m2i8H7d3G6K9N4H7_chess-piece-king-queen-pawn-chess-white-king-icon/
 
 void setup(){
   size(800, 800);
+  for (int i = 0; i < 8; i++){
+    for (int j = 0; j < 8; j++){
+      whiteThreatMap[i][j] = new ArrayList<Piece>();
+      blackThreatMap[i][j] = new ArrayList<Piece>();
+    }
+  }
   imagePawn = loadImage("Pawn.png");
   imageKing = loadImage("King.png");
   
@@ -103,6 +112,15 @@ Piece[][] getRotatedBoard(){
   }
   
   return rotated;
+}
+
+void newThreatMaps(){
+  for (int i = 0; i < 8; i++){
+    for (int j = 0; j < 8; j++){
+      whiteThreatMap[i][j] = new ArrayList<Piece>();
+      blackThreatMap[i][j] = new ArrayList<Piece>();
+    }
+  }
 }
 
 void draw(){
