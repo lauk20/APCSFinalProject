@@ -71,6 +71,27 @@ void updateMoves(){
   }
 }
 
+//Rotates the board, MUST change orientation to preserve direction of moves
+Piece[][] getRotatedBoard(){
+  Piece[][] rotated = new Piece[8][8];
+  int originalRow = 0;
+  int originalCol = 0;
+  
+  for (int i = 7; i >= 0 && originalRow < 8; i--){
+    for (int j = 7; j >= 0 && originalCol < 8; j--){
+      rotated[i][j] = board[originalRow][originalCol];
+      if (board[originalRow][originalCol] != null){
+        board[originalRow][originalCol].setPos(i, j);
+      }
+      originalCol = originalCol + 1;
+    }
+    originalCol = 0;
+    originalRow = originalRow + 1;
+  }
+  
+  return rotated;
+}
+
 int whosMove = -1; // -1 is white
 int orientation = 1; //orientation of the board. 1 is white on bottom of screen, -1 is black on bottom of screen
 void draw(){
