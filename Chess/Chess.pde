@@ -23,6 +23,7 @@ void setup(){
   board[0][4] = blackKing;
   
   updateBoard();
+  updateMoves();
 }
 
 void drawSquares(){

@@ -11,7 +11,6 @@ public abstract class Piece{
     col = c;
     squares = new ArrayList<Square>();
     selected = false;
-    updateValidMoves();
   }
   
   public int getColor(){
@@ -49,7 +48,6 @@ public abstract class Piece{
     whosMove = whosMove * -1;
     board = getRotatedBoard();
     orientation = orientation * -1;
-    updateMoves();
   }
   
   abstract void updateValidMoves();

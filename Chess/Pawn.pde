@@ -5,7 +5,6 @@ public class Pawn extends Piece{
   public Pawn(int colour, int r, int c){
     super(colour, r, c);
     firstMove = true;
-    updateValidMoves();
   }
   
   public void updateValidMoves(){

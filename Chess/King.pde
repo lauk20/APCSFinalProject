@@ -1,12 +1,11 @@
 import java.util.*;
 
 public class King extends Piece{
-  private int[][] moveMatrix = new int[][]{{1,0}, {-1,0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
+  private int[][] moveMatrices = new int[][]{{1,0}, {-1,0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
   private ArrayList<int[]> validMoves;
   
   public King(int colour, int r, int c){
     super(colour, r, c);
-    updateValidMoves();
   }
   
   public void updateValidMoves(){
@@ -15,6 +14,19 @@ public class King extends Piece{
     int row = coords[0];
     int col = coords[1];
     int colorP = getColor();
+    
+    println(Arrays.toString(moveMatrices));
+    
+    for (int[] move : moveMatrices){
+      int rMove = move[0];
+      int cMove = move[1];
+      
+      if (row + rMove >= 0 && row + rMove < 8 && col + cMove >= 0 && col + cMove < 8){
+        if (board[row + rMove][col + cMove] == null || board[row + rMove][col + cMove].getColor() != colorP){
+          moves.add(new int[]{row + rMove, col + cMove});
+        }
+      }
+    }
     
     validMoves = moves;
   }
