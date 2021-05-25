@@ -4,7 +4,7 @@ public abstract class Piece{
   private int col;
   private ArrayList<Square> squares;
   private boolean selected;
-  ArrayList<int[]> validMoves;//
+  private ArrayList<int[]> validMoves;
   
   public Piece(int colour, int r, int c){
     colorP = colour;
@@ -12,6 +12,8 @@ public abstract class Piece{
     col = c;
     squares = new ArrayList<Square>();
     selected = false;
+    validMoves = new ArrayList<int[]>();
+    updateValidMoves();
   }
   
   public int getColor(){
