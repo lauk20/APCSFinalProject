@@ -11,7 +11,6 @@ public abstract class Piece{
     col = c;
     squares = new ArrayList<Square>();
     selected = false;
-    //validMoves = new ArrayList<int[]>();
     updateValidMoves();
   }
   
