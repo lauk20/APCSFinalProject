@@ -8,7 +8,32 @@ public class Pawn extends Piece{
   }
   
   public void updateValidMoves(){
+    ArrayList<int[]> moves = getValidMoves();
+    moves.clear();
+    int[] coords = getPos();
+    int row = coords[0];
+    int col = coords[1];
+    int colorP = getColor();
     
+    if (firstMove && board[row + colorP * 2][col] == null){
+      moves.add(new int[]{row + colorP * 2, col});
+    }
+  
+    if ((row != 0 && row != 7) && board[row + colorP][col] == null){
+      moves.add(new int[]{row + colorP, col});
+    }
+      
+    if ((col != 0 && row != 0 && row != 7) && board[row + colorP][col - 1] != null){
+      if(board[row + colorP][col - 1].getColor() != getColor()){
+        moves.add(new int[]{row + colorP, col - 1});
+      }
+    }
+      
+    if ((col != 7 && row != 0 && row != 7) && board[row + colorP][col + 1] != null){
+      if(board[row + colorP][col + 1].getColor() != getColor()){
+        moves.add(new int[]{row + colorP, col + 1});
+      }
+    }
   }
 
   public void moveTo(int row, int col){

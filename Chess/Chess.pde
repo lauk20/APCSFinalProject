@@ -2,7 +2,6 @@ import java.util.*;
 
 Piece[][] board = new Piece[8][8];
 
-int orientation = 1;
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
 
 void setup(){
@@ -63,6 +62,7 @@ void updateBoard(){
 }
 
 int whosMove = -1; // -1 is white
+int orientation = 1; //orientation of the board. 1 is white on bottom of screen, -1 is black on bottom of screen
 void draw(){
   
 }
