@@ -50,6 +50,21 @@ public class King extends Piece{
   }
   
   public void display(){
-     
+    int[] pos = getPos();
+    PImage copy = imageKing.copy();
+    if (getColor() == 1){
+      for (int i = 15; i < copy.width - 10; i++){
+        for (int j = 14; j < copy.height - 10; j++){
+          copy.set(i, j, invertColor(imageKing.get(i, j)));
+        }
+      }
+    }
+    image(copy, pos[1] * 100, pos[0] * 100);
+    
+    if (isSelected()){
+      for (Square s : getSquares()){
+        s.display();
+      }
+    }
   }
 }
