@@ -48,6 +48,8 @@ public abstract class Piece{
     this.col = col;
     board[row][col] = this;
     whosMove = whosMove * -1;
+    board = getRotatedBoard();
+    orientation = orientation * -1;
     updateMoves();
   }
   
