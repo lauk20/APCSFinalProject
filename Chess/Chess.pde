@@ -8,6 +8,15 @@ PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-pie
 void setup(){
   size(800, 800);
   imagePawn = loadImage("Pawn.png");
+<<<<<<< HEAD
+  
+  for (int i = 0; i < board[0].length; i++){
+    board[1][i] = new Pawn(1, 1, i);
+    board[6][i] = new Pawn(-1, 6, i);
+  }
+  
+  updateBoard();
+=======
   int testx = 0;
   int testy = 0;
   System.out.print(alpha(imagePawn.get(testx,testy))+", "+(red(imagePawn.get(testx,testy)))+", "+(green(imagePawn.get(testx,testy)))+", "+(blue(imagePawn.get(testx,testy)))+", ");//looks at values of a pixel
@@ -22,6 +31,7 @@ void setup(){
       image(board[x][y].getImage(), x*100, y*100);
     }
   }
+>>>>>>> 70cefc3b5a09f9f72e847ba049bdbb161c80db41
 }
 
 void drawSquares(){
@@ -40,6 +50,18 @@ void drawSquares(){
       counterx++;
     }
     countery++;
+  }
+}
+
+void updateBoard(){
+  clear();
+  drawSquares();
+  for (int i = 0; i < board.length; i++){
+    for (int j = 0; j < board[0].length; j++){
+      if (board[i][j] != null){
+        board[i][j].display();
+      }
+    }
   }
 }
 
