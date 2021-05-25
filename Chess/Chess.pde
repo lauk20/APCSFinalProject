@@ -1,6 +1,8 @@
 import java.util.*;
 
 Piece[][] board = new Piece[8][8];
+int whosMove = -1; // -1 is white
+int orientation = 1; //orientation of the board. 1 is white on bottom of screen, -1 is black on bottom of screen
 King whiteKing;
 King blackKing;
 
@@ -103,8 +105,6 @@ Piece[][] getRotatedBoard(){
   return rotated;
 }
 
-int whosMove = -1; // -1 is white
-int orientation = 1; //orientation of the board. 1 is white on bottom of screen, -1 is black on bottom of screen
 void draw(){
   
 }
