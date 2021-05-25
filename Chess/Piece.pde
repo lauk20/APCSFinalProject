@@ -1,15 +1,24 @@
 public abstract class Piece{
   private int colorP; //-1 = white
+  private PImage image;
   private int row;
   private int col;
   private ArrayList<Square> squares;
   private boolean selected;
   ArrayList<int[]> validMoves;
   
-  public Piece(int colour, int r, int c){
+  public Piece(int colour, int r, int c, PImage i){
     colorP = colour;
     row = r;
     col = c;
+    if (colour != -1){
+      for (int x = 0; x < i.width; x++){
+        for (int y = 0; y < i.height; y++){
+          i.set(x,y, invertColor(color(i.get(x,y))));
+        }
+      }
+    }
+    image = i;
     squares = new ArrayList<Square>();
     selected = false;
   }
@@ -22,6 +31,10 @@ public abstract class Piece{
     int[] pos = new int[]{row, col};
     
     return pos;
+  }
+  
+  public PImage getImage(){
+    return image;
   }
   
   public void setPos(int r, int c){
