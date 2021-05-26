@@ -55,6 +55,10 @@ public class Bishop extends Piece{
     int row = coords[0];
     int col = coords[1];
     
+    if (r == row && c == col){ //meaning it will capture it so no threat;
+      return threatMap;
+    }
+    
     for (int[] move : moveMatrices){
       int rMove = row + move[0];
       int cMove = col + move[1];
@@ -81,14 +85,14 @@ public class Bishop extends Piece{
       }
     }
     
-    for (int i = 0; i < threatMap.length; i++){
+    /*for (int i = 0; i < threatMap.length; i++){
       for (int j = 0; j < threatMap[i].length; j++){
         print(threatMap[i][j].size() + " ");
       }
       println();
     }
     
-    println(getColor() + " " + getPos()[0] + " " + getPos()[1]);
+    println(getColor() + " " + getPos()[0] + " " + getPos()[1]);*/
     return threatMap;
   }
   
