@@ -101,6 +101,7 @@ void updateMoves(){
   
   whiteKing.updateValidMoves();
   blackKing.updateValidMoves();
+  whiteKing.updateValidMoves();
 }
 
 //Rotates the board, MUST change orientation to preserve direction of moves
