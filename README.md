@@ -11,8 +11,12 @@ Link: https://docs.google.com/document/d/1o0dgqXgDeqktdCHe9d0ZRGArPyJQEDs9bVVidZ
 Instructions: press run and play normally.
 
 ## Development Log
+### 5/26/21
+**Kenny Lau:** I created and completed the ``Rook`` class today. I also implemented one of the most crucial functions to a chess game to all the pieces that we currently have: Pieces cannot open its own King to a check anymore! I created new methods that "hypothetically" move the piece to a potential square that helps with the validating moves to see if they open its own king to a check. Also fixed Kings being able to put itself into a check, an error that was from yesterday's code.
+
 ### 5/25/21
 **Kenny Lau:** I completed the ```Pawn``` class, which now moves correctly. I also implemented the board rotation feature, so after each turn, the board will rotate. The ```King``` class was also completed and moves correctly. The King can now move correctly and also avoid putting itself into a check position by using the "threat maps" that I implemented. The Pawn moves correctly, but it can still make moves that open the King to a check; this will be addressed in later updates (probably).
+
 **Timothy Sit:** I created the ```Knight``` class. The king can still put itself in check with it, so I not done coding it yet. Beside that, I just discussed how code should be implemented with Kenny.
 
 ### 5/24/21
