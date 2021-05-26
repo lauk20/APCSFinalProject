@@ -10,6 +10,7 @@ King blackKing;
 
 
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
+PImage imageKnight;
 PImage imageKing; //https://www.clipartmax.com/middle/m2i8H7d3G6K9N4H7_chess-piece-king-queen-pawn-chess-white-king-icon/
 
 void setup(){
@@ -21,12 +22,18 @@ void setup(){
     }
   }
   imagePawn = loadImage("Pawn.png");
+  imageKnight = loadImage("Knight.png");
   imageKing = loadImage("King.png");
   
   for (int i = 0; i < board[0].length; i++){
     board[1][i] = new Pawn(1, 1, i);
     board[6][i] = new Pawn(-1, 6, i);
   }
+  
+  board[0][1] = new Knight(1,0,1);
+  board[0][6] = new Knight(1,0,6);
+  board[7][1] = new Knight(-1,7,1);
+  board[7][6] = new Knight(-1,7,6);
   
   whiteKing = new King(-1, 7, 4);
   board[7][4] = whiteKing;
