@@ -1,5 +1,5 @@
 public class Rook extends Piece{
-  private int[][] moveMatrices = new int[][]{ {-1, 0}, {1, 0}, {0, -1}, {-1, 0}};
+  private int[][] moveMatrices = new int[][]{ {-1, 0}, {1, 0}, {0, -1}, {0, 1}};
   private ArrayList<int[]> validMoves;
   
   public Rook(int colour, int r, int c){
