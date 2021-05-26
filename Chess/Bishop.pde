@@ -28,11 +28,11 @@ public class Bishop extends Piece{
         if (!stopAddingMoves){
           moves.add(new int[]{rMove, cMove});
         }
-        rMove += move[0];
-        cMove += move[1];
         if (board[rMove][cMove] != null){
           stopAddingMoves = true;
         }
+        rMove += move[0];
+        cMove += move[1];
       }
     }
     
