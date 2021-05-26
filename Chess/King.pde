@@ -20,15 +20,18 @@ public class King extends Piece{
       int cMove = col + move[1];
       
       if (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8){
+         if (colorP == -1){
+            whiteThreatMap[rMove][cMove].add(this);
+         }else{
+            blackThreatMap[rMove][cMove].add(this);
+         }
         if (board[rMove][cMove] == null || board[rMove][cMove].getColor() != colorP){
           if (colorP == -1){
             if (blackThreatMap[rMove][cMove].size() == 0){
-              whiteThreatMap[rMove][cMove].add(this);
               moves.add(new int[]{rMove, cMove});
             }
           }else{
             if (whiteThreatMap[rMove][cMove].size() == 0){
-              blackThreatMap[rMove][cMove].add(this);
               moves.add(new int[]{rMove, cMove});
             }
           }
