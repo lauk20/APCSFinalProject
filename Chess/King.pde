@@ -23,10 +23,12 @@ public class King extends Piece{
         if (board[row + rMove][col + cMove] == null || board[row + rMove][col + cMove].getColor() != colorP){
           if (colorP == -1){
             if (blackThreatMap[row + rMove][col + cMove].size() == 0){
+              whiteThreatMap[row + rMove][col + cMove].add(this);
               moves.add(new int[]{row + rMove, col + cMove});
             }
           }else{
             if (whiteThreatMap[row + rMove][col + cMove].size() == 0){
+              blackThreatMap[row + rMove][col + cMove].add(this);
               moves.add(new int[]{row + rMove, col + cMove});
             }
           }
