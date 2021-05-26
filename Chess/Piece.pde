@@ -52,6 +52,44 @@ public abstract class Piece{
     updateMoves();
   }
   
+  public boolean hypotheticalMove(int r, int c){
+    Piece[][] originalBoard = board.clone();
+    int[] coords = getPos();
+    int row = coords[0];
+    int col = coords[1];
+    int colorP = getColor();
+    
+    board[row][col] = null;
+    board[r][c] = this;
+    
+    newThreatMaps();
+    updateMoves();
+    
+    if (colorP == -1){
+      int[] kingCoords = whiteKing.getPos();
+      int kRow = kingCoords[0];
+      int kCol = kingCoords[1];
+      
+      if (blackThreatMap[kRow][kCol].size() > 0){
+        return false;
+      }
+    }else{
+      int[] kingCoords = blackKing.getPos();
+      int kRow = kingCoords[0];
+      int kCol = kingCoords[1];
+      
+      if (whiteThreatMap[kRow][kCol].size() > 0){
+        return false;
+      }
+    }
+    
+    board = originalBoard;
+    newThreatMaps();
+    updateMoves();
+    
+    return true;
+  }
+  
   public void click(){
     if (whosMove != getColor()) return;
     int[] pos = getPos();
