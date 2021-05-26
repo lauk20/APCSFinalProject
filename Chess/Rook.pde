@@ -17,25 +17,22 @@ public class Rook extends Piece{
       int rMove = row + move[0];
       int cMove = col + move[1];
       
-      while (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8 && board[rMove][cMove] == null ){
+      boolean stopAddingMoves = false;
+      
+      while (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8){
         if (colorP == -1){
-          moves.add(new int[]{rMove, cMove});
           whiteThreatMap[rMove][cMove].add(this);
         }else{
-          moves.add(new int[]{rMove, cMove});
           blackThreatMap[rMove][cMove].add(this);
+        }
+        if (!stopAddingMoves){
+          moves.add(new int[]{rMove, cMove});
+        }
+        if (board[rMove][cMove] != null){
+          stopAddingMoves = true;
         }
         rMove += move[0];
         cMove += move[1];
-      }
-      if (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8 && board[rMove][cMove].getColor() != colorP){
-        if (colorP == -1){
-          moves.add(new int[]{rMove, cMove});
-          whiteThreatMap[rMove][cMove].add(this);
-        }else{
-          moves.add(new int[]{rMove, cMove});
-          blackThreatMap[rMove][cMove].add(this);
-        }
       }
     }
     
