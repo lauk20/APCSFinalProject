@@ -75,7 +75,7 @@ public abstract class Piece{
         kCol = kingCoords[1];
       }
       if (rawMap[kRow][kCol].size() > 0){
-        println(kRow + " " + kCol);
+        //println(kRow + " " + kCol);
         return false;
       }
     }

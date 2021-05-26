@@ -76,7 +76,7 @@ public class Bishop extends Piece{
           }
         }
         if (board[rMove][cMove] == null && rMove == r && cMove == c){
-          println(rMove + " " + cMove + " Bishop");
+          //println(rMove + " " + cMove + " Bishop");
           stopAddingThreats = true;
         }
         
