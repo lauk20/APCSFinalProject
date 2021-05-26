@@ -52,8 +52,33 @@ public abstract class Piece{
     updateMoves();
   }
   
+  public void click(){
+    if (whosMove != getColor()) return;
+    int[] pos = getPos();
+    if (isSelected()){
+      for (int[] move : getValidMoves()){
+        if (move[1] == mouseX / 100 && move[0] == mouseY / 100){
+          moveTo(move[0], move[1]);
+        }
+      }
+    }
+    if (dist(mouseX, mouseY, pos[1] * 100 + 50, pos[0] * 100 + 50) < 50){
+      setSelected(!isSelected());
+      ArrayList<int[]> moves = getValidMoves();
+      if (!isSelected()){
+        getSquares().clear();
+      }else{
+        for (int[] coord : moves){
+          getSquares().add(new Square(coord[1] * 100, coord[0] * 100, color(0, 255, 0, 100)));
+        }
+      }
+    }else{
+      setSelected(false);
+      getSquares().clear();
+    }
+  }
+  
   abstract void updateValidMoves();
   abstract ArrayList<int[]> getValidMoves();
-  abstract void click(int x, int y);
   abstract void display();
 }
