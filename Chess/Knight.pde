@@ -22,12 +22,12 @@ public class Knight extends Piece{
           if (colorP == -1){
             if (blackThreatMap[row + rMove][col + cMove].size() == 0){
               moves.add(new int[]{row + rMove, col + cMove});
-              System.out.println("White" +(row + rMove)+", "+ (col + cMove));
+              //System.out.println("White" +(row + rMove)+", "+ (col + cMove));
             }
           }else{
             if (whiteThreatMap[row + rMove][col + cMove].size() == 0){
               moves.add(new int[]{row + rMove, col + cMove});
-              System.out.println("Black" + (row + rMove)+", "+ (col + cMove));
+              //System.out.println("Black" + (row + rMove)+", "+ (col + cMove));
             }
           }
         }
@@ -71,7 +71,7 @@ public class Knight extends Piece{
     int[] pos = getPos();
     PImage copy = imageKnight.copy();
     if (getColor() == 1){
-      for (int i = 15; i < copy.width - 10; i++){
+      for (int i = 10; i < copy.width - 10; i++){
         for (int j = 14; j < copy.height - 10; j++){
           copy.set(i, j, invertColor(imageKnight.get(i, j)));
         }
