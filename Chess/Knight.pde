@@ -20,15 +20,11 @@ public class Knight extends Piece{
       if (row + rMove >= 0 && row + rMove < 8 && col + cMove >= 0 && col + cMove < 8){
         if (board[row + rMove][col + cMove] == null || board[row + rMove][col + cMove].getColor() != colorP){
           if (colorP == -1){
-            if (blackThreatMap[row + rMove][col + cMove].size() == 0){
-              moves.add(new int[]{row + rMove, col + cMove});
-              //System.out.println("White" +(row + rMove)+", "+ (col + cMove));
-            }
+            moves.add(new int[]{row + rMove, col + cMove});
+            whiteThreatMap[row + rMove][col + cMove].add(this);
           }else{
-            if (whiteThreatMap[row + rMove][col + cMove].size() == 0){
-              moves.add(new int[]{row + rMove, col + cMove});
-              //System.out.println("Black" + (row + rMove)+", "+ (col + cMove));
-            }
+            moves.add(new int[]{row + rMove, col + cMove});
+            blackThreatMap[row + rMove][col + cMove].add(this);
           }
         }
       }
