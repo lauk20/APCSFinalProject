@@ -16,20 +16,20 @@ public class King extends Piece{
     int colorP = getColor();
     
     for (int[] move : moveMatrices){
-      int rMove = move[0];
-      int cMove = move[1];
+      int rMove = row + move[0];
+      int cMove = col + move[1];
       
-      if (row + rMove >= 0 && row + rMove < 8 && col + cMove >= 0 && col + cMove < 8){
-        if (board[row + rMove][col + cMove] == null || board[row + rMove][col + cMove].getColor() != colorP){
+      if (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8){
+        if (board[rMove][cMove] == null || board[rMove][cMove].getColor() != colorP){
           if (colorP == -1){
-            if (blackThreatMap[row + rMove][col + cMove].size() == 0){
-              whiteThreatMap[row + rMove][col + cMove].add(this);
-              moves.add(new int[]{row + rMove, col + cMove});
+            if (blackThreatMap[rMove][cMove].size() == 0){
+              whiteThreatMap[rMove][cMove].add(this);
+              moves.add(new int[]{rMove, cMove});
             }
           }else{
-            if (whiteThreatMap[row + rMove][col + cMove].size() == 0){
-              blackThreatMap[row + rMove][col + cMove].add(this);
-              moves.add(new int[]{row + rMove, col + cMove});
+            if (whiteThreatMap[rMove][cMove].size() == 0){
+              blackThreatMap[rMove][cMove].add(this);
+              moves.add(new int[]{rMove, cMove});
             }
           }
         }
