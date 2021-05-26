@@ -11,7 +11,7 @@ King blackKing;
 
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
 PImage imageKnight; //https://www.clipartmax.com/middle/m2i8H7i8i8d3A0d3_this-free-icons-png-design-of-chess-tile-knight-chess-piece/
-//PImage imageBishop;
+PImage imageBishop;
 PImage imageKing; //https://www.clipartmax.com/middle/m2i8H7d3G6K9N4H7_chess-piece-king-queen-pawn-chess-white-king-icon/
 
 void setup(){
@@ -24,6 +24,7 @@ void setup(){
   }
   imagePawn = loadImage("Pawn.png");
   imageKnight = loadImage("Knight.png");
+  imageBishop = loadImage("Bishop.png");
   imageKing = loadImage("King.png");
   
   for (int i = 0; i < board[0].length; i++){

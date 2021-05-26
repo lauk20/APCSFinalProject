@@ -17,18 +17,25 @@ public class Bishop extends Piece{
       int rMove = row + move[0];
       int cMove = col + move[1];
       
-      while (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8 && (board[rMove][cMove] == null || board[rMove][cMove].getColor() != colorP)){
-        if (board[rMove][cMove] == null || board[rMove][cMove].getColor() != colorP){
-          if (colorP == -1){
-            moves.add(new int[]{rMove, cMove});
-            whiteThreatMap[rMove][cMove].add(this);
-          }else{
-            moves.add(new int[]{rMove, cMove});
-            blackThreatMap[rMove][cMove].add(this);
-          }
+      while (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8 && board[rMove][cMove] == null ){
+        if (colorP == -1){
+          moves.add(new int[]{rMove, cMove});
+          whiteThreatMap[rMove][cMove].add(this);
+        }else{
+          moves.add(new int[]{rMove, cMove});
+          blackThreatMap[rMove][cMove].add(this);
         }
         rMove += move[0];
         cMove += move[1];
+      }
+      if (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8 && board[rMove][cMove].getColor() != colorP){
+        if (colorP == -1){
+          moves.add(new int[]{rMove, cMove});
+          whiteThreatMap[rMove][cMove].add(this);
+        }else{
+          moves.add(new int[]{rMove, cMove});
+          blackThreatMap[rMove][cMove].add(this);
+        }
       }
     }
     
@@ -41,11 +48,11 @@ public class Bishop extends Piece{
   
   public void display(){
     int[] pos = getPos();
-    PImage copy = imageKnight.copy();
+    PImage copy = imageBishop.copy();
     if (getColor() == 1){
       for (int i = 10; i < copy.width - 10; i++){
         for (int j = 14; j < copy.height - 10; j++){
-          copy.set(i, j, invertColor(imageKnight.get(i, j)));
+          copy.set(i, j, invertColor(imageBishop.get(i, j)));
         }
       }
     }
