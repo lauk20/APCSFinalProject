@@ -53,7 +53,7 @@ public class Pawn extends Piece{
     validMoves = moves;
   }
   
-  public ArrayList<Piece>[][] rawThreatMap(int row, int col){
+  public ArrayList<Piece>[][] rawThreatMap(int row, int col, Piece movedPiece){
     ArrayList<Piece>[][] threatMap = new ArrayList[8][8];
     generateArrayListArray(threatMap);
     int colorP = getColor();

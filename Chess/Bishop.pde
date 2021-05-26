@@ -48,7 +48,7 @@ public class Bishop extends Piece{
     validMoves = moves;
   }
   
-  public ArrayList<Piece>[][] rawThreatMap(int row, int col){
+  public ArrayList<Piece>[][] rawThreatMap(int row, int col, Piece movedPiece){
     ArrayList<Piece>[][] threatMap = new ArrayList[8][8];
     generateArrayListArray(threatMap);
     
@@ -64,15 +64,28 @@ public class Bishop extends Piece{
         }
         if (board[rMove][cMove] != null){
           Piece piece = board[rMove][cMove];
-          if (piece != whiteKing && piece != blackKing){
+          if (piece != whiteKing && piece != blackKing && piece != movedPiece){
             stopAddingThreats = true;
           }
         }
+        if (board[rMove][cMove] == null && rMove == row && cMove == col){
+          println(rMove + " " + cMove + " Bishop");
+          stopAddingThreats = true;
+        }
+        
         rMove += move[0];
         cMove += move[1];
       }
     }
     
+    for (int i = 0; i < threatMap.length; i++){
+      for (int j = 0; j < threatMap[i].length; j++){
+        print(threatMap[i][j].size() + " ");
+      }
+      println();
+    }
+    
+    println(getColor());
     return threatMap;
   }
   

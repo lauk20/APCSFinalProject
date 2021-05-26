@@ -63,8 +63,9 @@ public abstract class Piece{
       map = blackThreatMap;
     }
     
-    for (Piece p : map[row][col]){
-      ArrayList<Piece>[][] rawMap = p.rawThreatMap(r, c);
+    ArrayList<Piece> ALP = map[row][col];
+    for (Piece p : ALP){
+      ArrayList<Piece>[][] rawMap = p.rawThreatMap(r, c, this);
       int[] kingCoords = whiteKing.getPos();
       int kRow = kingCoords[0];
       int kCol = kingCoords[1];
@@ -73,7 +74,8 @@ public abstract class Piece{
         kRow = kingCoords[0];
         kCol = kingCoords[1];
       }
-      if (rawMap[kRow][kCol] != null && rawMap[kRow][kCol].size() > 0){
+      if (rawMap[kRow][kCol].size() > 0){
+        println(kRow + " " + kCol);
         return false;
       }
     }
@@ -116,7 +118,7 @@ public abstract class Piece{
   }
   
   abstract void updateValidMoves();
-  abstract ArrayList<Piece>[][] rawThreatMap(int r, int c);
+  abstract ArrayList<Piece>[][] rawThreatMap(int row, int col, Piece movedPiece);
   abstract ArrayList<int[]> getValidMoves();
   abstract void display();
 }
