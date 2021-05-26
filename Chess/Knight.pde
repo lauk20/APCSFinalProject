@@ -18,14 +18,13 @@ public class Knight extends Piece{
       int cMove = col + move[1];
       
       if (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8){
-        if (board[rMove][cMove] == null || board[rMove][cMove].getColor() != colorP){
-          if (colorP == -1){
-            moves.add(new int[]{rMove, cMove});
+         if (colorP == -1){
             whiteThreatMap[rMove][cMove].add(this);
-          }else{
-            moves.add(new int[]{rMove, cMove});
+         }else{
             blackThreatMap[rMove][cMove].add(this);
-          }
+         }
+        if (board[rMove][cMove] == null || board[rMove][cMove].getColor() != colorP){
+          moves.add(new int[]{rMove, cMove});
         }
       }
     }

@@ -18,12 +18,21 @@ public class Rook extends Piece{
       int cMove = col + move[1];
       
       boolean stopAddingMoves = false;
+      boolean stopAddingThreats = false;
       
       while (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8){
-        if (colorP == -1){
-          whiteThreatMap[rMove][cMove].add(this);
-        }else{
-          blackThreatMap[rMove][cMove].add(this);
+        if (!stopAddingThreats){
+          if (colorP == -1){
+            whiteThreatMap[rMove][cMove].add(this);
+          }else{
+            blackThreatMap[rMove][cMove].add(this);
+          }
+        }
+        if (board[rMove][cMove] != null){
+          Piece piece = board[rMove][cMove];
+          if (piece != whiteKing && piece != blackKing){
+            stopAddingThreats = true;
+          }
         }
         if (!stopAddingMoves && (board[rMove][cMove] == null || board[rMove][cMove].getColor() != colorP)){
           moves.add(new int[]{rMove, cMove});
