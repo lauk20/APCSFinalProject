@@ -25,7 +25,7 @@ public class Bishop extends Piece{
         }else{
           blackThreatMap[rMove][cMove].add(this);
         }
-        if (!stopAddingMoves){
+        if (!stopAddingMoves && (board[rMove][cMove] == null || board[rMove][cMove].getColor() != colorP)){
           moves.add(new int[]{rMove, cMove});
         }
         if (board[rMove][cMove] != null){
