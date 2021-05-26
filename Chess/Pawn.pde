@@ -52,6 +52,22 @@ public class Pawn extends Piece{
     
     validMoves = moves;
   }
+  
+  public ArrayList<Piece>[][] rawThreatMap(int row, int col){
+    ArrayList<Piece>[][] threatMap = new ArrayList[8][8];
+    generateArrayListArray(threatMap);
+    int colorP = getColor();
+    
+    if (col != 0 && row != 0 && row != 7){
+      threatMap[row + colorP * orientation][col - 1].add(this);
+    }
+    
+    if (col != 7 && row != 0 && row != 7){
+      threatMap[row + colorP * orientation][col + 1].add(this);
+    }
+    
+    return threatMap;
+  }
 
   public void moveTo(int row, int col){
     super.moveTo(row, col);

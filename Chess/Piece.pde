@@ -53,39 +53,30 @@ public abstract class Piece{
   }
   
   public boolean hypotheticalMove(int r, int c){
-    Piece[][] originalBoard = board.clone();
     int[] coords = getPos();
     int row = coords[0];
     int col = coords[1];
     int colorP = getColor();
     
-    board[row][col] = null;
-    board[r][c] = this;
-    
-    newThreatMaps();
-    updateMoves();
-    
+    ArrayList<Piece>[][] map = whiteThreatMap;
     if (colorP == -1){
+      map = blackThreatMap;
+    }
+    
+    for (Piece p : map[row][col]){
+      ArrayList<Piece>[][] rawMap = p.rawThreatMap(r, c);
       int[] kingCoords = whiteKing.getPos();
       int kRow = kingCoords[0];
       int kCol = kingCoords[1];
-      
-      if (blackThreatMap[kRow][kCol].size() > 0){
-        return false;
+      if (colorP == 1){
+        kingCoords = blackKing.getPos();
+        kRow = kingCoords[0];
+        kCol = kingCoords[1];
       }
-    }else{
-      int[] kingCoords = blackKing.getPos();
-      int kRow = kingCoords[0];
-      int kCol = kingCoords[1];
-      
-      if (whiteThreatMap[kRow][kCol].size() > 0){
+      if (rawMap[kRow][kCol] != null && rawMap[kRow][kCol].size() > 0){
         return false;
       }
     }
-    
-    board = originalBoard;
-    newThreatMaps();
-    updateMoves();
     
     return true;
   }
@@ -116,7 +107,16 @@ public abstract class Piece{
     }
   }
   
+  public void generateArrayListArray(ArrayList<Piece>[][] map){
+    for (int i = 0; i < 8; i++){
+      for (int j = 0; j < 8; j++){
+        map[i][j] = new ArrayList<Piece>();
+      }
+    }
+  }
+  
   abstract void updateValidMoves();
+  abstract ArrayList<Piece>[][] rawThreatMap(int r, int c);
   abstract ArrayList<int[]> getValidMoves();
   abstract void display();
 }

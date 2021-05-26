@@ -42,6 +42,22 @@ public class King extends Piece{
     validMoves = moves;
   }
   
+  public ArrayList<Piece>[][] rawThreatMap(int row, int col){
+    ArrayList<Piece>[][] threatMap = new ArrayList[8][8];
+    generateArrayListArray(threatMap);
+    
+    for (int[] move : moveMatrices){
+      int rMove = row + move[0];
+      int cMove = col + move[1];
+      
+      if (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8){
+        threatMap[rMove][cMove].add(this);
+      }
+    }
+    
+    return threatMap;
+  }
+  
   public ArrayList<int[]> getValidMoves(){
     return validMoves;
   }

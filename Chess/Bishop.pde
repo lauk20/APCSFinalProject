@@ -34,7 +34,7 @@ public class Bishop extends Piece{
             stopAddingThreats = true;
           }
         }
-        if (!stopAddingMoves && (board[rMove][cMove] == null || board[rMove][cMove].getColor() != colorP)){
+        if (!stopAddingMoves && (board[rMove][cMove] == null || board[rMove][cMove].getColor() != colorP) && hypotheticalMove(rMove, cMove)){
           moves.add(new int[]{rMove, cMove});
         }
         if (board[rMove][cMove] != null){
@@ -46,6 +46,34 @@ public class Bishop extends Piece{
     }
     
     validMoves = moves;
+  }
+  
+  public ArrayList<Piece>[][] rawThreatMap(int row, int col){
+    ArrayList<Piece>[][] threatMap = new ArrayList[8][8];
+    generateArrayListArray(threatMap);
+    
+    for (int[] move : moveMatrices){
+      int rMove = row + move[0];
+      int cMove = col + move[1];
+      
+      boolean stopAddingThreats = false;
+      
+      while (rMove >= 0 && rMove < 8 && cMove >= 0 && cMove < 8){
+        if (!stopAddingThreats){
+            threatMap[rMove][cMove].add(this);
+        }
+        if (board[rMove][cMove] != null){
+          Piece piece = board[rMove][cMove];
+          if (piece != whiteKing && piece != blackKing){
+            stopAddingThreats = true;
+          }
+        }
+        rMove += move[0];
+        cMove += move[1];
+      }
+    }
+    
+    return threatMap;
   }
   
   public ArrayList<int[]> getValidMoves(){
