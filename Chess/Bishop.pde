@@ -48,9 +48,12 @@ public class Bishop extends Piece{
     validMoves = moves;
   }
   
-  public ArrayList<Piece>[][] rawThreatMap(int row, int col, Piece movedPiece){
+  public ArrayList<Piece>[][] rawThreatMap(int r, int c, Piece movedPiece){
     ArrayList<Piece>[][] threatMap = new ArrayList[8][8];
     generateArrayListArray(threatMap);
+    int[] coords = getPos();
+    int row = coords[0];
+    int col = coords[1];
     
     for (int[] move : moveMatrices){
       int rMove = row + move[0];
@@ -68,7 +71,7 @@ public class Bishop extends Piece{
             stopAddingThreats = true;
           }
         }
-        if (board[rMove][cMove] == null && rMove == row && cMove == col){
+        if (board[rMove][cMove] == null && rMove == r && cMove == c){
           println(rMove + " " + cMove + " Bishop");
           stopAddingThreats = true;
         }
@@ -85,7 +88,7 @@ public class Bishop extends Piece{
       println();
     }
     
-    println(getColor());
+    println(getColor() + " " + getPos()[0] + " " + getPos()[1]);
     return threatMap;
   }
   
