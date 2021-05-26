@@ -14,21 +14,21 @@ public class Pawn extends Piece{
     int col = coords[1];
     int colorP = getColor();
     
-    if (firstMove && board[row + colorP * 2 * orientation][col] == null){
+    if (firstMove && board[row + colorP * 2 * orientation][col] == null && hypotheticalMove(row + colorP * 2 * orientation, col)){
       moves.add(new int[]{row + colorP * 2 * orientation, col});
     }
   
-    if ((row != 0 && row != 7) && board[row + colorP * orientation][col] == null){
+    if ((row != 0 && row != 7) && board[row + colorP * orientation][col] == null && hypotheticalMove(row + colorP * orientation, col)){
       moves.add(new int[]{row + colorP * orientation, col});
     }
       
-    if ((col != 0 && row != 0 && row != 7) && board[row + colorP * orientation][col - 1] != null){
+    if ((col != 0 && row != 0 && row != 7) && board[row + colorP * orientation][col - 1] != null && hypotheticalMove(row + colorP * orientation, col - 1)){
       if(board[row + colorP * orientation][col - 1].getColor() != getColor()){
         moves.add(new int[]{row + colorP * orientation, col - 1});
       }
     }
       
-    if ((col != 7 && row != 0 && row != 7) && board[row + colorP * orientation][col + 1] != null){
+    if ((col != 7 && row != 0 && row != 7) && board[row + colorP * orientation][col + 1] != null && hypotheticalMove(row + colorP * orientation, col + 1)){
       if(board[row + colorP * orientation][col + 1].getColor() != getColor()){
         moves.add(new int[]{row + colorP * orientation, col + 1});
       }
