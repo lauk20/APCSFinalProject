@@ -13,6 +13,7 @@ PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-pie
 PImage imageKnight; //https://www.clipartmax.com/middle/m2i8H7i8i8d3A0d3_this-free-icons-png-design-of-chess-tile-knight-chess-piece/
 PImage imageBishop;
 PImage imageKing; //https://www.clipartmax.com/middle/m2i8H7d3G6K9N4H7_chess-piece-king-queen-pawn-chess-white-king-icon/
+PImage imageRook;
 
 void setup(){
   size(800, 800);
@@ -26,6 +27,7 @@ void setup(){
   imageKnight = loadImage("Knight.png");
   imageBishop = loadImage("Bishop.png");
   imageKing = loadImage("King.png");
+  imageRook = loadImage("Rook.png");
   
   for (int i = 0; i < board[0].length; i++){
     board[1][i] = new Pawn(1, 1, i);
@@ -46,6 +48,11 @@ void setup(){
   board[7][4] = whiteKing;
   blackKing = new King(1, 0, 4);
   board[0][4] = blackKing;
+  
+  board[7][0] = new Rook(-1, 7, 0);
+  board[7][7] = new Rook(-1, 7, 7);
+  board[0][0] = new Rook(1, 0, 0);
+  board[0][7] = new Rook(1, 0, 7);
   
   updateBoard();
   updateMoves();

@@ -51,7 +51,7 @@ public class Bishop extends Piece{
     PImage copy = imageBishop.copy();
     if (getColor() == 1){
       for (int i = 10; i < copy.width - 10; i++){
-        for (int j = 14; j < copy.height - 10; j++){
+        for (int j = 8; j < copy.height - 10; j++){
           copy.set(i, j, invertColor(imageBishop.get(i, j)));
         }
       }
