@@ -108,6 +108,16 @@ void updateBoard(){
       }
     }
   }
+  
+  if (winner != 0){
+    fill(100, 97, 97, 150);
+    rect(0, 0, 800, 800);
+  }
+  if (winner == -1){
+    displayMessage("WHITE WINS", color(255,255,255,255));
+  }else if (winner == 1){
+    displayMessage("BLACK WINS", color(0, 0, 0, 255));
+  }
 }
 
 void updateMoves(){
@@ -182,7 +192,8 @@ boolean isCheckmate(){
         }
       }
     }
-    println("BLACK WINS");
+    //println("BLACK WINS");
+    winner = 1;
     return true;
   }else if (blackKing.getValidMoves().size() == 0){
     for (int i = 0; i < board.length; i++){
@@ -194,10 +205,17 @@ boolean isCheckmate(){
         }
       }
     }
-    println("WHITE WINS");
+    //println("WHITE WINS");
+    winner = -1;
     return true;
   }
   
-  
   return false;
+}
+
+void displayMessage(String text, color c){
+  fill(c);
+  textAlign(CENTER);
+  textSize(64);
+  text(text, width/2, height/2);
 }
