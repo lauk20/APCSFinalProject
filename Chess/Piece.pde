@@ -50,6 +50,7 @@ public abstract class Piece{
     orientation = orientation * -1;
     newThreatMaps();
     updateMoves();
+    isCheckmate();
   }
   
   public boolean hypotheticalMove(int r, int c){

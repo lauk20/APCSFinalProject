@@ -7,6 +7,7 @@ int whosMove = -1; // -1 is white
 int orientation = 1; //orientation of the board. 1 is white on bottom of screen, -1 is black on bottom of screen
 King whiteKing;
 King blackKing;
+int winner = 0; //0 is no winner, -1 is white, 1 is black.
 
 
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
@@ -167,4 +168,36 @@ void mouseClicked(){
   }
   
   updateBoard();
+}
+
+//UML: "isCheck()"
+boolean isCheckmate(){
+  if (whiteKing.getValidMoves().size() == 0){
+    for (int i = 0; i < board.length; i++){
+      for (int j = 0; j < board[0].length; j++){
+        if (board[i][j] != null && board[i][j].getColor() == -1){
+          if (board[i][j].getValidMoves().size() > 0){
+            return false;
+          }
+        }
+      }
+    }
+    println("BLACK WINS");
+    return true;
+  }else if (blackKing.getValidMoves().size() == 0){
+    for (int i = 0; i < board.length; i++){
+      for (int j = 0; j < board[0].length; j++){
+        if (board[i][j] != null && board[i][j].getColor() == 1){
+          if (board[i][j].getValidMoves().size() > 0){
+            return false;
+          }
+        }
+      }
+    }
+    println("WHITE WINS");
+    return true;
+  }
+  
+  
+  return false;
 }
