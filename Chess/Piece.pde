@@ -75,7 +75,7 @@ public abstract class Piece{
         kRow = kingCoords[0];
         kCol = kingCoords[1];
       }
-      if (rawMap[kRow][kCol].size() > 0){
+      if (rawMap[kRow][kCol].size() > 0 && board[r][c] != p){
         //println(kRow + " " + kCol);
         return false;
       }
@@ -101,7 +101,7 @@ public abstract class Piece{
         kRow = kingCoords[0];
         kCol = kingCoords[1];
       }
-      if (rawMap[kRow][kCol].size() > 0){
+      if (rawMap[kRow][kCol].size() > 0 && board[r][c] != p){
         //println(kRow + " " + kCol);
         return false;
       }
