@@ -50,6 +50,7 @@ public abstract class Piece{
     orientation = orientation * -1;
     newThreatMaps();
     updateMoves();
+    updateMoves(); // called a second time because for example: if a black queen just checked the king in a previous move and we have some white pieces that is past the black queen, their valid moves would not be correct because the queen's threat map has not been updated since the last move yet and the white pieces past the queen think that there's no check.
     isCheckmate();
   }
   
