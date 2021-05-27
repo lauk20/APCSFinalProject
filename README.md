@@ -13,7 +13,7 @@
 2. Open ```Chess.pde``` in Processing
 3. Press Run
 
-*TIP:* You can only select/unselect pieces if you click near them (a design choice).
+*TIP: You can only select/unselect pieces if you click near them (a design choice).*
 
 ## Development Log
 ### 5/27/21
