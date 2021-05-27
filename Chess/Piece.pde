@@ -80,6 +80,32 @@ public abstract class Piece{
       }
     }
     
+    if (colorP == -1){
+      int[] kingCoords = whiteKing.getPos();
+      row = kingCoords[0];
+      col = kingCoords[1];
+    }else{
+      int[] kingCoords = blackKing.getPos();
+      row = kingCoords[0];
+      col = kingCoords[1];
+    }
+    
+    for (Piece p : map[row][col]){
+      ArrayList<Piece>[][] rawMap = p.rawThreatMap(r, c, this);
+      int[] kingCoords = whiteKing.getPos();
+      int kRow = kingCoords[0];
+      int kCol = kingCoords[1];
+      if (colorP == 1){
+        kingCoords = blackKing.getPos();
+        kRow = kingCoords[0];
+        kCol = kingCoords[1];
+      }
+      if (rawMap[kRow][kCol].size() > 0){
+        //println(kRow + " " + kCol);
+        return false;
+      }
+    }
+    
     return true;
   }
   
