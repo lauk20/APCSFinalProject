@@ -1,16 +1,23 @@
 # APCSFinalProject
 
-Team Name: Chess Masters
+**Team Name:** Chess Masters
 
-Team Members: Kenny Lau, Timothy Sit
+**Team Members:** Kenny Lau, Timothy Sit
 
-Project Description: This is just regular chess. There's an 8 by 8 board with all the pieces. The looks will be simplified though with a birds eye view. The pieces will look like simple sprites.
+**Project Description:** This is just regular chess. There's an 8 by 8 board with all the pieces. The looks will be simplified though with a birds eye view. The pieces will look like simple sprites.
 
-Link: https://docs.google.com/document/d/1o0dgqXgDeqktdCHe9d0ZRGArPyJQEDs9bVVidZOPrwI/edit?usp=sharing
+**Link:** https://docs.google.com/document/d/1o0dgqXgDeqktdCHe9d0ZRGArPyJQEDs9bVVidZOPrwI/edit?usp=sharing
 
-Instructions: press run and play normally.
+**Run Instructions**
+1. Install Processing
+2. Open ```Chess.pde``` in Processing
+3. Press Run
+*TIP:* You can only select/unselect pieces if you click near them (a design choice).
 
 ## Development Log
+### 5/27/21
+**Kenny Lau:** Created and completed the ```Queen``` class, meaning all Pieces are now made. Also fixed error with pieces being able to make moves that would keep their king in check (from yesterday's code). Implemented a way to determine a checkmate that is now working and displays the winner on the screen. As far as testing goes, the game seems to be functional, not including special moves that may be added later.
+
 ### 5/26/21
 **Kenny Lau:** I created and completed the ``Rook`` class today. I also implemented one of the most crucial functions to a chess game to all the pieces that we currently have: Pieces cannot open its own King to a check anymore! I created new methods that "hypothetically" move the piece to a potential square that helps with the validating moves to see if they open its own king to a check. Also fixed Kings being able to put itself into a check, an error that was from yesterday's code.
 
