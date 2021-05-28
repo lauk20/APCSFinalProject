@@ -1,9 +1,11 @@
 public class Rook extends Piece{
   private int[][] moveMatrices = new int[][]{ {-1, 0}, {1, 0}, {0, -1}, {0, 1}};
   private ArrayList<int[]> validMoves;
+  boolean firstMove;
   
   public Rook(int colour, int r, int c){
     super(colour, r, c);
+    firstMove = true;
   }
   
   public void updateValidMoves(){
@@ -81,6 +83,11 @@ public class Rook extends Piece{
     }
     
     return threatMap;
+  }
+  
+  public void moveTo(int row, int col){
+    super.moveTo(row, col);
+    firstMove = false;
   }
   
   public ArrayList<int[]> getValidMoves(){
