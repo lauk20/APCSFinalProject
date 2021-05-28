@@ -18,9 +18,13 @@
 ## Development Log
 ### 5/27/21
 **Kenny Lau:** Created and completed the ```Queen``` class, meaning all Pieces are now made. Also fixed error with pieces being able to make moves that would keep their king in check (from yesterday's code). Implemented a way to determine a checkmate that is now working and displays the winner on the screen. As far as testing goes, the game seems to be functional, not including special moves that may be added later.
+**Timothy Sit:** Started on transforming ```Pawn``` when it reaches the end. Not completed yet, but the looks are done.
+
 
 ### 5/26/21
 **Kenny Lau:** I created and completed the ``Rook`` class today. I also implemented one of the most crucial functions to a chess game to all the pieces that we currently have: Pieces cannot open its own King to a check anymore! I created new methods that "hypothetically" move the piece to a potential square that helps with the validating moves to see if they open its own king to a check. Also fixed Kings being able to put itself into a check, an error that was from yesterday's code.
+
+**Timothy Sit:** Today was a rest day for me.
 
 ### 5/25/21
 **Kenny Lau:** I completed the ```Pawn``` class, which now moves correctly. I also implemented the board rotation feature, so after each turn, the board will rotate. The ```King``` class was also completed and moves correctly. The King can now move correctly and also avoid putting itself into a check position by using the "threat maps" that I implemented. The Pawn moves correctly, but it can still make moves that open the King to a check; this will be addressed in later updates (probably).
