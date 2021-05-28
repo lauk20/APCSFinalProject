@@ -19,7 +19,7 @@
 
 ## Development Log
 ### 5/28/21
-**Kenny Lau:** Fixed check error with the Knight where it allowed other Pieces to keep the King in check. Completed the castling special move for both white and black pieces.
+**Kenny Lau:** Fixed check error with the Knight where it allowed other Pieces to keep the King in check. Fixed another check error where pieces could not identify a King was being checked by a Pawn. Also added feature where after a Pawn is promoted, the resulting Piece will be able to be identified as a check if there is one. Completed the castling special move for both white and black pieces.
 
 ### 5/27/21
 **Kenny Lau:** Created and completed the ```Queen``` class, meaning all Pieces are now made. Also fixed error with pieces being able to make moves that would keep their king in check (from yesterday's code). Implemented a way to determine a checkmate that is now working and displays the winner on the screen. As far as testing goes, the game seems to be functional, not including special moves that may be added later.
