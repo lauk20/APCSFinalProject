@@ -1,7 +1,7 @@
 public class Rook extends Piece{
   private int[][] moveMatrices = new int[][]{ {-1, 0}, {1, 0}, {0, -1}, {0, 1}};
   private ArrayList<int[]> validMoves;
-  boolean firstMove;
+  private boolean firstMove;
   
   public Rook(int colour, int r, int c){
     super(colour, r, c);
@@ -111,5 +111,9 @@ public class Rook extends Piece{
         s.display();
       }
     }
+  }
+  
+  public boolean isFirstMove(){
+    return firstMove;
   }
 }

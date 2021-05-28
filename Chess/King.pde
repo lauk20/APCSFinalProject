@@ -41,6 +41,21 @@ public class King extends Piece{
       }
     }
     
+    if (firstMove){
+      if (colorP == -1){
+        if (blackThreatMap[row][col + 1].size() == 0 && blackThreatMap[row][col + 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteRightRook.isFirstMove() && whiteRightRook.hypotheticalMove(row, col + 1)){
+          moves.add(new int[]{row, col + 2});
+        }
+        if (blackThreatMap[row][col - 1].size() == 0 && blackThreatMap[row][col - 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteLeftRook.isFirstMove() && whiteLeftRook.hypotheticalMove(row, col + 3)){
+          moves.add(new int[]{row, col + 2});
+        }
+      }else{
+        if (whiteThreatMap[row][col + 1].size() == 0 && whiteThreatMap[row][col + 2].size() == 0 && whiteThreatMap[row][col].size() == 0){
+          moves.add(new int[]{row, col + 2});
+        }    
+      }
+    }
+    
     validMoves = moves;
   }
   
@@ -61,6 +76,19 @@ public class King extends Piece{
   }
   
   public void moveTo(int row, int col){
+    int[] coords = getPos();
+    int c = coords[1];
+    int colorP = getColor();
+    Rook rookInQuestion;
+    if (firstMove && col == c + 2){
+      if (colorP == -1){
+        rookInQuestion = whiteRightRook;
+      }
+      else{
+        rookInQuestion = blackRightRook;
+      }
+      rookInQuestion.moveTo(row, col + 1);
+    }
     super.moveTo(row, col);
     firstMove = false;
   }

@@ -7,6 +7,10 @@ int whosMove = -1; // -1 is white
 int orientation = 1; //orientation of the board. 1 is white on bottom of screen, -1 is black on bottom of screen
 King whiteKing;
 King blackKing;
+Rook whiteRightRook;
+Rook whiteLeftRook;
+Rook blackRightRook;
+Rook blackLeftRook;
 int winner = 0; //0 is no winner, -1 is white, 1 is black.
 boolean transformation = false;
 Piece transforming;
@@ -54,10 +58,14 @@ void setup(){
   blackKing = new King(1, 0, 4);
   board[0][4] = blackKing;
   
-  board[7][0] = new Rook(-1, 7, 0);
-  board[7][7] = new Rook(-1, 7, 7);
-  board[0][0] = new Rook(1, 0, 0);
-  board[0][7] = new Rook(1, 0, 7);
+  whiteLeftRook = new Rook(-1, 7, 0);
+  board[7][0] = whiteLeftRook;
+  whiteRightRook = new Rook(-1, 7, 7);
+  board[7][7] = whiteRightRook;
+  blackRightRook = new Rook(1, 0, 0);
+  board[0][0] = blackRightRook;
+  blackLeftRook = new Rook(1, 0, 7);
+  board[0][7] = blackLeftRook;
   
   board[7][3] = new Queen(-1, 7, 3);
   board[0][3] = new Queen(1, 0, 3);
