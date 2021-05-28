@@ -51,7 +51,7 @@ public abstract class Piece{
     }else if (pieceThere == blackLeftRook){
       blackLeftRook = null;
     }
-    pieceThere = null;
+    board[this.row][this.col] = null;
     this.row = row;
     this.col = col;
     board[row][col] = this;
