@@ -47,17 +47,19 @@ public class King extends Piece{
           if (board[row][col + 1] == null && board[row][col + 2] == null && blackThreatMap[row][col + 1].size() == 0 && blackThreatMap[row][col + 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteRightRook.isFirstMove() && whiteRightRook.hypotheticalMove(row, col + 1)){
             moves.add(new int[]{row, col + 2});
           }
-          if (board[row][col - 1] == null && board[row][col - 2] == null && blackThreatMap[row][col - 1].size() == 0 && blackThreatMap[row][col - 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteLeftRook.isFirstMove() && whiteLeftRook.hypotheticalMove(row, col + 3)){
+          if (board[row][col - 1] == null && board[row][col - 2] == null && blackThreatMap[row][col - 1].size() == 0 && blackThreatMap[row][col - 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteLeftRook.isFirstMove() && whiteLeftRook.hypotheticalMove(row, col - 1)){
             moves.add(new int[]{row, col - 2});
           }
         }
       }else{
-        if (board[row][col - 1] == null && board[row][col - 2] == null && board[row][col + 1] == null && board[row][col + 2] == null && whiteThreatMap[row][col + 1].size() == 0 && whiteThreatMap[row][col + 2].size() == 0 && whiteThreatMap[row][col].size() == 0 && blackRightRook.isFirstMove() && blackRightRook.hypotheticalMove(row, col + 1)){
-          moves.add(new int[]{row, col + 2});
-        }
-        if (whiteThreatMap[row][col - 1].size() == 0 && whiteThreatMap[row][col - 2].size() == 0 && whiteThreatMap[row][col].size() == 0 && blackLeftRook.isFirstMove() && blackLeftRook.hypotheticalMove(row, col + 3)){
-          moves.add(new int[]{row, col - 2});
-        }   
+        if (row >= 0 && row < 8 && col == 3){
+          if (board[row][col + 1] == null && board[row][col + 2] == null && whiteThreatMap[row][col + 1].size() == 0 && whiteThreatMap[row][col + 2].size() == 0 && whiteThreatMap[row][col].size() == 0 && blackRightRook.isFirstMove() && blackRightRook.hypotheticalMove(row, col + 1)){
+            moves.add(new int[]{row, col + 2});
+          }
+          if (board[row][col - 1] == null && board[row][col - 2] == null && whiteThreatMap[row][col - 1].size() == 0 && whiteThreatMap[row][col - 2].size() == 0 && whiteThreatMap[row][col].size() == 0 && blackLeftRook.isFirstMove() && blackLeftRook.hypotheticalMove(row, col - 1)){
+            moves.add(new int[]{row, col - 2});
+          }
+        }  
       }
     }
     
@@ -92,16 +94,23 @@ public class King extends Piece{
         rookInQuestion.setPos(r, c + 1);
         board[r][c + 3] = null;
         board[r][c + 1] = rookInQuestion;
-      }
-      else{
+      }else{
         rookInQuestion = blackRightRook;
+        rookInQuestion.setPos(r, c + 1);
+        board[r][c + 4] = null;
+        board[r][c + 1] = rookInQuestion;
       }
     }else if (firstMove && col == c - 2){
       if (colorP == -1){
         rookInQuestion = whiteLeftRook;
-        rookInQuestion.setPos(r, c + 3);
+        rookInQuestion.setPos(r, c - 1);
         board[r][c - 4] = null;
         board[r][c - 1] = rookInQuestion;
+      }else{
+        rookInQuestion = blackLeftRook;
+        rookInQuestion.setPos(r, c - 1);
+        board[r][c - 3] = null;
+        board[r][c - 1] = rookInQuestion;        
       }
     }
     super.moveTo(row, col);
