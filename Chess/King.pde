@@ -96,6 +96,13 @@ public class King extends Piece{
       else{
         rookInQuestion = blackRightRook;
       }
+    }else if (firstMove && col == c - 2){
+      if (colorP == -1){
+        rookInQuestion = whiteLeftRook;
+        rookInQuestion.setPos(r, c + 3);
+        board[r][c - 4] = null;
+        board[r][c - 1] = rookInQuestion;
+      }
     }
     super.moveTo(row, col);
     firstMove = false;
