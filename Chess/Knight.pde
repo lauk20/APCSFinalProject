@@ -32,9 +32,12 @@ public class Knight extends Piece{
     validMoves = moves;
   }
   
-  public ArrayList<Piece>[][] rawThreatMap(int row, int col, Piece movedPiece){
+  public ArrayList<Piece>[][] rawThreatMap(int r, int c, Piece movedPiece){
     ArrayList<Piece>[][] threatMap = new ArrayList[8][8];
     generateArrayListArray(threatMap);
+    int[] coords = getPos();
+    int row = coords[0];
+    int col = coords[1];
     
     for (int[] move : moveMatrices){
       int rMove = row + move[0];
