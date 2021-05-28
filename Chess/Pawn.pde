@@ -74,6 +74,27 @@ public class Pawn extends Piece{
     firstMove = false;
   }
   
+  public void transform(){
+    fill(100, 97, 97, 150);
+    rect(0, 0, 800, 800);
+    fill(255);
+    rect(width*1/4, height*3/8, 400, 200);
+    stroke(0);
+    for (int i = 0; i < 4; i++){
+      rect(i*100+200, 400, 100, 100);
+    }
+    noStroke();
+    fill(0);
+    textAlign(CENTER);
+    textSize(64);
+    text("Transform", width*1/2, height*5/11);
+    image(imageQueen.copy(), 200, 400);
+    image(imageBishop.copy(), 300, 400);
+    image(imageRook.copy(), 400, 400);
+    image(imageBishop.copy(), 500, 400);
+    transformation = true;
+  }
+  
   public ArrayList<int[]> getValidMoves(){
     return validMoves;
   }

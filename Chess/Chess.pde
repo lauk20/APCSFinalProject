@@ -8,6 +8,8 @@ int orientation = 1; //orientation of the board. 1 is white on bottom of screen,
 King whiteKing;
 King blackKing;
 int winner = 0; //0 is no winner, -1 is white, 1 is black.
+boolean transformation = false;
+Piece transforming;
 
 
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
@@ -32,33 +34,35 @@ void setup(){
   imageRook = loadImage("Rook.png");
   imageQueen = loadImage("Queen.png");
   
-  for (int i = 0; i < board[0].length; i++){
-    board[1][i] = new Pawn(1, 1, i);
-    board[6][i] = new Pawn(-1, 6, i);
-  }
+  //for (int i = 0; i < board[0].length; i++){
+  //  board[1][i] = new Pawn(1, 1, i);
+  //  board[6][i] = new Pawn(-1, 6, i);
+  //}
   
-  board[0][1] = new Knight(1,0,1);
-  board[0][6] = new Knight(1,0,6);
-  board[7][1] = new Knight(-1,7,1);
-  board[7][6] = new Knight(-1,7,6);
+  board[3][1] = new Pawn(-1,3,1);
   
-  board[0][2] = new Bishop(1,0,2);
-  board[0][5] = new Bishop(1,0,5);
-  board[7][2] = new Bishop(-1,7,2);
-  board[7][5] = new Bishop(-1,7,5);
+  //board[0][1] = new Knight(1,0,1);
+  //board[0][6] = new Knight(1,0,6);
+  //board[7][1] = new Knight(-1,7,1);
+  //board[7][6] = new Knight(-1,7,6);
+  
+  //board[0][2] = new Bishop(1,0,2);
+  //board[0][5] = new Bishop(1,0,5);
+  //board[7][2] = new Bishop(-1,7,2);
+  //board[7][5] = new Bishop(-1,7,5);
   
   whiteKing = new King(-1, 7, 4);
   board[7][4] = whiteKing;
   blackKing = new King(1, 0, 4);
   board[0][4] = blackKing;
   
-  board[7][0] = new Rook(-1, 7, 0);
-  board[7][7] = new Rook(-1, 7, 7);
-  board[0][0] = new Rook(1, 0, 0);
-  board[0][7] = new Rook(1, 0, 7);
+  //board[7][0] = new Rook(-1, 7, 0);
+  //board[7][7] = new Rook(-1, 7, 7);
+  //board[0][0] = new Rook(1, 0, 0);
+  //board[0][7] = new Rook(1, 0, 7);
   
-  board[7][3] = new Queen(-1, 7, 3);
-  board[0][3] = new Queen(1, 0, 3);
+  //board[7][3] = new Queen(-1, 7, 3);
+  //board[0][3] = new Queen(1, 0, 3);
   
   updateBoard();
   updateMoves();
@@ -106,6 +110,13 @@ void updateBoard(){
       if (board[i][j] != null){
         board[i][j].display();
       }
+    }
+  }
+  
+  for (int i = 0; i < 7; i++){
+    if (board[7][i] instanceof Pawn){
+      transforming = board[7][i];
+      board[7][i].transform();
     }
   }
   
@@ -169,13 +180,21 @@ void draw(){
 }
 
 void mouseClicked(){
-  for (int i = 0; i < board.length; i++){
-    for (int j = 0; j < board[0].length; j++){
-      if (board[i][j] != null){
-        board[i][j].click();
+  if (transformation == false){
+    for (int i = 0; i < board.length; i++){
+      for (int j = 0; j < board[0].length; j++){
+        if (board[i][j] != null){
+          board[i][j].click();
+        }
       }
     }
   }
+  else for (int i = 0; i < 4; i++){
+    if (dist(mouseX, mouseY, (2+i) * 100 + 50, 4 * 100 + 50) < 50){
+      if (i == 0)  transforming = new Queen(transforming.getColor(), transforming.row, transforming.col);
+    }
+  }
+  
   
   updateBoard();
 }
