@@ -13,11 +13,17 @@
 2. Open ```Chess.pde``` in Processing
 3. Press Run
 
-*TIP: You can only select/unselect pieces if you click near them (a design choice).*
+**TIPS**
+1. You can only select/unselect pieces if you click near them (a design choice).
+2. If you want to castle, select the King piece.
 
 ## Development Log
+### 5/28/21
+**Kenny Lau:** Fixed check error with the Knight where it allowed other Pieces to keep the King in check. Completed the castling special move for both white and black pieces.
+
 ### 5/27/21
 **Kenny Lau:** Created and completed the ```Queen``` class, meaning all Pieces are now made. Also fixed error with pieces being able to make moves that would keep their king in check (from yesterday's code). Implemented a way to determine a checkmate that is now working and displays the winner on the screen. As far as testing goes, the game seems to be functional, not including special moves that may be added later.
+
 **Timothy Sit:** Started on transforming ```Pawn``` when it reaches the end. Not completed yet, but the looks are done.
 
 
