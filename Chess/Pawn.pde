@@ -14,7 +14,7 @@ public class Pawn extends Piece{
     int col = coords[1];
     int colorP = getColor();
     
-    if (firstMove && board[row + colorP * 2 * orientation][col] == null && hypotheticalMove(row + colorP * 2 * orientation, col)){
+    if (firstMove && board[row + colorP * 2 * orientation][col] == null && board[row + colorP * 1 * orientation][col] == null && hypotheticalMove(row + colorP * 2 * orientation, col)){
       moves.add(new int[]{row + colorP * 2 * orientation, col});
     }
   
