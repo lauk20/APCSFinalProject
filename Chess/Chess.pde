@@ -211,12 +211,21 @@ void mouseClicked(){
   }
   else for (int i = 0; i < 4; i++){
     if (dist(mouseX, mouseY, (2+i) * 100 + 50, 4 * 100 + 50) < 50){
-      if (i == 0)  board[7][transforming] = new Queen(whosMove*-1, 7, transforming);
-      if (i == 1)  board[7][transforming] = new Bishop(whosMove*-1, 7, transforming);
-      if (i == 2)  board[7][transforming] = new Rook(whosMove*-1, 7, transforming);
-      if (i == 3)  board[7][transforming] = new Knight(whosMove*-1, 7, transforming);
+      Piece newPiece;
+      if (i == 0){
+        newPiece = new Queen(whosMove*-1, 7, transforming);
+      }else if (i == 1){
+        newPiece = new Bishop(whosMove*-1, 7, transforming);
+      }else if (i == 2){
+        newPiece = new Rook(whosMove*-1, 7, transforming);
+      }else{
+        newPiece = new Knight(whosMove*-1, 7, transforming);
+      }
+      board[7][transforming] = newPiece;
+      newPiece.updateValidMoves();
       transforming = -1;
       transformation = false;
+      updateMoves();
     }
   }
 
