@@ -41,7 +41,17 @@ public abstract class Piece{
   }
  
   public void moveTo(int row, int col){
-    board[this.row][this.col] = null;
+    Piece pieceThere = board[this.row][this.col];
+    if (pieceThere == whiteRightRook){
+      whiteRightRook = null;
+    }else if (pieceThere == whiteLeftRook){
+      whiteLeftRook = null;
+    }else if (pieceThere == blackRightRook){
+      blackRightRook = null;
+    }else if (pieceThere == blackLeftRook){
+      blackLeftRook = null;
+    }
+    pieceThere = null;
     this.row = row;
     this.col = col;
     board[row][col] = this;
