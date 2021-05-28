@@ -56,14 +56,17 @@ public class Pawn extends Piece{
   public ArrayList<Piece>[][] rawThreatMap(int row, int col, Piece movedPiece){
     ArrayList<Piece>[][] threatMap = new ArrayList[8][8];
     generateArrayListArray(threatMap);
+    int[] coords = getPos();
+    int r = coords[0];
+    int c = coords[1];
     int colorP = getColor();
     
-    if (col != 0 && row != 0 && row != 7){
-      threatMap[row + colorP * orientation][col - 1].add(this);
+    if (c != 0 && r != 0 && r != 7){
+      threatMap[r + colorP * orientation][c - 1].add(this);
     }
     
-    if (col != 7 && row != 0 && row != 7){
-      threatMap[row + colorP * orientation][col + 1].add(this);
+    if (c != 7 && r != 0 && r != 7){
+      threatMap[r + colorP * orientation][c + 1].add(this);
     }
     
     return threatMap;
