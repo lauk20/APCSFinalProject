@@ -13,7 +13,7 @@ Rook blackRightRook;
 Rook blackLeftRook;
 int winner = 0; //0 is no winner, -1 is white, 1 is black.
 boolean transformation = false;
-Piece transforming;
+int transforming = -1;
 
 
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
@@ -119,11 +119,25 @@ void updateBoard(){
     }
   }
   
-  for (int i = 0; i < 7; i++){
-    if (board[7][i] instanceof Pawn){
-      transforming = board[7][i];
-      board[7][i].transform();
+  if (transforming != -1){
+    fill(100, 97, 97, 150);
+    rect(0, 0, 800, 800);
+    fill(255);
+    rect(width*1/4, height*3/8, 400, 200);
+    stroke(0);
+    for (int i = 0; i < 4; i++){
+      rect(i*100+200, 400, 100, 100);
     }
+    noStroke();
+    fill(0);
+    textAlign(CENTER);
+    textSize(64);
+    text("Transform", width*1/2, height*5/11);
+    image(imageQueen.copy(), 200, 400);
+    image(imageBishop.copy(), 300, 400);
+    image(imageRook.copy(), 400, 400);
+    image(imageKnight.copy(), 500, 400);
+    transformation = true;
   }
   
   if (winner != 0){
@@ -197,9 +211,15 @@ void mouseClicked(){
   }
   else for (int i = 0; i < 4; i++){
     if (dist(mouseX, mouseY, (2+i) * 100 + 50, 4 * 100 + 50) < 50){
-      if (i == 0)  transforming = new Queen(transforming.getColor(), transforming.row, transforming.col);
+      if (i == 0)  board[7][transforming] = new Queen(whosMove*-1, 7, transforming);
+      if (i == 1)  board[7][transforming] = new Bishop(whosMove*-1, 7, transforming);
+      if (i == 2)  board[7][transforming] = new Rook(whosMove*-1, 7, transforming);
+      if (i == 3)  board[7][transforming] = new Knight(whosMove*-1, 7, transforming);
+      transforming = -1;
+      transformation = false;
     }
   }
+
   
   
   updateBoard();

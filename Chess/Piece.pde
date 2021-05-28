@@ -4,7 +4,7 @@ public abstract class Piece{
   private int col;
   private ArrayList<Square> squares;
   private boolean selected;
-  
+ 
   public Piece(int colour, int r, int c){
     colorP = colour;
     row = r;
@@ -12,34 +12,34 @@ public abstract class Piece{
     squares = new ArrayList<Square>();
     selected = false;
   }
-  
+ 
   public int getColor(){
     return colorP;
   }
-  
+ 
   public int[] getPos(){
     int[] pos = new int[]{row, col};
     
     return pos;
   }
-  
+ 
   public void setPos(int r, int c){
     row = r;
     col = c;
   }
-  
+ 
   public void setSelected(boolean b){
     selected = b;
   }
-  
+ 
   public boolean isSelected(){
     return selected;
   }
-  
+ 
   public ArrayList<Square> getSquares(){
     return squares;
   }
-  
+ 
   public void moveTo(int row, int col){
     board[this.row][this.col] = null;
     this.row = row;
@@ -53,7 +53,7 @@ public abstract class Piece{
     updateMoves(); // called a second time because for example: if a black queen just checked the king in a previous move and we have some white pieces that is past the black queen, their valid moves would not be correct because the queen's threat map has not been updated since the last move yet and the white pieces past the queen think that there's no check.
     isCheckmate();
   }
-  
+ 
   public boolean hypotheticalMove(int r, int c){
     int[] coords = getPos();
     int row = coords[0];
@@ -110,7 +110,7 @@ public abstract class Piece{
     
     return true;
   }
-  
+ 
   public void click(){
     if (whosMove != getColor()) return;
     int[] pos = getPos();
@@ -136,7 +136,7 @@ public abstract class Piece{
       getSquares().clear();
     }
   }
-  
+ 
   public void generateArrayListArray(ArrayList<Piece>[][] map){
     for (int i = 0; i < 8; i++){
       for (int j = 0; j < 8; j++){
@@ -144,10 +144,7 @@ public abstract class Piece{
       }
     }
   }
-  
-  public void transform(){
-  }
-  
+ 
   abstract void updateValidMoves();
   abstract ArrayList<Piece>[][] rawThreatMap(int row, int col, Piece movedPiece);
   abstract ArrayList<int[]> getValidMoves();
