@@ -159,4 +159,5 @@ public abstract class Piece{
   abstract ArrayList<Piece>[][] rawThreatMap(int row, int col, Piece movedPiece);
   abstract ArrayList<int[]> getValidMoves();
   abstract void display();
+  abstract boolean getJustMovedTwo();
 }

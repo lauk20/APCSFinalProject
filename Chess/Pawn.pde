@@ -1,10 +1,12 @@
 public class Pawn extends Piece{
   private boolean firstMove;
   private ArrayList<int[]> validMoves;
+  private boolean justMovedTwo;
 
   public Pawn(int colour, int r, int c){
     super(colour, r, c);
     firstMove = true;
+    justMovedTwo = false;
   }
  
   public void updateValidMoves(){
@@ -13,6 +15,10 @@ public class Pawn extends Piece{
     int row = coords[0];
     int col = coords[1];
     int colorP = getColor();
+    
+    if (colorP == whosMove){
+      justMovedTwo = false;
+    }
     
     if (firstMove && board[row + colorP * 2 * orientation][col] == null && board[row + colorP * 1 * orientation][col] == null && hypotheticalMove(row + colorP * 2 * orientation, col)){
       moves.add(new int[]{row + colorP * 2 * orientation, col});
@@ -33,6 +39,20 @@ public class Pawn extends Piece{
         moves.add(new int[]{row + colorP * orientation, col + 1});
       }
     }
+    
+    //En Passant checks;
+    if ((col != 0 && row != 0 && row != 7) && row == 3 && board[row][col - 1] != null && board[row][col - 1].getJustMovedTwo() && hypotheticalMove(row + colorP * orientation, col - 1)){
+      if(board[row][col - 1].getColor() != getColor()){
+        moves.add(new int[]{row + colorP * orientation, col - 1});
+      }
+    } 
+    
+    if ((col != 7 && row != 0 && row != 7) && row == 3 && board[row][col + 1] != null && board[row][col + 1].getJustMovedTwo() && hypotheticalMove(row + colorP * orientation, col + 1)){
+      if(board[row][col + 1].getColor() != getColor()){
+        moves.add(new int[]{row + colorP * orientation, col + 1});
+      }
+    }
+    
     
     if (col != 0 && row != 0 && row != 7){
       if (getColor() == -1){
@@ -73,6 +93,17 @@ public class Pawn extends Piece{
   }
 
   public void moveTo(int row, int col){
+    int[] coords = getPos();
+    int r = coords[0];
+    int c = coords[1];
+    if (row == r - 2){
+      justMovedTwo = true;
+    }
+    if (row == r - 1 && col == c - 1 && board[row][col] == null){ //must be en passant to the left
+      board[r][c - 1] = null;
+    }else if (row == r - 1 && col == c + 1 && board[row][col] == null){ //must be en passant to the right
+      board[r][c + 1] = null;
+    }
     super.moveTo(row, col);
     firstMove = false;
     if (row==0){
@@ -101,5 +132,9 @@ public class Pawn extends Piece{
         s.display();
       }
     }
+  }
+  
+  public boolean getJustMovedTwo(){
+    return justMovedTwo;
   }
 }
