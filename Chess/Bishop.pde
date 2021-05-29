@@ -118,8 +118,4 @@ public class Bishop extends Piece{
       }
     }
   }
-  
-  public boolean getJustMovedTwo(){
-    return false;
-  }
 }

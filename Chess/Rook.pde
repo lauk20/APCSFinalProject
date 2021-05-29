@@ -116,8 +116,4 @@ public class Rook extends Piece{
   public boolean isFirstMove(){
     return firstMove;
   }
-  
-  public boolean getJustMovedTwo(){
-    return false;
-  }
 }

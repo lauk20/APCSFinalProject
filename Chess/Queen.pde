@@ -105,8 +105,4 @@ public class Queen extends Piece{
       }
     }
   }
-  
-  public boolean getJustMovedTwo(){
-    return false;
-  }
 }

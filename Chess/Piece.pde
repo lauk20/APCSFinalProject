@@ -154,10 +154,13 @@ public abstract class Piece{
       }
     }
   }
+  
+  public boolean getJustMovedTwo(){
+    return false;
+  }
  
   abstract void updateValidMoves();
   abstract ArrayList<Piece>[][] rawThreatMap(int row, int col, Piece movedPiece);
   abstract ArrayList<int[]> getValidMoves();
   abstract void display();
-  abstract boolean getJustMovedTwo();
 }

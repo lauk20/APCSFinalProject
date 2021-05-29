@@ -139,8 +139,4 @@ public class King extends Piece{
       }
     }
   }
-  
-  public boolean getJustMovedTwo(){
-    return false;
-  }
 }
