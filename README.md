@@ -19,7 +19,7 @@
 3. En Passant is also supported.
 
 ## Development Log
-## 5/29/21
+### 5/29/21
 **Kenny Lau:** Added En Passant, a special move, into the game.
 
 ### 5/28/21
