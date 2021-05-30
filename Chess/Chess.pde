@@ -24,7 +24,7 @@ PImage imageRook;
 PImage imageQueen; //https://www.clipartmax.com/download/m2i8i8d3d3m2i8Z5_free-vector-portablejim-chess-tile-queen-clip-art-chess-queen-clip-art/
 
 void setup(){
-  size(800, 800);
+  size(1000, 800);
   for (int i = 0; i < 8; i++){
     for (int j = 0; j < 8; j++){
       whiteThreatMap[i][j] = new ArrayList<Piece>();
@@ -77,8 +77,8 @@ void setup(){
 void drawSquares(){
   int counterx = 0;
   int countery = 0;
-  for (int i = 0; i < width; i = i + 100){
-    for (int j = 0; j < height; j = j + 100){;
+  for (int i = 0; i < width && i < 800; i = i + 100){
+    for (int j = 0; j < height && j < 800; j = j + 100){;
       if (counterx % 2 == countery % 2){
         fill(185, 167, 116);
         noStroke();
@@ -123,7 +123,7 @@ void updateBoard(){
     fill(100, 97, 97, 150);
     rect(0, 0, 800, 800);
     fill(255);
-    rect(width*1/4, height*3/8, 400, 200);
+    rect(800*1/4, 800*3/8, 400, 200);
     stroke(0);
     for (int i = 0; i < 4; i++){
       rect(i*100+200, 400, 100, 100);
@@ -132,7 +132,7 @@ void updateBoard(){
     fill(0);
     textAlign(CENTER);
     textSize(64);
-    text("Transform", width*1/2, height*5/11);
+    text("Transform", 800*1/2, 800*5/11);
     image(imageQueen.copy(), 200, 400);
     image(imageBishop.copy(), 300, 400);
     image(imageRook.copy(), 400, 400);

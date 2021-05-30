@@ -86,7 +86,7 @@ public abstract class Piece{
         kRow = kingCoords[0];
         kCol = kingCoords[1];
       }
-      if (rawMap[kRow][kCol].size() > 0 && board[r][c] != p){
+      if (rawMap[kRow][kCol].size() > 0 && board[r][c] != p){ //board[r][c] != p : if board[r][c] == p, then it means that the move we are hypothetically making will capture the threat of that piece.
         //println(kRow + " " + kCol);
         return false;
       }
