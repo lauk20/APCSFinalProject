@@ -16,8 +16,12 @@
 **TIPS**
 1. You can only select/unselect pieces if you click near them (a design choice).
 2. If you want to castle, select the King piece.
+3. En Passant is also supported.
 
 ## Development Log
+## 5/29/21
+**Kenny Lau:** Added En Passant, a special move, into the game.
+
 ### 5/28/21
 **Kenny Lau:** Fixed check error with the Knight where it allowed other Pieces to keep the King in check. Fixed another check error where pieces could not identify a King was being checked by a Pawn. Also added feature where after a Pawn is promoted, the resulting Piece will be able to be identified as a check if there is one. Completed the castling special move for both white and black pieces.
 
