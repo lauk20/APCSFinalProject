@@ -19,6 +19,9 @@
 3. En Passant is also supported.
 
 ## Development Log
+### 5/30/21
+**Kenny Lau:** Increased screen size to 1000x800 (width x height) to prepare for new functions/buttons.
+
 ### 5/29/21
 **Kenny Lau:** Added En Passant, a special move, into the game.
 
