@@ -25,6 +25,12 @@ PImage imageQueen; //https://www.clipartmax.com/download/m2i8i8d3d3m2i8Z5_free-v
 
 void setup(){
   size(1000, 800);
+  imagePawn = loadImage("Pawn.png");
+  imageKnight = loadImage("Knight.png");
+  imageBishop = loadImage("Bishop.png");
+  imageKing = loadImage("King.png");
+  imageRook = loadImage("Rook.png");
+  imageQueen = loadImage("Queen.png");
   createBoard();
 }
 
@@ -36,12 +42,6 @@ void createBoard(){
       blackThreatMap[i][j] = new ArrayList<Piece>();
     }
   }
-  imagePawn = loadImage("Pawn.png");
-  imageKnight = loadImage("Knight.png");
-  imageBishop = loadImage("Bishop.png");
-  imageKing = loadImage("King.png");
-  imageRook = loadImage("Rook.png");
-  imageQueen = loadImage("Queen.png");
   
   for (int i = 0; i < board[0].length; i++){
     board[1][i] = new Pawn(1, 1, i);
