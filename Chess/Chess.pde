@@ -35,7 +35,7 @@ void setup(){
 }
 
 void createBoard(){
-  
+  board = new Piece[8][8];
   for (int i = 0; i < 8; i++){
     for (int j = 0; j < 8; j++){
       whiteThreatMap[i][j] = new ArrayList<Piece>();
@@ -202,7 +202,7 @@ void newThreatMaps(){
 }
 
 void draw(){
-  
+  updateBoard();
 }
 
 void mouseClicked(){
@@ -213,6 +213,12 @@ void mouseClicked(){
           board[i][j].click();
         }
       }
+    }
+    
+    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 100 && mouseY <= 150){ //AREA OF RESET BOARD BUTTON
+      whosMove = -1;
+      orientation = 1;
+      createBoard();
     }
   }
   else for (int i = 0; i < 4; i++){
@@ -233,12 +239,9 @@ void mouseClicked(){
       transformation = false;
       updateMoves();
     }
-    
   }
 
-  
-  
-  updateBoard();
+  //updateBoard(); not needed if is called in draw();
 }
 
 //UML: "isCheck()"
@@ -286,7 +289,10 @@ void updateMenu(){
   rectMode(CENTER);
   noStroke();
   fill(56, 75, 87);
-  rect(900, 125, 80, 40);
+  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 100 && mouseY <= 150){ //AREA OF RESET BOARD BUTTON
+    fill(56, 75, 150);
+  }
+  rect(900, 125, 100, 50);
   fill(255);
   textAlign(CENTER);
   textSize(48);
