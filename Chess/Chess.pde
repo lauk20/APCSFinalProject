@@ -138,7 +138,7 @@ void updateBoard(){
     fill(0);
     textAlign(CENTER);
     textSize(64);
-    text("Transform", 800*1/2, 800*5/11);
+    text("PROMOTE", 800*1/2, 800*5/11);
     image(imageQueen.copy(), 200, 400);
     image(imageBishop.copy(), 300, 400);
     image(imageRook.copy(), 400, 400);
