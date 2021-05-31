@@ -75,6 +75,7 @@ void setup(){
 }
 
 void drawSquares(){
+  rectMode(CORNER);
   int counterx = 0;
   int countery = 0;
   for (int i = 0; i < width && i < 800; i = i + 100){
@@ -109,7 +110,7 @@ color invertColor(color c){
 }
 
 void updateBoard(){
-  clear();
+  updateMenu();
   drawSquares();
   for (int i = 0; i < board.length; i++){
     for (int j = 0; j < board[0].length; j++){
@@ -271,5 +272,20 @@ void displayMessage(String text, color c){
   fill(c);
   textAlign(CENTER);
   textSize(64);
-  text(text, width/2, height/2);
+  text(text, 800/2, 800/2);
+}
+
+void updateMenu(){
+  fill(255);
+  background(45,45,45);
+  textAlign(CENTER);
+  textSize(48);
+  text("MENU", 900, 75);
+  rectMode(CENTER);
+  noStroke();
+  fill(56, 75, 87);
+  rect(900, 125, 80, 40);
+  textSize(15);
+  fill(255);
+  text("RESET\nBOARD", 900, 118);
 }
