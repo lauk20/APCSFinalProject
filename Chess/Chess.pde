@@ -25,6 +25,11 @@ PImage imageQueen; //https://www.clipartmax.com/download/m2i8i8d3d3m2i8Z5_free-v
 
 void setup(){
   size(1000, 800);
+  createBoard();
+}
+
+void createBoard(){
+  
   for (int i = 0; i < 8; i++){
     for (int j = 0; j < 8; j++){
       whiteThreatMap[i][j] = new ArrayList<Piece>();
@@ -228,6 +233,7 @@ void mouseClicked(){
       transformation = false;
       updateMoves();
     }
+    
   }
 
   
@@ -276,16 +282,15 @@ void displayMessage(String text, color c){
 }
 
 void updateMenu(){
-  fill(255);
   background(45,45,45);
-  textAlign(CENTER);
-  textSize(48);
-  text("MENU", 900, 75);
   rectMode(CENTER);
   noStroke();
   fill(56, 75, 87);
   rect(900, 125, 80, 40);
-  textSize(15);
   fill(255);
+  textAlign(CENTER);
+  textSize(48);
+  text("MENU", 900, 75);
+  textSize(15);
   text("RESET\nBOARD", 900, 118);
 }
