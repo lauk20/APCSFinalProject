@@ -181,6 +181,7 @@ Piece[][] getRotatedBoard(){
     for (int j = 7; j >= 0 && originalCol < 8; j--){
       rotated[i][j] = board[originalRow][originalCol];
       if (board[originalRow][originalCol] != null){
+        board[originalRow][originalCol].setSelected(false); //when we rotate, we don't want and pieces to be selected
         board[originalRow][originalCol].setPos(i, j);
       }
       originalCol = originalCol + 1;
