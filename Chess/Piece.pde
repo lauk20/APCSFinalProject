@@ -131,7 +131,7 @@ public abstract class Piece{
         }
       }
     }
-    if (dist(mouseX, mouseY, pos[1] * 100 + 50, pos[0] * 100 + 50) < 50){
+    if (mouseX/100 == pos[1] && mouseY/100 == pos[0]){
       setSelected(!isSelected());
       ArrayList<int[]> moves = getValidMoves();
       if (!isSelected()){
