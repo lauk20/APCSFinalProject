@@ -218,6 +218,7 @@ void mouseClicked(){
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 100 && mouseY <= 150){ //AREA OF RESET BOARD BUTTON
       whosMove = -1;
       orientation = 1;
+      winner = 0;
       createBoard();
     }
   }
