@@ -14,9 +14,10 @@ Rook blackLeftRook;
 int winner = 0; //0 is no winner, -1 is white, 1 is black.
 boolean transformation = false;
 int transforming = -1;
-String mode = "time"; //timed for timers
-float whiteTimeLeft = 0;
-float blackTimeLeft = 0;
+String mode = "timed"; //timed for timers
+float[] whiteTime = new float[] {0, 600000}; //[0] = start, [1] = current time left in millis
+float[] blackTime = new float[] {0, 600000};
+float timerAmount = 600000; // 10 minutes in millis
 boolean paused = true;
 boolean madeMove = false;
 
@@ -246,11 +247,25 @@ void mouseClicked(){
       createBoard();
     }
     
-    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400 && mode.equals("timed")){ //AREA OF END TURN BUTTON, ONLY WORKS WHEN TIMED MODE
+    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400 && mode.equals("timed") && madeMove && !paused){ //AREA OF END TURN BUTTON, ONLY WORKS WHEN TIMED MODE
       endTurn();
+      
+      if (blackTime[0] == 0){
+        blackTime[0] = millis();
+      }
+      if (whosMove == -1){
+        blackTime[1] = blackTime[1] - (millis() - blackTime[0]);
+        whiteTime[0] = millis();
+      }else{
+        whiteTime[1] = whiteTime[1] - (millis() - whiteTime[0]);
+        blackTime[0] = millis();
+      }
     }
     
     if (mouseX <= 800 && mode.equals("timed") && paused){
+      if (whiteTime[0] == 0){
+        whiteTime[0] = millis();
+      }
       paused = false;
     }
   }
@@ -345,8 +360,23 @@ void updateMenu(){
   //timers
   textSize(25);
   if (mode.equals("timed")){
-    text(whiteTimeLeft, 900, 215);
-    text(blackTimeLeft, 900, 295);
+    if (whosMove == -1){
+      if (whiteTime[0] == 0){
+        text(timerAmount/1000, 900, 215);
+        text(timerAmount/1000, 900, 295);
+      }else{
+        text((whiteTime[1] - (millis() - whiteTime[0]))/1000, 900, 215);
+        text(blackTime[1]/1000, 900, 295);
+      }
+    }
+    if (whosMove == 1){
+       if (blackTime[0] == 0){
+        text(timerAmount/1000, 900, 215);
+      }else{
+        text(whiteTime[1]/1000, 900, 215);
+        text((blackTime[1] - (millis() - blackTime[0]))/1000, 900, 295);
+      }
+    }
   }else{
     text("OFF", 900, 215);
     text("OFF", 900, 295);
