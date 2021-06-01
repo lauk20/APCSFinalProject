@@ -265,7 +265,11 @@ void mouseClicked(){
       }
     }
     
-    if (mouseX <= 800 && mode.equals("timed") && paused){
+    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 425 && mouseY <= 475){ //AREA OF PAUSE GAME BUTTON
+      paused = true;
+    }
+    
+    if (mouseX <= 800 && mode.equals("timed") && paused){ //Start screen for timed mode
       if (whiteTime[0] == 0){
         whiteTime[0] = millis();
       }
@@ -397,5 +401,15 @@ void updateMenu(){
   textSize(15);
   fill(255,255,255);
   text("END\nTURN", 900, 368);
+  
+  //Pause button
+  fill(56, 76, 87);
+  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 425 && mouseY <= 475){ //AREA OF PAUSE GAME BUTTON
+    fill(56, 75, 150);
+  }
+  rect(900, 450, 100, 50);
+  textSize(15);
+  fill(255);
+  text("PAUSE\nGAME", 900, 443);
   
 }
