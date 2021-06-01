@@ -115,7 +115,6 @@ color invertColor(color c){
 }
 
 void updateBoard(){
-  updateMenu();
   drawSquares();
   for (int i = 0; i < board.length; i++){
     for (int j = 0; j < board[0].length; j++){
@@ -203,7 +202,7 @@ void newThreatMaps(){
 }
 
 void draw(){
-  updateBoard();
+  updateMenu();
 }
 
 void mouseClicked(){
@@ -244,7 +243,7 @@ void mouseClicked(){
     updateMoves();
   }
 
-  //updateBoard(); not needed if is called in draw();
+  updateBoard(); //not needed if is called in draw();
 }
 
 //UML: "isCheck()"
@@ -288,9 +287,11 @@ void displayMessage(String text, color c){
 }
 
 void updateMenu(){
-  background(45,45,45);
-  rectMode(CENTER);
+  rectMode(CORNER);
+  fill(45,45,45);
   noStroke();
+  rect(800, 0, 200, 800);
+  rectMode(CENTER);
   fill(56, 75, 87);
   if (mouseX >= 850 && mouseX <= 950 && mouseY >= 100 && mouseY <= 150){ //AREA OF RESET BOARD BUTTON
     fill(56, 75, 150);
