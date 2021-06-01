@@ -268,7 +268,7 @@ void mouseClicked(){
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 425 && mouseY <= 475 && !paused && mode.equals("timed")){ //AREA OF PAUSE GAME BUTTON
       paused = true;
       if (whiteTime[0] != 0 && whosMove == -1){
-        whiteTime[1] = whiteTime[1] - (millis() - whiteTime[0]);
+        whiteTime[1] = whiteTime[1] - (millis() - whiteTime[0]); //we set the current time left because once we unpause, the time checkpoint will be updated to reflect the time that has passed. no need to update the checkpoint because the unpause will handle it correctly
       }
       if (blackTime[0] != 0 && whosMove == 1){
         blackTime[1] = blackTime[1] - (millis() - blackTime[0]);
@@ -279,7 +279,7 @@ void mouseClicked(){
       if (whiteTime[0] == 0){
         whiteTime[0] = millis();
       }else{
-        if (whosMove == -1){
+        if (whosMove == -1){ //we only update the time checkpoint for white/black because end move will set a new checkpoint for the other to start counting
           whiteTime[0] = millis();
         }else{
           blackTime[0] = millis();
