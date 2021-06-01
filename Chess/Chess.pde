@@ -40,6 +40,9 @@ void setup(){
 }
 
 void createBoard(){
+  whiteTime = new float[] {0, timerAmount}; 
+  blackTime = new float[] {0, timerAmount};  
+  paused = true;
   madeMove = false;
   board = new Piece[8][8];
   for (int i = 0; i < 8; i++){
