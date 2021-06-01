@@ -14,7 +14,7 @@ Rook blackLeftRook;
 int winner = 0; //0 is no winner, -1 is white, 1 is black.
 boolean transformation = false;
 int transforming = -1;
-String mode = "timed"; //timed for timers
+String mode = "time"; //timed for timers
 float whiteTimeLeft = 0;
 float blackTimeLeft = 0;
 boolean paused = true;
