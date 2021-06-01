@@ -246,7 +246,7 @@ void mouseClicked(){
       createBoard();
     }
     
-    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400){ //AREA OF END TURN BUTTON
+    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400 && mode.equals("timed")){ //AREA OF END TURN BUTTON, ONLY WORKS WHEN TIMED MODE
       endTurn();
     }
     
@@ -349,6 +349,7 @@ void updateMenu(){
     text(blackTimeLeft, 900, 295);
   }else{
     text("OFF", 900, 215);
+    text("OFF", 900, 295);
   }
   textSize(15);
   text("WHITE TIME", 900, 250);
