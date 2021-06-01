@@ -18,6 +18,9 @@
 2. En Passant is also supported.
 
 ## Development Log
+### 6/1/21
+**Kenny Lau:** Finished the timed mode that uses the timers I created today. Pausing is also now a feature that works with the timed mode and timers. These come with their corresponding buttons in the menu.
+
 ### 5/31/21
 **Kenny Lau:** Started the menu design and created a working reset board button, which resets the board.
 
