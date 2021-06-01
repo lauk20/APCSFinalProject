@@ -257,21 +257,33 @@ void mouseClicked(){
         blackTime[0] = millis();
       }
       if (whosMove == -1){
-        blackTime[1] = blackTime[1] - (millis() - blackTime[0]);
-        whiteTime[0] = millis();
+        blackTime[1] = blackTime[1] - (millis() - blackTime[0]); //changing the time left for black because if it's white's move, it means that black just ended. so, we subtract the timeleft for black by (the current time minus the last time checkpoint), which will give us the new time left
+        whiteTime[0] = millis(); //this sets the new time checkpoint for white, which will be used later when the move is ended to set the current time leftw
       }else{
         whiteTime[1] = whiteTime[1] - (millis() - whiteTime[0]);
         blackTime[0] = millis();
       }
     }
     
-    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 425 && mouseY <= 475){ //AREA OF PAUSE GAME BUTTON
+    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 425 && mouseY <= 475 && !paused && mode.equals("timed")){ //AREA OF PAUSE GAME BUTTON
       paused = true;
+      if (whiteTime[0] != 0 && whosMove == -1){
+        whiteTime[1] = whiteTime[1] - (millis() - whiteTime[0]);
+      }
+      if (blackTime[0] != 0 && whosMove == 1){
+        blackTime[1] = blackTime[1] - (millis() - blackTime[0]);
+      }
     }
     
     if (mouseX <= 800 && mode.equals("timed") && paused){ //Start screen for timed mode
       if (whiteTime[0] == 0){
         whiteTime[0] = millis();
+      }else{
+        if (whosMove == -1){
+          whiteTime[0] = millis();
+        }else{
+          blackTime[0] = millis();
+        }
       }
       paused = false;
     }
@@ -367,21 +379,26 @@ void updateMenu(){
   //timers
   textSize(25);
   if (mode.equals("timed")){
-    if (whosMove == -1){
-      if (whiteTime[0] == 0){
-        text(timerAmount/1000, 900, 215);
-        text(timerAmount/1000, 900, 295);
-      }else{
-        text((whiteTime[1] - (millis() - whiteTime[0]))/1000, 900, 215);
-        text(blackTime[1]/1000, 900, 295);
+    if (paused){
+      text(whiteTime[1]/1000, 900, 215);
+      text(blackTime[1]/1000, 900, 295);
+    }else{
+      if (whosMove == -1){
+        if (whiteTime[0] == 0){
+          text(timerAmount/1000, 900, 215);
+          text(timerAmount/1000, 900, 295);
+        }else{
+          text((whiteTime[1] - (millis() - whiteTime[0]))/1000, 900, 215); //calculate but dont set the time until turn is ended
+          text(blackTime[1]/1000, 900, 295);
+        }
       }
-    }
-    if (whosMove == 1){
-       if (blackTime[0] == 0){
-        text(timerAmount/1000, 900, 215);
-      }else{
-        text(whiteTime[1]/1000, 900, 215);
-        text((blackTime[1] - (millis() - blackTime[0]))/1000, 900, 295);
+      if (whosMove == 1){
+        if (blackTime[0] == 0){
+          text(timerAmount/1000, 900, 215);
+        }else{
+          text(whiteTime[1]/1000, 900, 215);
+          text((blackTime[1] - (millis() - blackTime[0]))/1000, 900, 295);
+        }
       }
     }
   }else{
