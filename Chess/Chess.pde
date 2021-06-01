@@ -17,6 +17,8 @@ int transforming = -1;
 String mode = "timed"; //timed for timers
 float whiteTimeLeft = 0;
 float blackTimeLeft = 0;
+boolean paused = true;
+boolean madeMove = false;
 
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
 PImage imageKnight; //https://www.clipartmax.com/middle/m2i8H7i8i8d3A0d3_this-free-icons-png-design-of-chess-tile-knight-chess-piece/
@@ -37,6 +39,7 @@ void setup(){
 }
 
 void createBoard(){
+  madeMove = false;
   board = new Piece[8][8];
   for (int i = 0; i < 8; i++){
     for (int j = 0; j < 8; j++){
@@ -117,6 +120,14 @@ color invertColor(color c){
 }
 
 void updateBoard(){
+  if (mode.equals("timed") && paused){
+    background(23,23,23);
+    fill(255);
+    textSize(48);
+    textAlign(CENTER);
+    text("CLICK SCREEN TO BEGIN/RESUME", 400, 400);
+    return;
+  }
   drawSquares();
   for (int i = 0; i < board.length; i++){
     for (int j = 0; j < board[0].length; j++){
@@ -203,6 +214,17 @@ void newThreatMaps(){
   }
 }
 
+public void endTurn(){
+  whosMove = whosMove * -1;
+  board = getRotatedBoard();
+  orientation = orientation * -1;
+  newThreatMaps();
+  updateMoves();
+  updateMoves(); // called a second time because for example: if a black queen just checked the king in a previous move and we have some white pieces that is past the black queen, their valid moves would not be correct because the queen's threat map has not been updated since the last move yet and the white pieces past the queen think that there's no check.
+  isCheckmate(); 
+  madeMove = false;
+}
+
 void draw(){
   updateMenu();
 }
@@ -222,6 +244,14 @@ void mouseClicked(){
       orientation = 1;
       winner = 0;
       createBoard();
+    }
+    
+    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400){ //AREA OF END TURN BUTTON
+      endTurn();
+    }
+    
+    if (mouseX <= 800 && mode.equals("timed") && paused){
+      paused = false;
     }
   }
   else if (mouseY/100 == 4 && mouseX/100>=2 && mouseX/100<=5){
@@ -326,12 +356,12 @@ void updateMenu(){
   
   //End move button
   fill(56,75,87);
-  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400){ //AREA OF END MOVE BUTTON
+  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400){ //AREA OF END TURN BUTTON
     fill(56, 75, 150);
   }
   rect(900, 375, 100, 50);
   textSize(15);
   fill(255,255,255);
-  text("END\nMOVE", 900, 368);
+  text("END\nTURN", 900, 368);
   
 }

@@ -41,6 +41,9 @@ public abstract class Piece{
   }
  
   public void moveTo(int row, int col){
+    if (madeMove){
+      return;
+    }
     Piece pieceThere = board[this.row][this.col];
     if (pieceThere == whiteRightRook){
       whiteRightRook = null;
@@ -55,13 +58,12 @@ public abstract class Piece{
     this.row = row;
     this.col = col;
     board[row][col] = this;
-    whosMove = whosMove * -1;
-    board = getRotatedBoard();
-    orientation = orientation * -1;
-    newThreatMaps();
+    if (!mode.equals("timed")){
+      endTurn();
+    }
+    madeMove = true;
     updateMoves();
     updateMoves(); // called a second time because for example: if a black queen just checked the king in a previous move and we have some white pieces that is past the black queen, their valid moves would not be correct because the queen's threat map has not been updated since the last move yet and the white pieces past the queen think that there's no check.
-    isCheckmate();
   }
  
   public boolean hypotheticalMove(int r, int c){
