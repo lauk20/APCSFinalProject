@@ -14,11 +14,13 @@
 3. Press Run
 
 **TIPS**
-1. You can only select/unselect pieces if you click near them (a design choice).
-2. If you want to castle, select the King piece.
-3. En Passant is also supported.
+1. If you want to castle, select the King piece.
+2. En Passant is also supported.
 
 ## Development Log
+### 5/31/21
+**Kenny Lau:** Started the menu design and created a working reset board button, which resets the board.
+
 ### 5/30/21
 **Kenny Lau:** Increased screen size to 1000x800 (width x height) to prepare for new functions/buttons.
 
