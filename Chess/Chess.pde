@@ -14,7 +14,9 @@ Rook blackLeftRook;
 int winner = 0; //0 is no winner, -1 is white, 1 is black.
 boolean transformation = false;
 int transforming = -1;
-
+String mode = "timed"; //timed for timers
+float whiteTimeLeft = 0;
+float blackTimeLeft = 0;
 
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
 PImage imageKnight; //https://www.clipartmax.com/middle/m2i8H7i8i8d3A0d3_this-free-icons-png-design-of-chess-tile-knight-chess-piece/
@@ -291,7 +293,15 @@ void updateMenu(){
   fill(45,45,45);
   noStroke();
   rect(800, 0, 200, 800);
+  
   rectMode(CENTER);
+  
+  //title
+  fill(255,255,255);
+  textSize(48);
+  text("MENU", 900, 75);
+  
+  //reset board button
   fill(56, 75, 87);
   if (mouseX >= 850 && mouseX <= 950 && mouseY >= 100 && mouseY <= 150){ //AREA OF RESET BOARD BUTTON
     fill(56, 75, 150);
@@ -299,8 +309,29 @@ void updateMenu(){
   rect(900, 125, 100, 50);
   fill(255);
   textAlign(CENTER);
-  textSize(48);
-  text("MENU", 900, 75);
   textSize(15);
   text("RESET\nBOARD", 900, 118);
+  
+  //timers
+  textSize(25);
+  if (mode.equals("timed")){
+    text(whiteTimeLeft, 900, 215);
+    text(blackTimeLeft, 900, 295);
+  }else{
+    text("OFF", 900, 215);
+  }
+  textSize(15);
+  text("WHITE TIME", 900, 250);
+  text("BLACK TIME", 900, 325);
+  
+  //End move button
+  fill(56,75,87);
+  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400){ //AREA OF END MOVE BUTTON
+    fill(56, 75, 150);
+  }
+  rect(900, 375, 100, 50);
+  textSize(15);
+  fill(255,255,255);
+  text("END\nMOVE", 900, 368);
+  
 }
