@@ -124,7 +124,7 @@ color invertColor(color c){
 }
 
 void updateBoard(){
-  if (mode.equals("timed") && paused){
+  if (mode.equals("timed") && paused && winner == 0){
     background(23,23,23);
     fill(255);
     textSize(48);
@@ -230,6 +230,13 @@ public void endTurn(){
 }
 
 void draw(){
+  if (whiteTime[1] <= 0){
+    winner = 1;
+    paused = true;
+  }else if (blackTime[1] <= 0){
+    winner = -1;
+    paused = true;
+  }
   updateMenu();
 }
 
@@ -379,7 +386,7 @@ void updateMenu(){
   //timers
   textSize(25);
   if (mode.equals("timed")){
-    if (paused){
+    if (paused || winner != 0){
       text(whiteTime[1]/1000, 900, 215);
       text(blackTime[1]/1000, 900, 295);
     }else{
