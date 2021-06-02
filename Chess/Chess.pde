@@ -399,24 +399,24 @@ void updateMenu(){
   textSize(25);
   if (mode.equals("timed")){
     if (paused || winner != 0){
-      text(whiteTime[1]/1000, 900, 215);
-      text(blackTime[1]/1000, 900, 295);
+      text(round(whiteTime[1]/1000), 900, 215);
+      text(round(blackTime[1]/1000), 900, 295);
     }else{
       if (whosMove == -1){
         if (whiteTime[0] == 0){
-          text(timerAmount/1000, 900, 215);
-          text(timerAmount/1000, 900, 295);
+          text(round(timerAmount/1000), 900, 215);
+          text(round(timerAmount/1000), 900, 295);
         }else{
-          text((whiteTime[1] - (millis() - whiteTime[0]))/1000, 900, 215); //calculate but dont set the time until turn is ended
-          text(blackTime[1]/1000, 900, 295);
+          text(round((whiteTime[1] - (millis() - whiteTime[0]))/1000), 900, 215); //calculate but dont set the time until turn is ended
+          text(round(blackTime[1]/1000), 900, 295);
         }
       }
       if (whosMove == 1){
         if (blackTime[0] == 0){
-          text(timerAmount/1000, 900, 215);
+          text(round(timerAmount/1000), 900, 215);
         }else{
-          text(whiteTime[1]/1000, 900, 215);
-          text((blackTime[1] - (millis() - blackTime[0]))/1000, 900, 295);
+          text(round(whiteTime[1]/1000), 900, 215);
+          text(round((blackTime[1] - (millis() - blackTime[0]))/1000), 900, 295);
         }
       }
     }

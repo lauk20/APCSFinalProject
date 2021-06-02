@@ -126,7 +126,7 @@ public abstract class Piece{
   }
  
   public void click(){
-    if (whosMove != getColor()) return;
+    if (whosMove != getColor() || paused) return;
     int[] pos = getPos();
     if (isSelected()){
       for (int[] move : getValidMoves()){
