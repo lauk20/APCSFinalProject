@@ -282,6 +282,18 @@ void mouseClicked(){
       }
     }
     
+    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 535 && mouseY <= 585){ //AREA OF TOGGLE MODE BUTTON
+      if (mode.equals("timed")){
+        mode = "casual";
+      }else{
+        mode = "timed";
+      }
+      whosMove = -1;
+      orientation = 1;
+      winner = 0;
+      createBoard();
+    }
+    
     if (mouseX <= 800 && mode.equals("timed") && paused){ //Start screen for timed mode
       if (whiteTime[0] == 0){
         whiteTime[0] = millis();
@@ -445,11 +457,13 @@ void updateMenu(){
   
   //Mode toggle button
   fill(56, 76, 87);
-  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 535 && mouseY <= 585){ //AREA OF PAUSE GAME BUTTON
+  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 535 && mouseY <= 585){ //AREA OF TOGGLE MODE BUTTON
     fill(56, 75, 150);
   }
   rect(900, 560, 100, 50);
   fill(255);
   text("TOGGLE\nMODE", 900, 553);
+  textSize(10);
+  text("TOGGLING MODE RESETS THE BOARD", 900, 600);
   
 }
