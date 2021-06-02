@@ -66,7 +66,6 @@ public abstract class Piece{
       updateMoves();
       updateMoves(); // called a second time because for example: if a black queen just checked the king in a previous move and we have some white pieces that is past the black queen, their valid moves would not be correct because the queen's threat map has not been updated since the last move yet and the white pieces past the queen think that there's no check.
     }
-    changeTime = false;
   }
  
   public boolean hypotheticalMove(int r, int c){
@@ -127,7 +126,7 @@ public abstract class Piece{
   }
  
   public void click(){
-    if (whosMove != getColor() || paused) return;
+    if (whosMove != getColor() || (paused && mode.equals("timed"))) return;
     int[] pos = getPos();
     if (isSelected()){
       for (int[] move : getValidMoves()){

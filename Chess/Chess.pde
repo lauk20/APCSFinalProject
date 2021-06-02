@@ -43,6 +43,7 @@ void setup(){
 void createBoard(){
   whiteTime = new float[] {0, timerAmount}; 
   blackTime = new float[] {0, timerAmount};  
+  changeTime = true;
   paused = true;
   madeMove = false;
   board = new Piece[8][8];
@@ -286,6 +287,7 @@ void mouseClicked(){
     
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 425 && mouseY <= 475 && !paused && mode.equals("timed")){ //AREA OF PAUSE GAME BUTTON
       paused = true;
+      changeTime = true;
       if (whiteTime[0] != 0 && whosMove == -1){
         whiteTime[1] = whiteTime[1] - (millis() - whiteTime[0]); //we set the current time left because once we unpause, the time checkpoint will be updated to reflect the time that has passed. no need to update the checkpoint because the unpause will handle it correctly
       }
@@ -317,6 +319,7 @@ void mouseClicked(){
         }
       }
       paused = false;
+      changeTime = false;
     }
   }
   else if (mouseY/100 == 4 && mouseX/100>=2 && mouseX/100<=5){ // area of tranformation
