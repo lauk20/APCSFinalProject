@@ -127,7 +127,8 @@ color invertColor(color c){
 
 void updateBoard(){
   if (mode.equals("timed") && paused && winner == 0){
-    background(23,23,23);
+    fill(23,23,23);
+    rect(800/2, 800/2, 800, 800);
     fill(255);
     textSize(48);
     textAlign(CENTER);
