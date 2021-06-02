@@ -11,7 +11,7 @@ Rook whiteRightRook;
 Rook whiteLeftRook;
 Rook blackRightRook;
 Rook blackLeftRook;
-int winner = 0; //0 is no winner, -1 is white, 1 is black.
+int winner = 0; //0 is no winner, -1 is white, 1 is black, 2 is stalemate
 boolean transformation = false;
 int transforming = -1;
 String mode = "casual"; //timed for timers, anything else for non-timed...
@@ -173,6 +173,8 @@ void updateBoard(){
     displayMessage("WHITE WINS", color(255,255,255,255));
   }else if (winner == 1){
     displayMessage("BLACK WINS", color(0, 0, 0, 255));
+  }else if (winner == 2){
+    displayMessage("STALEMATE", color(255, 255, 255, 255));
   }
 }
 
@@ -387,8 +389,12 @@ boolean isCheckmate(){
         }
       }
     }
-    //println("BLACK WINS");
-    winner = 1;
+    int[] coords = whiteKing.getPos();
+    if (blackThreatMap[coords[0]][coords[1]].size() > 0){ // is in check? diff between checkmate and stalemate: checkmate, king in check and no valid moves. stalemate, king not in check and no valid moves
+      winner = 1;
+    }else{
+      winner = 2; //stalemate because king not in check but also no valid moves
+    }
     return true;
   }else if (blackKing.getValidMoves().size() == 0){
     for (int i = 0; i < board.length; i++){
@@ -400,8 +406,12 @@ boolean isCheckmate(){
         }
       }
     }
-    //println("WHITE WINS");
-    winner = -1;
+    int[] coords = blackKing.getPos();
+    if (whiteThreatMap[coords[0]][coords[1]].size() > 0){
+      winner = -1;
+    }else{
+      winner = 2; //stalemate because king not in check but also no valid moves
+    }
     return true;
   }
   
