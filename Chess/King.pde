@@ -44,19 +44,19 @@ public class King extends Piece{
     if (firstMove){
       if (colorP == -1){
         if (row >= 0 && row < 8 && col == 4){
-          if (board[row][col + 1] == null && board[row][col + 2] == null && blackThreatMap[row][col + 1].size() == 0 && blackThreatMap[row][col + 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteRightRook.isFirstMove() && whiteRightRook.hypotheticalMove(row, col + 1)){
+          if (board[row][col + 1] == null && board[row][col + 2] == null && blackThreatMap[row][col + 1].size() == 0 && blackThreatMap[row][col + 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteRightRook != null && whiteRightRook.isFirstMove() && whiteRightRook.hypotheticalMove(row, col + 1)){
             moves.add(new int[]{row, col + 2});
           }
-          if (board[row][col - 1] == null && board[row][col - 2] == null && blackThreatMap[row][col - 1].size() == 0 && blackThreatMap[row][col - 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteLeftRook.isFirstMove() && whiteLeftRook.hypotheticalMove(row, col - 1)){
+          if (board[row][col - 1] == null && board[row][col - 2] == null && blackThreatMap[row][col - 1].size() == 0 && blackThreatMap[row][col - 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteLeftRook != null && whiteLeftRook.isFirstMove() && whiteLeftRook.hypotheticalMove(row, col - 1)){
             moves.add(new int[]{row, col - 2});
           }
         }
       }else{
         if (row >= 0 && row < 8 && col == 3){
-          if (board[row][col + 1] == null && board[row][col + 2] == null && whiteThreatMap[row][col + 1].size() == 0 && whiteThreatMap[row][col + 2].size() == 0 && whiteThreatMap[row][col].size() == 0 && blackRightRook.isFirstMove() && blackRightRook.hypotheticalMove(row, col + 1)){
+          if (board[row][col + 1] == null && board[row][col + 2] == null && whiteThreatMap[row][col + 1].size() == 0 && whiteThreatMap[row][col + 2].size() == 0 && whiteThreatMap[row][col].size() == 0 && blackRightRook != null && blackRightRook.isFirstMove() && blackRightRook.hypotheticalMove(row, col + 1)){
             moves.add(new int[]{row, col + 2});
           }
-          if (board[row][col - 1] == null && board[row][col - 2] == null && whiteThreatMap[row][col - 1].size() == 0 && whiteThreatMap[row][col - 2].size() == 0 && whiteThreatMap[row][col].size() == 0 && blackLeftRook.isFirstMove() && blackLeftRook.hypotheticalMove(row, col - 1)){
+          if (board[row][col - 1] == null && board[row][col - 2] == null && whiteThreatMap[row][col - 1].size() == 0 && whiteThreatMap[row][col - 2].size() == 0 && whiteThreatMap[row][col].size() == 0 && blackLeftRook != null && blackLeftRook.isFirstMove() && blackLeftRook.hypotheticalMove(row, col - 1)){
             moves.add(new int[]{row, col - 2});
           }
         }  
