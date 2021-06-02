@@ -14,7 +14,7 @@ Rook blackLeftRook;
 int winner = 0; //0 is no winner, -1 is white, 1 is black.
 boolean transformation = false;
 int transforming = -1;
-String mode = "timed"; //timed for timers, anything else for non-timed...
+String mode = "casual"; //timed for timers, anything else for non-timed...
 float[] whiteTime = new float[] {0, 600000}; //[0] = start, [1] = current time left in millis
 float[] blackTime = new float[] {0, 600000};
 float timerAmount = 600000; // 10 minutes in millis
