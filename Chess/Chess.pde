@@ -273,6 +273,17 @@ void mouseClicked(){
       }
     }
     
+    if (mouseX >= 815 && mouseX <= 835 && mouseY >= 200 && mouseY <= 230){ //white time decrease
+      println("HELLO");
+      whiteTime[1] = whiteTime[1] - 10 * 1000;
+    }else if (mouseX >= 965 && mouseX <= 985 && mouseY >= 200 && mouseY <= 230){ //white time increase
+      whiteTime[1] = whiteTime[1] + 10 * 1000;
+    }else if (mouseX >= 815 && mouseX <= 835 && mouseY >= 280 && mouseY <= 310){ //black time decrease
+      blackTime[1] = blackTime[1] - 10 * 1000;
+    }else if (mouseX >= 965 && mouseX <= 985 && mouseY >= 280 && mouseY <= 310){ //black time increase
+      blackTime[1] = blackTime[1] + 10 * 1000;
+    }
+    
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 425 && mouseY <= 475 && !paused && mode.equals("timed")){ //AREA OF PAUSE GAME BUTTON
       paused = true;
       if (whiteTime[0] != 0 && whosMove == -1){
@@ -422,7 +433,10 @@ void updateMenu(){
       }
     }
     if (changeTime == true){
-      text("<", 850, 215);
+      text("<", 825, 215);
+      text(">", 975, 215);
+      text("<", 825, 295);
+      text(">", 975, 295);
     }
   }else{
     text("OFF", 900, 215);
