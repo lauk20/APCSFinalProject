@@ -30,12 +30,12 @@ int transforming = -1;
 
 //mode based variables (timers)
 String mode = "casual"; //timed for timers, anything else for non-timed...
-float[] whiteTime = new float[] {0, 600000}; //[0] = start, [1] = current time left in millis
+float[] whiteTime = new float[] {0, 600000}; //[0] = start/time checkpoint, [1] = current time left in millis
 float[] blackTime = new float[] {0, 600000};
 float timerAmount = 600000; // 10 minutes in millis
 boolean paused = true;
 boolean madeMove = false;
-boolean changeTime = true;;
+boolean changeTime = true;
 
 //PImage variables
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
@@ -393,7 +393,6 @@ void mouseClicked(){
   updateBoard(); //not needed if is called in draw();
 }
 
-//UML: "isCheck()"
 boolean isCheckmate(){
   if (whiteKing.getValidMoves().size() == 0){
     for (int i = 0; i < board.length; i++){
