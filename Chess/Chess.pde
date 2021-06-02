@@ -20,6 +20,7 @@ float[] blackTime = new float[] {0, 600000};
 float timerAmount = 600000; // 10 minutes in millis
 boolean paused = true;
 boolean madeMove = false;
+boolean changeTime = true;;
 
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
 PImage imageKnight; //https://www.clipartmax.com/middle/m2i8H7i8i8d3A0d3_this-free-icons-png-design-of-chess-tile-knight-chess-piece/
@@ -419,6 +420,9 @@ void updateMenu(){
           text(round((blackTime[1] - (millis() - blackTime[0]))/1000), 900, 295);
         }
       }
+    }
+    if (changeTime == true){
+      text("<", 850, 215);
     }
   }else{
     text("OFF", 900, 215);
