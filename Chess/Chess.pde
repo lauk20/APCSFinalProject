@@ -275,7 +275,6 @@ void mouseClicked(){
     }
     
     if (mouseX >= 815 && mouseX <= 835 && mouseY >= 200 && mouseY <= 230){ //white time decrease
-      println("HELLO");
       whiteTime[1] = whiteTime[1] - 10 * 1000;
     }else if (mouseX >= 965 && mouseX <= 985 && mouseY >= 200 && mouseY <= 230){ //white time increase
       whiteTime[1] = whiteTime[1] + 10 * 1000;
