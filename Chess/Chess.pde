@@ -1,19 +1,34 @@
 import java.util.*;
 
+//board
 Piece[][] board = new Piece[8][8];
+
+//basic threat maps
 ArrayList<Piece>[][] whiteThreatMap = new ArrayList[8][8]; //squares white pieces threaten
 ArrayList<Piece>[][] blackThreatMap = new ArrayList[8][8]; //squares black pieces threaten
+
+//whosMove and orientation
 int whosMove = -1; // -1 is white
 int orientation = 1; //orientation of the board. 1 is white on bottom of screen, -1 is black on bottom of screen
+
+//Kings
 King whiteKing;
 King blackKing;
+
+//Rooks
 Rook whiteRightRook;
 Rook whiteLeftRook;
 Rook blackRightRook;
 Rook blackLeftRook;
+
+//winner
 int winner = 0; //0 is no winner, -1 is white, 1 is black, 2 is stalemate
+
+//pawn promotion variables
 boolean transformation = false;
 int transforming = -1;
+
+//mode based variables (timers)
 String mode = "casual"; //timed for timers, anything else for non-timed...
 float[] whiteTime = new float[] {0, 600000}; //[0] = start, [1] = current time left in millis
 float[] blackTime = new float[] {0, 600000};
@@ -22,6 +37,7 @@ boolean paused = true;
 boolean madeMove = false;
 boolean changeTime = true;;
 
+//PImage variables
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
 PImage imageKnight; //https://www.clipartmax.com/middle/m2i8H7i8i8d3A0d3_this-free-icons-png-design-of-chess-tile-knight-chess-piece/
 PImage imageBishop;
