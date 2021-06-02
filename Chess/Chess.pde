@@ -232,12 +232,16 @@ public void endTurn(){
 }
 
 void draw(){
-  if (whiteTime[1] <= 0){
+  if (whiteTime[1] <= 0 || (whiteTime[1] - (millis() - whiteTime[0]))/1000 == 0){
+    whiteTime[1] = 0;
     winner = 1;
     paused = true;
-  }else if (blackTime[1] <= 0){
+    updateBoard();
+  }else if (blackTime[1] <= 0 || (blackTime[1] - (millis() - blackTime[0]))/1000 == 0){
+    blackTime[1] = 0;
     winner = -1;
     paused = true;
+    updateBoard();
   }
   updateMenu();
 }
