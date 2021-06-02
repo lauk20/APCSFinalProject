@@ -307,21 +307,21 @@ void mouseClicked(){
       paused = false;
     }
   }
-  else if (mouseY/100 == 4 && mouseX/100>=2 && mouseX/100<=5){
+  else if (mouseY/100 == 4 && mouseX/100>=2 && mouseX/100<=5){ // area of tranformation
     Piece newPiece;
     if (mouseX/100 == 2){
-      newPiece = new Queen(whosMove*-1, 7, transforming);
+      newPiece = new Queen(whosMove, 0, transforming);
     }
     else if (mouseX/100 == 3){
-      newPiece = new Bishop(whosMove*-1, 7, transforming);
+      newPiece = new Bishop(whosMove, 0, transforming);
     }
     else if (mouseX/100 == 4){
-      newPiece = new Rook(whosMove*-1, 7, transforming);
+      newPiece = new Rook(whosMove, 0, transforming);
     }
     else{
-      newPiece = new Knight(whosMove*-1, 7, transforming);
+      newPiece = new Knight(whosMove, 0, transforming);
     }
-    board[7][transforming] = newPiece;
+    board[0][transforming] = newPiece;
     newPiece.updateValidMoves();
     transforming = -1;
     transformation = false;
