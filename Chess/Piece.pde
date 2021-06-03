@@ -134,7 +134,7 @@ public abstract class Piece{
   }
  
   public void click(){
-    if (whosMove != getColor() || (paused && mode.equals("timed"))) return;
+    if (whosMove != getColor() || (paused && mode.equals("timed")) || winner != 0) return;
     int[] pos = getPos();
     if (isSelected()){
       for (int[] move : getValidMoves()){

@@ -37,7 +37,7 @@ boolean paused = true;
 boolean madeMove = false;
 boolean changeTime = true;
 
-//moves since last eaten
+//moves since last captured piece or last pawn moved, 50-move rule variable
 int eaten;
 
 //PImage variables
@@ -265,6 +265,9 @@ void draw(){
     winner = -1;
     paused = true;
     updateBoard();
+  }
+  if (eaten >= 100){
+    winner = 2;
   }
   updateMenu();
 }
