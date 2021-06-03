@@ -37,6 +37,9 @@ boolean paused = true;
 boolean madeMove = false;
 boolean changeTime = true;
 
+//moves since last eaten
+int eaten;
+
 //PImage variables
 PImage imagePawn; //https://www.clipartmax.com/middle/m2H7N4K9A0d3K9d3_chess-piece-pawn-queen-knight-chess-piece-pawn-queen-knight/
 PImage imageKnight; //https://www.clipartmax.com/middle/m2i8H7i8i8d3A0d3_this-free-icons-png-design-of-chess-tile-knight-chess-piece/
@@ -62,6 +65,7 @@ void createBoard(){
   changeTime = true;
   paused = true;
   madeMove = false;
+  eaten = 0;
   board = new Piece[8][8];
   for (int i = 0; i < 8; i++){
     for (int j = 0; j < 8; j++){
@@ -181,7 +185,7 @@ void updateBoard(){
     transformation = true;
   }
   
-  if (winner != 0){
+  if (winner != 0 || eaten >= 100){
     fill(100, 97, 97, 150);
     rect(0, 0, 800, 800);
   }
@@ -189,7 +193,7 @@ void updateBoard(){
     displayMessage("WHITE WINS", color(255,255,255,255));
   }else if (winner == 1){
     displayMessage("BLACK WINS", color(0, 0, 0, 255));
-  }else if (winner == 2){
+  }else if (winner == 2 || eaten >= 100){
     displayMessage("STALEMATE", color(255, 255, 255, 255));
   }
 }
@@ -541,4 +545,7 @@ void updateMenu(){
   textSize(10);
   text("TOGGLING MODE RESETS THE BOARD", 900, 600);
   
+  //noteaten
+  textSize(15);
+  text(eaten/2, 900, 650);
 }
