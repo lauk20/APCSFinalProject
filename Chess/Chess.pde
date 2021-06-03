@@ -185,15 +185,16 @@ void updateBoard(){
     transformation = true;
   }
   
-  if (winner != 0 || eaten >= 100){
+  if (winner != 0){
     fill(100, 97, 97, 150);
     rect(0, 0, 800, 800);
+    noStroke();
   }
   if (winner == -1){
     displayMessage("WHITE WINS", color(255,255,255,255));
   }else if (winner == 1){
     displayMessage("BLACK WINS", color(0, 0, 0, 255));
-  }else if (winner == 2 || eaten >= 100){
+  }else if (winner == 2){
     displayMessage("STALEMATE", color(255, 255, 255, 255));
   }
 }
