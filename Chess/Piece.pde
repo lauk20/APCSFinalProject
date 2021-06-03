@@ -54,7 +54,7 @@ public abstract class Piece{
     }else if (pieceThere == blackLeftRook){
       blackLeftRook = null;
     }
-    if (board[this.row][this.col] instanceof Pawn || board[row][col] != null){
+    if (board[row][col] != null){
       eaten = 0;
     }
     else{

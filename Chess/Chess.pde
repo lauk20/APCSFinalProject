@@ -548,4 +548,8 @@ void updateMenu(){
   //noteaten
   textSize(15);
   text(eaten/2, 900, 650);
+  textSize(12);
+  text("MOVES WITHOUT CAPTURES", 900, 675);
+  textSize(10);
+  text("STALEMATE AT 50", 900, 690);
 }

@@ -109,6 +109,7 @@ public class Pawn extends Piece{
     if (row==0){
       transforming = this.getPos()[1];
     }
+    eaten = 0;
   }
  
   public ArrayList<int[]> getValidMoves(){
