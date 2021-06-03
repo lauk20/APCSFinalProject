@@ -548,8 +548,7 @@ void updateMenu(){
   //noteaten
   textSize(15);
   text(eaten/2, 900, 650);
-  textSize(12);
-  text("MOVES WITHOUT CAPTURES", 900, 675);
   textSize(10);
-  text("STALEMATE AT 50", 900, 690);
+  text("ROUNDS WITHOUT CAPTURES\nOR PAWN MOVEMENT ON BOTH SIDES", 900, 675);
+  text("STALEMATE AT 50: 50-MOVE RULE", 900, 710);
 }
