@@ -267,7 +267,7 @@ int checkBoardHistory(){
     }
   }
   
-  return counter;
+  return counter; //testing branch
 }
 
 void printBoard(Piece[][] b){
