@@ -242,8 +242,25 @@ void updateBoardHistory(){
 int checkBoardHistory(){
   int counter = 0;
   
+  Piece[][] currentBoard = board.clone();
+  
+  if (whosMove == 1){
+    Piece[][] newBoard = new Piece[8][8];
+    int originalRow = 0;
+    int originalCol = 0;
+    for (int i = 7; i >= 0 && originalRow < 8; i--){
+      for (int j = 7; j >= 0 && originalCol < 8; j--){
+        newBoard[i][j] = currentBoard[originalRow][originalCol];
+        originalCol = originalCol + 1;
+      }
+      originalCol = 0;
+      originalRow = originalRow + 1;
+    }
+    currentBoard = newBoard;
+  }
+  
   for (Piece[][] oldBoard : boardHistory){
-    if (oldBoard.equals(board)){
+    if (oldBoard.equals(currentBoard)){
       counter = counter + 1;
     }
   }
