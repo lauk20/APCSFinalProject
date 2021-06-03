@@ -74,8 +74,6 @@ public abstract class Piece{
     }
     
     setSelected(false); //unselect after move
-    
-    updateBoardHistory();
   }
  
   public boolean hypotheticalMove(int r, int c){

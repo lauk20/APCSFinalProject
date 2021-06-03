@@ -221,7 +221,7 @@ void updateMoves(){
 
 void updateBoardHistory(){
   Piece[][] addBoard = board.clone();
-  if (whosMove == 1){
+  if (orientation == -1){
     Piece[][] newBoard = new Piece[8][8];
     int originalRow = 0;
     int originalCol = 0;
@@ -244,7 +244,7 @@ int checkBoardHistory(){
   
   Piece[][] currentBoard = board.clone();
   
-  if (whosMove == 1){
+  if (orientation == -1){
     Piece[][] newBoard = new Piece[8][8];
     int originalRow = 0;
     int originalCol = 0;
@@ -260,12 +260,25 @@ int checkBoardHistory(){
   }
   
   for (Piece[][] oldBoard : boardHistory){
-    if (oldBoard.equals(currentBoard)){
+    //printBoard(oldBoard);
+    if (Arrays.equals(oldBoard, currentBoard)){
       counter = counter + 1;
+      //println(counter);
     }
   }
   
   return counter;
+}
+
+void printBoard(Piece[][] b){
+  for (Piece[] row : b){
+    for (Piece p : row){
+      print(p + " ");
+    }
+    println();
+  }
+  
+  println();
 }
 
 //Rotates the board, MUST change orientation to preserve direction of moves
@@ -307,6 +320,10 @@ public void endTurn(){
   updateMoves();
   updateMoves(); // called a second time because for example: if a black queen just checked the king in a previous move and we have some white pieces that is past the black queen, their valid moves would not be correct because the queen's threat map has not been updated since the last move yet and the white pieces past the queen think that there's no check.
   isCheckmate(); 
+  updateBoardHistory();
+  if (checkBoardHistory() >= 3){
+    winner = 2; //stalemate 3 fold repetition
+  }
   madeMove = false;
 }
 
