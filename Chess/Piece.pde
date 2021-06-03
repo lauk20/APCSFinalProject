@@ -74,6 +74,7 @@ public abstract class Piece{
     }
     
     setSelected(false); //unselect after move
+    
     updateBoardHistory();
   }
  

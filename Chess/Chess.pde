@@ -220,9 +220,20 @@ void updateMoves(){
 }
 
 void updateBoardHistory(){
-  Piece[][] addBoard = board;
+  Piece[][] addBoard = board.clone();
   if (whosMove == 1){
-    addBoard = getRotatedBoard();
+    Piece[][] newBoard = new Piece[8][8];
+    int originalRow = 0;
+    int originalCol = 0;
+    for (int i = 7; i >= 0 && originalRow < 8; i--){
+      for (int j = 7; j >= 0 && originalCol < 8; j--){
+        newBoard[i][j] = addBoard[originalRow][originalCol];
+        originalCol = originalCol + 1;
+      }
+      originalCol = 0;
+      originalRow = originalRow + 1;
+    }
+    addBoard = newBoard;
   }
   boardHistory.add(addBoard);
   historyIndex = historyIndex + 1;
