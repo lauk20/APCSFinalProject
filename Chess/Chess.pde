@@ -2,6 +2,8 @@ import java.util.*;
 
 //board
 Piece[][] board = new Piece[8][8];
+ArrayList<Piece[][]> boardHistory = new ArrayList<Piece[][]>();
+int historyIndex = 0;
 
 //basic threat maps
 ArrayList<Piece>[][] whiteThreatMap = new ArrayList[8][8]; //squares white pieces threaten
@@ -108,6 +110,10 @@ void createBoard(){
   
   updateBoard();
   updateMoves();
+  
+  boardHistory.clear();
+  boardHistory.add(board);
+  historyIndex = 0;
 }
 
 void drawSquares(){
@@ -211,6 +217,11 @@ void updateMoves(){
   whiteKing.updateValidMoves();
   blackKing.updateValidMoves();
   whiteKing.updateValidMoves();
+}
+
+void updateBoardHistory(){
+  boardHistory.add(board);
+  historyIndex = historyIndex + 1;
 }
 
 //Rotates the board, MUST change orientation to preserve direction of moves
