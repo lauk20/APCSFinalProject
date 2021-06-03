@@ -18,6 +18,9 @@
 2. En Passant is also supported.
 
 ## Development Log
+### 6/2/21
+**Kenny Lau:** Completed the toggle mode button, which toggles between casual and timed mode now. Completed increase and decrease time button for the timers. Also, a winner will now be determined when a timer runs out. I also implemented the basic stalemate condition (no valid moves left and the king is not in check).
+
 ### 6/1/21
 **Kenny Lau:** Finished the timed mode that uses the timers I created today. Pausing is also now a feature that works with the timed mode and timers. These come with their corresponding buttons in the menu.
 
