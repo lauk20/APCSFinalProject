@@ -20,26 +20,32 @@
 ## Development Log
 ### 6/2/21
 **Kenny Lau:** Completed the toggle mode button, which toggles between casual and timed mode now. Completed increase and decrease time button for the timers. Also, a winner will now be determined when a timer runs out. I also implemented the basic stalemate condition (no valid moves left and the king is not in check).
+
 **Timothy Sit:** Changed promotion to work with new code. Started on change time buttons, which Kenny finished. Created a new kind of stalemate which still has bugs.
 
 ### 6/1/21
 **Kenny Lau:** Finished the timed mode that uses the timers I created today. Pausing is also now a feature that works with the timed mode and timers. These come with their corresponding buttons in the menu.
+
 **Timothy Sit:** Studied for ap exam.
 
 ### 5/31/21
 **Kenny Lau:** Started the menu design and created a working reset board button, which resets the board.
+
 **Timothy Sit:** Changed transform, actually called promotion, to depend on color of piece being changed. Changed mouseclicks to work as a square.
 
 ### 5/30/21
 **Kenny Lau:** Increased screen size to 1000x800 (width x height) to prepare for new functions/buttons.
+
 **Timothy Sit:** Out with family. Unable to code.
 
 ### 5/29/21
 **Kenny Lau:** Added En Passant, a special move, into the game.
+
 **Timothy Sit:** Rest day.
 
 ### 5/28/21
 **Kenny Lau:** Fixed check error with the Knight where it allowed other Pieces to keep the King in check. Fixed another check error where pieces could not identify a King was being checked by a Pawn. Also added feature where after a Pawn is promoted, the resulting Piece will be able to be identified as a check if there is one. Completed the castling special move for both white and black pieces.
+
 **Timothy Sit:** Finished tranforming.
 
 ### 5/27/21
