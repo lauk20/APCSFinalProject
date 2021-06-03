@@ -18,6 +18,9 @@
 2. En Passant is also supported.
 
 ## Development Log
+### 6/3/21
+**Kenny Lau:** Updated menu to reflect new stalemate condition. Fixed end game screen so that pieces are no longer selectable after a player has won. Fixed some bugs with the new stalemate.
+
 ### 6/2/21
 **Kenny Lau:** Completed the toggle mode button, which toggles between casual and timed mode now. Completed increase and decrease time button for the timers. Also, a winner will now be determined when a timer runs out. I also implemented the basic stalemate condition (no valid moves left and the king is not in check).
 
