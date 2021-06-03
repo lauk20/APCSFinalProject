@@ -239,6 +239,18 @@ void updateBoardHistory(){
   historyIndex = historyIndex + 1;
 }
 
+int checkBoardHistory(){
+  int counter = 0;
+  
+  for (Piece[][] oldBoard : boardHistory){
+    if (oldBoard.equals(board)){
+      counter = counter + 1;
+    }
+  }
+  
+  return counter;
+}
+
 //Rotates the board, MUST change orientation to preserve direction of moves
 Piece[][] getRotatedBoard(){
   Piece[][] rotated = new Piece[8][8];
