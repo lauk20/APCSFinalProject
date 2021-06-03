@@ -220,7 +220,11 @@ void updateMoves(){
 }
 
 void updateBoardHistory(){
-  boardHistory.add(board);
+  Piece[][] addBoard = board;
+  if (whosMove == 1){
+    addBoard = getRotatedBoard();
+  }
+  boardHistory.add(addBoard);
   historyIndex = historyIndex + 1;
 }
 
