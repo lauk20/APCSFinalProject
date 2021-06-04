@@ -329,6 +329,18 @@ public void endTurn(){
   isCheckmate(); 
   updateBoardHistory();
   madeMove = false;
+  if (mode.equals("timed")){
+    if (blackTime[0] == 0){
+      blackTime[0] = millis();
+    }
+    if (whosMove == -1){
+      blackTime[1] = blackTime[1] - (millis() - blackTime[0]); //changing the time left for black because if it's white's move, it means that black just ended. so, we subtract the timeleft for black by (the current time minus the last time checkpoint), which will give us the new time left
+      whiteTime[0] = millis(); //this sets the new time checkpoint for white, which will be used later when the move is ended to set the current time leftw
+    }else{
+      whiteTime[1] = whiteTime[1] - (millis() - whiteTime[0]);
+      blackTime[0] = millis();
+    }
+  }
 }
 
 void draw(){
@@ -376,7 +388,8 @@ void mouseClicked(){
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400 && mode.equals("timed") && madeMove && !paused){ //AREA OF END TURN BUTTON, ONLY WORKS WHEN TIMED MODE
       endTurn();
       
-      if (blackTime[0] == 0){
+      //Not needed since endTurn has this portion of code now
+      /*if (blackTime[0] == 0){
         blackTime[0] = millis();
       }
       if (whosMove == -1){
@@ -385,7 +398,7 @@ void mouseClicked(){
       }else{
         whiteTime[1] = whiteTime[1] - (millis() - whiteTime[0]);
         blackTime[0] = millis();
-      }
+      }*/
     }
     
     if (mouseX >= 810 && mouseX <= 840 && mouseY >= 360 && mouseY <= 390 && mode.equals("timed") && paused){// AREA OF AUTO END TURN BUTTON
