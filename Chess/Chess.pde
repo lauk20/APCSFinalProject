@@ -220,7 +220,7 @@ void updateMoves(){
 }
 
 void updateBoardHistory(){
-  Piece[][] addBoard = board.clone();
+  Piece[][] addBoard = copyArray(board);
   if (orientation == -1){
     Piece[][] newBoard = new Piece[8][8];
     int originalRow = 0;
@@ -235,42 +235,48 @@ void updateBoardHistory(){
     }
     addBoard = newBoard;
   }
+  //printBoard(addBoard);
+  
+  int counter = 0;
+  for (Piece[][] oldBoard : boardHistory){
+    if (isEqualBoard(oldBoard, addBoard)){
+      counter = counter + 1;
+    }/*else{
+      printBoard(oldBoard);
+      printBoard(addBoard);
+    }*/
+  }
+  
+  if (counter >= 2){
+    winner = 2;
+  }
   boardHistory.add(addBoard);
   historyIndex = historyIndex + 1;
 }
 
-int checkBoardHistory(){
-  int counter = 0;
-  
-  Piece[][] currentBoard = board.clone();
-  
-  if (orientation == -1){
-    Piece[][] newBoard = new Piece[8][8];
-    int originalRow = 0;
-    int originalCol = 0;
-    for (int i = 7; i >= 0 && originalRow < 8; i--){
-      for (int j = 7; j >= 0 && originalCol < 8; j--){
-        newBoard[i][j] = currentBoard[originalRow][originalCol];
-        originalCol = originalCol + 1;
-      }
-      originalCol = 0;
-      originalRow = originalRow + 1;
-    }
-    currentBoard = newBoard;
-  }
-  
-  for (Piece[][] oldBoard : boardHistory){
-    //printBoard(oldBoard);
-    if (Arrays.equals(oldBoard, currentBoard)){
-      counter = counter + 1;
-      //println(counter);
+Piece[][] copyArray(Piece[][] arr){ //make our own copy
+  Piece[][] newCopy = new Piece[8][8];
+  for (int i = 0; i < 8; i++){
+    for (int j = 0; j < 8; j++){
+      newCopy[i][j] = arr[i][j];
     }
   }
-  
-  return counter; //testing branch
+  return newCopy;
 }
 
-void printBoard(Piece[][] b){
+boolean isEqualBoard(Piece[][] arr1, Piece[][] arr2){ //check if the boards are equal
+  for (int i = 0; i < 8; i++){
+    for (int j = 0; j < 8; j++){
+      if (arr1[i][j] != arr2[i][j]){
+        return false;
+      }
+    }
+  }
+  
+  return true;
+}
+
+void printBoard(Piece[][] b){ //for debug purposes only
   for (Piece[] row : b){
     for (Piece p : row){
       print(p + " ");
@@ -291,8 +297,8 @@ Piece[][] getRotatedBoard(){
     for (int j = 7; j >= 0 && originalCol < 8; j--){
       rotated[i][j] = board[originalRow][originalCol];
       if (board[originalRow][originalCol] != null){
-        board[originalRow][originalCol].setSelected(false); //when we rotate, we don't want and pieces to be selected
         board[originalRow][originalCol].setPos(i, j);
+        board[originalRow][originalCol].setSelected(false); //when we rotate, we don't want and pieces to be selected
       }
       originalCol = originalCol + 1;
     }
@@ -321,9 +327,6 @@ public void endTurn(){
   updateMoves(); // called a second time because for example: if a black queen just checked the king in a previous move and we have some white pieces that is past the black queen, their valid moves would not be correct because the queen's threat map has not been updated since the last move yet and the white pieces past the queen think that there's no check.
   isCheckmate(); 
   updateBoardHistory();
-  if (checkBoardHistory() >= 3){
-    winner = 2; //stalemate 3 fold repetition
-  }
   madeMove = false;
 }
 
