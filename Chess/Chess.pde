@@ -408,6 +408,7 @@ void mouseClicked(){
       whosMove *= -1;
       orientation = orientation * -1;
       board = getRotatedBoard();
+      newThreatMaps();
       updateMoves();
       updateMoves();
     }
