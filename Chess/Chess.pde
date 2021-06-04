@@ -366,6 +366,13 @@ void mouseClicked(){
       createBoard();
     }
     
+    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 162 && mouseY <= 187 && boardHistory.size() >= 2){// AREA OF UNDO BOARD BUTTON
+      boardHistory.remove(boardHistory.size()-1);
+      board = boardHistory.get(boardHistory.size()-1);
+      whosMove *= -1;
+      updateBoard();
+    }
+    
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400 && mode.equals("timed") && madeMove && !paused){ //AREA OF END TURN BUTTON, ONLY WORKS WHEN TIMED MODE
       endTurn();
       
@@ -554,7 +561,7 @@ void updateMenu(){
   
   //undo button
   fill(56, 75, 87);
-  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 162 && mouseY <= 187){ //AREA OF RESET BOARD BUTTON
+  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 162 && mouseY <= 187){ //AREA OF UNDO BOARD BUTTON
     fill(56, 75, 150);
   }
   rect(900, 175, 100, 25);
