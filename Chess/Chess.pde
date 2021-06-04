@@ -552,6 +552,15 @@ void updateMenu(){
   textSize(15);
   text("RESET\nBOARD", 900, 118);
   
+  //undo button
+  fill(56, 75, 87);
+  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 162 && mouseY <= 187){ //AREA OF RESET BOARD BUTTON
+    fill(56, 75, 150);
+  }
+  rect(900, 175, 100, 25);
+  fill(255);
+  text("Undo", 900, 180);
+  
   //timers
   textSize(25);
   if (mode.equals("timed")){
