@@ -64,7 +64,7 @@ public abstract class Piece{
     this.row = row;
     this.col = col;
     board[row][col] = this;
-    if (!mode.equals("timed")){
+    if (!mode.equals("timed") || auto){
       endTurn();
       madeMove = false;
     }else{

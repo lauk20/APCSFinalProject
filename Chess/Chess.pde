@@ -38,6 +38,7 @@ float timerAmount = 600000; // 10 minutes in millis
 boolean paused = true;
 boolean madeMove = false;
 boolean changeTime = true;
+boolean auto = false;
 
 //moves since last captured piece or last pawn moved, 50-move rule variable
 int eaten;
@@ -241,10 +242,10 @@ void updateBoardHistory(){
   for (Piece[][] oldBoard : boardHistory){
     if (isEqualBoard(oldBoard, addBoard)){
       counter = counter + 1;
-    }/*else{
-      printBoard(oldBoard);
-      printBoard(addBoard);
-    }*/
+    }//else{
+      //printBoard(oldBoard);
+      //printBoard(addBoard);
+    //}
   }
   
   if (counter >= 2){
@@ -378,6 +379,10 @@ void mouseClicked(){
         whiteTime[1] = whiteTime[1] - (millis() - whiteTime[0]);
         blackTime[0] = millis();
       }
+    }
+    
+    if (mouseX >= 810 && mouseX <= 840 && mouseY >= 360 && mouseY <= 390 && mode.equals("timed") && paused){
+      auto = !auto;
     }
     
     if (mouseX >= 815 && mouseX <= 835 && mouseY >= 200 && mouseY <= 230){ //white time decrease
@@ -595,6 +600,23 @@ void updateMenu(){
   textSize(15);
   fill(255,255,255);
   text("END\nTURN", 900, 368);
+  
+  //auto end move button
+  if (paused && mode.equals("timed")){
+    if (auto){
+      fill(56,75,87);
+    }
+    else{
+      fill(255);
+    }
+    if (mouseX >= 810 && mouseX <= 840 && mouseY >= 360 && mouseY <= 390){ //AREA OF AUTO END TURN BUTTON
+      fill(56, 75, 150);
+    }
+    rect(825, 375, 30, 30);
+    textSize(10);
+    fill(255);
+    text("AUTO", 825, 355);
+  }
   
   //Pause button
   fill(56, 76, 87);
