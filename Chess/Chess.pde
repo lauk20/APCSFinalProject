@@ -113,7 +113,7 @@ void createBoard(){
   updateMoves();
   
   boardHistory.clear();
-  boardHistory.add(board);
+  boardHistory.add(copyArray(board));
   historyIndex = 0;
 }
 
@@ -251,6 +251,7 @@ void updateBoardHistory(){
   if (counter >= 2){
     winner = 2;
   }
+
   boardHistory.add(addBoard);
   historyIndex = historyIndex + 1;
 }
