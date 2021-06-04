@@ -2,13 +2,23 @@ public class Pawn extends Piece{
   private boolean firstMove;
   private ArrayList<int[]> validMoves;
   private boolean justMovedTwo;
+  private int firstMoveTime;
 
   public Pawn(int colour, int r, int c){
     super(colour, r, c);
     firstMove = true;
     justMovedTwo = false;
+    firstMoveTime = -1;
   }
  
+   public void setPos(int r, int c){
+    super.setPos(r, c);
+    if (firstMoveTime > boardHistory.size() - 1){
+      firstMove = true;
+      firstMoveTime = -1;
+    }
+  }
+  
   public void updateValidMoves(){
     ArrayList<int[]> moves = new ArrayList<int[]>();
     int[] coords = getPos();
@@ -110,6 +120,9 @@ public class Pawn extends Piece{
       transforming = this.getPos()[1];
     }
     eaten = 0;
+    if (firstMoveTime == -1){
+      firstMoveTime = boardHistory.size() - 1;
+    }
   }
  
   public ArrayList<int[]> getValidMoves(){

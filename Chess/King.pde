@@ -4,10 +4,20 @@ public class King extends Piece{
   private int[][] moveMatrices = new int[][]{{1,0}, {-1,0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
   private ArrayList<int[]> validMoves;
   private boolean firstMove;
+  private int firstMoveTime;
   
   public King(int colour, int r, int c){
     super(colour, r, c);
     firstMove = true;
+    firstMoveTime = -1;
+  }
+  
+  public void setPos(int r, int c){
+    super.setPos(r, c);
+    if (firstMoveTime > boardHistory.size() - 1){
+      firstMove = true;
+      firstMoveTime = -1;
+    }
   }
   
   public void updateValidMoves(){
@@ -115,6 +125,9 @@ public class King extends Piece{
     }
     super.moveTo(row, col);
     firstMove = false;
+    if (firstMoveTime == -1){
+      firstMoveTime = boardHistory.size() - 1;
+    }
   }
   
   public ArrayList<int[]> getValidMoves(){
