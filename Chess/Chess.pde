@@ -236,7 +236,6 @@ void updateBoardHistory(){
     }
     addBoard = newBoard;
   }
-  //printBoard(addBoard);
   
   int counter = 0;
   for (Piece[][] oldBoard : boardHistory){
@@ -379,11 +378,38 @@ void mouseClicked(){
       createBoard();
     }
     
-    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 162 && mouseY <= 187 && boardHistory.size() >= 2){// AREA OF UNDO BOARD BUTTON
+    if (mouseX >= 850 && mouseX <= 950 && mouseY >= 162 && mouseY <= 187 && boardHistory.size() >= 2 && !mode.equals("timed")){// AREA OF UNDO BOARD BUTTON
       boardHistory.remove(boardHistory.size()-1);
-      board = boardHistory.get(boardHistory.size()-1);
+      board = copyArray(boardHistory.get(boardHistory.size()-1));
+      //printBoard(board);
+      Piece[][] changeBoard = copyArray(board);
+      if (whosMove == 1){
+        Piece[][] newBoard = new Piece[8][8];
+        int originalRow = 0;
+        int originalCol = 0;
+        for (int i = 7; i >= 0 && originalRow < 8; i--){
+          for (int j = 7; j >= 0 && originalCol < 8; j--){
+            newBoard[i][j] = changeBoard[originalRow][originalCol];
+            originalCol = originalCol + 1;
+          }
+          originalCol = 0;
+          originalRow = originalRow + 1;
+        }
+        changeBoard = newBoard; 
+      }
+      board = changeBoard;
+      for (int i = 0; i < 8; i++){
+        for (int j = 0; j < 8; j++){
+          if (board[i][j] != null){
+            board[i][j].setPos(i, j);
+          }
+        }
+      }
       whosMove *= -1;
-      updateBoard();
+      orientation = orientation * -1;
+      board = getRotatedBoard();
+      updateMoves();
+      updateMoves();
     }
     
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400 && mode.equals("timed") && madeMove && !paused){ //AREA OF END TURN BUTTON, ONLY WORKS WHEN TIMED MODE
@@ -575,12 +601,12 @@ void updateMenu(){
   
   //undo button
   fill(56, 75, 87);
-  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 162 && mouseY <= 187){ //AREA OF UNDO BOARD BUTTON
+  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 162 && mouseY <= 187 && !mode.equals("timed")){ //AREA OF UNDO BOARD BUTTON
     fill(56, 75, 150);
   }
   rect(900, 175, 100, 25);
   fill(255);
-  text("Undo", 900, 180);
+  text("UNDO", 900, 180);
   
   //timers
   textSize(25);
