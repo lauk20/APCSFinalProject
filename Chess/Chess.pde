@@ -381,7 +381,7 @@ void mouseClicked(){
       }
     }
     
-    if (mouseX >= 810 && mouseX <= 840 && mouseY >= 360 && mouseY <= 390 && mode.equals("timed") && paused){
+    if (mouseX >= 810 && mouseX <= 840 && mouseY >= 360 && mouseY <= 390 && mode.equals("timed") && paused){// AREA OF AUTO END TURN BUTTON
       auto = !auto;
     }
     
