@@ -159,13 +159,13 @@ public class King extends Piece{
     int colorP = getColor();
     Rook rookInQuestion;
     if (firstMove && ((col == 6 && colorP == -1) || (col == 5 && colorP == 1))){
-      if (colorP == -1){
+      if (colorP == -1 && board[r][5] == null){
         rookInQuestion = whiteRightRook;
         int oldCol = rookInQuestion.getPos()[1];
         rookInQuestion.setPos(r, 5);
         board[r][oldCol] = null;
         board[r][5] = rookInQuestion;
-      }else{
+      }else if (board[r][4] == null){
         rookInQuestion = blackRightRook;
         int oldCol = rookInQuestion.getPos()[1];
         rookInQuestion.setPos(r, 4);
@@ -173,13 +173,13 @@ public class King extends Piece{
         board[r][4] = rookInQuestion;
       }
     }else if (firstMove && ((col == 2 && colorP == -1) || (col == 1 && colorP == 1))){
-      if (colorP == -1){
+      if (colorP == -1 && board[r][3] == null){
         rookInQuestion = whiteLeftRook;
         int oldCol = rookInQuestion.getPos()[1];
         rookInQuestion.setPos(r, 3);
         board[r][oldCol] = null;
         board[r][3] = rookInQuestion;
-      }else{
+      }else if (board[r][2] == null){
         rookInQuestion = blackLeftRook;
         int oldCol = rookInQuestion.getPos()[1];
         rookInQuestion.setPos(r, 2);
