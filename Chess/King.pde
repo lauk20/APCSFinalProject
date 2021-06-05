@@ -159,13 +159,13 @@ public class King extends Piece{
     int colorP = getColor();
     Rook rookInQuestion;
     if (firstMove && ((col == 6 && colorP == -1) || (col == 5 && colorP == 1))){
-      if (colorP == -1 && board[r][5] == null){
+      if (colorP == -1 && (board[r][5] == null || board[r][5] == whiteKing)){
         rookInQuestion = whiteRightRook;
         int oldCol = rookInQuestion.getPos()[1];
         rookInQuestion.setPos(r, 5);
         board[r][oldCol] = null;
         board[r][5] = rookInQuestion;
-      }else if (board[r][4] == null){
+      }else if (board[r][4] == null || board[r][4] == blackKing){
         rookInQuestion = blackRightRook;
         int oldCol = rookInQuestion.getPos()[1];
         rookInQuestion.setPos(r, 4);
@@ -173,13 +173,13 @@ public class King extends Piece{
         board[r][4] = rookInQuestion;
       }
     }else if (firstMove && ((col == 2 && colorP == -1) || (col == 1 && colorP == 1))){
-      if (colorP == -1 && board[r][3] == null){
+      if (colorP == -1 && (board[r][3] == null || board[r][3] == whiteKing)){
         rookInQuestion = whiteLeftRook;
         int oldCol = rookInQuestion.getPos()[1];
         rookInQuestion.setPos(r, 3);
         board[r][oldCol] = null;
         board[r][3] = rookInQuestion;
-      }else if (board[r][2] == null){
+      }else if (board[r][2] == null || board[r][2] == blackKing){
         rookInQuestion = blackLeftRook;
         int oldCol = rookInQuestion.getPos()[1];
         rookInQuestion.setPos(r, 2);
@@ -193,6 +193,7 @@ public class King extends Piece{
     if (firstMoveTime == -1){
       firstMoveTime = boardHistory.size() - 1;
     }
+    setSelected(false);
     //printBoard(board);
   }
   

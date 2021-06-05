@@ -71,6 +71,7 @@ public abstract class Piece{
     this.col = col;
     board[row][col] = this;
     //printBoard(board);
+    setSelected(false); //unselect after move
     if (!mode.equals("timed") || auto){
       endTurn();
       madeMove = false;
@@ -79,8 +80,6 @@ public abstract class Piece{
       updateMoves();
       updateMoves(); // called a second time because for example: if a black queen just checked the king in a previous move and we have some white pieces that is past the black queen, their valid moves would not be correct because the queen's threat map has not been updated since the last move yet and the white pieces past the queen think that there's no check.
     }
-    
-    setSelected(false); //unselect after move
   }
  
   public boolean hypotheticalMove(int r, int c){
