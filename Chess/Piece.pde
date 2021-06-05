@@ -54,6 +54,7 @@ public abstract class Piece{
     }else if (pieceThere == blackLeftRook){
       blackLeftRook = null;
     }
+    eatenHistory.add(eaten);
     if (board[row][col] != null){
       eaten = 0;
     }

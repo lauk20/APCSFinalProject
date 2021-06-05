@@ -4,6 +4,7 @@ import java.util.*;
 Piece[][] board = new Piece[8][8];
 ArrayList<Piece[][]> boardHistory = new ArrayList<Piece[][]>();
 int historyIndex = 0;
+ArrayList<Integer> eatenHistory;
 
 //basic threat maps
 ArrayList<Piece>[][] whiteThreatMap = new ArrayList[8][8]; //squares white pieces threaten
@@ -69,6 +70,7 @@ void createBoard(){
   paused = true;
   madeMove = false;
   eaten = 0;
+  eatenHistory = new ArrayList<Integer>();
   board = new Piece[8][8];
   for (int i = 0; i < 8; i++){
     for (int j = 0; j < 8; j++){
@@ -405,6 +407,7 @@ void mouseClicked(){
           }
         }
       }
+      eaten = eatenHistory.remove(eatenHistory.size()-1);
       whosMove *= -1;
       orientation = orientation * -1;
       board = getRotatedBoard();
