@@ -44,7 +44,7 @@ public abstract class Piece{
     if (madeMove){
       return;
     }
-    Piece pieceThere = board[this.row][this.col];
+    Piece pieceThere = board[row][col];
     if (pieceThere == whiteRightRook){
       whiteRightRook = null;
     }else if (pieceThere == whiteLeftRook){

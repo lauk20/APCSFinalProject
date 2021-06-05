@@ -129,10 +129,10 @@ void createBoard(){
     board[7][leftRook] = whiteLeftRook;
     whiteRightRook = new Rook(-1, 7, rightRook);
     board[7][rightRook] = whiteRightRook;
-    blackRightRook = new Rook(1, 0, rightRook);
-    board[0][rightRook] = blackRightRook;
-    blackLeftRook = new Rook(1, 0, leftRook);
-    board[0][leftRook] = blackLeftRook;
+    blackRightRook = new Rook(1, 0, leftRook);
+    board[0][leftRook] = blackRightRook;
+    blackLeftRook = new Rook(1, 0, rightRook);
+    board[0][rightRook] = blackLeftRook;
     
     int bishopOdd = -1;
     while ((bishopOdd == -1 || !availableColumns[bishopOdd]) || bishopOdd % 2 != 0){
