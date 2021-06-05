@@ -53,21 +53,78 @@ public class King extends Piece{
     
     if (firstMove){
       if (colorP == -1){
-        if (row >= 0 && row < 8 && col == 4){
-          if (board[row][col + 1] == null && board[row][col + 2] == null && blackThreatMap[row][col + 1].size() == 0 && blackThreatMap[row][col + 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteRightRook != null && whiteRightRook.isFirstMove() && whiteRightRook.hypotheticalMove(row, col + 1)){
+        if (row >= 0 && row < 8 && col == 4){ //0, 6 right side castle
+          //piece obstruction test!!!
+          boolean canCastleRight = true;
+          if (whiteRightRook == null && !whiteRightRook.isFirstMove()){
+            canCastleRight = false;
+          }
+          for (int i = col + 1; canCastleRight && i < whiteRightRook.getPos()[1]; i++){
+            //if statements are split up for readability
+            if (board[row][i] != null){
+              canCastleRight = false;
+            }else if (blackThreatMap[row][i].size() != 0){
+              canCastleRight = false;
+            }
+          }
+          if (canCastleRight && whiteRightRook.hypotheticalMove(row, 5)){
+            moves.add(new int[]{row, 6});
+          }
+          //old castling code
+          /*if (board[row][col + 1] == null && board[row][col + 2] == null && blackThreatMap[row][col + 1].size() == 0 && blackThreatMap[row][col + 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteRightRook != null && whiteRightRook.isFirstMove() && whiteRightRook.hypotheticalMove(row, col + 1)){
             moves.add(new int[]{row, col + 2});
+          }*/
+          boolean canCastleLeft = true;
+          if (whiteLeftRook == null && !whiteLeftRook.isFirstMove()){
+            canCastleLeft = false;
           }
-          if (board[row][col - 1] == null && board[row][col - 2] == null && blackThreatMap[row][col - 1].size() == 0 && blackThreatMap[row][col - 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteLeftRook != null && whiteLeftRook.isFirstMove() && whiteLeftRook.hypotheticalMove(row, col - 1)){
+          for (int i = col - 1; canCastleLeft && i > whiteLeftRook.getPos()[1]; i--){
+            //if statements are split up for readability
+            if (board[row][i] != null){
+              canCastleLeft = false;
+            }else if (blackThreatMap[row][i].size() != 0){
+              canCastleLeft = false;
+            }
+          }
+          if (canCastleLeft && whiteLeftRook.hypotheticalMove(row, 3)){
+            moves.add(new int[]{row, 2});
+          }
+          //old castling code
+          /*if (board[row][col - 1] == null && board[row][col - 2] == null && blackThreatMap[row][col - 1].size() == 0 && blackThreatMap[row][col - 2].size() == 0 && blackThreatMap[row][col].size() == 0 && whiteLeftRook != null && whiteLeftRook.isFirstMove() && whiteLeftRook.hypotheticalMove(row, col - 1)){
             moves.add(new int[]{row, col - 2});
-          }
+          }*/
         }
       }else{
         if (row >= 0 && row < 8 && col == 3){
-          if (board[row][col + 1] == null && board[row][col + 2] == null && whiteThreatMap[row][col + 1].size() == 0 && whiteThreatMap[row][col + 2].size() == 0 && whiteThreatMap[row][col].size() == 0 && blackRightRook != null && blackRightRook.isFirstMove() && blackRightRook.hypotheticalMove(row, col + 1)){
-            moves.add(new int[]{row, col + 2});
+          boolean canCastleRight = true;
+          if (blackRightRook == null && !blackRightRook.isFirstMove()){
+            canCastleRight = false;
           }
-          if (board[row][col - 1] == null && board[row][col - 2] == null && whiteThreatMap[row][col - 1].size() == 0 && whiteThreatMap[row][col - 2].size() == 0 && whiteThreatMap[row][col].size() == 0 && blackLeftRook != null && blackLeftRook.isFirstMove() && blackLeftRook.hypotheticalMove(row, col - 1)){
-            moves.add(new int[]{row, col - 2});
+          for (int i = col + 1; canCastleRight && i < blackRightRook.getPos()[1]; i++){
+            //if statements are split up for readability
+            if (board[row][i] != null){
+              canCastleRight = false;
+            }else if (whiteThreatMap[row][i].size() != 0){
+              canCastleRight = false;
+            }
+          }
+          if (canCastleRight && blackRightRook.hypotheticalMove(row, 4)){
+            moves.add(new int[]{row, 5});
+          }
+          boolean canCastleLeft = true;
+          if (blackLeftRook == null && !blackLeftRook.isFirstMove()){
+            canCastleLeft = false;
+          }
+          for (int i = col - 1; canCastleLeft && i > blackLeftRook.getPos()[1]; i--){
+            //if statements are split up for readability
+            if (board[row][i] != null){
+              canCastleLeft = false;
+            }else if (whiteThreatMap[row][i].size() != 0){
+              canCastleLeft = false;
+            }
+          }
+          if (canCastleLeft && blackLeftRook.hypotheticalMove(row, 2)){
+            moves.add(new int[]{row, 1});
           }
         }  
       }
