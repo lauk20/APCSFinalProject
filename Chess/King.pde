@@ -153,6 +153,9 @@ public class King extends Piece{
   }
   
   public void moveTo(int row, int col){
+    if (madeMove){
+      return;
+    }
     int[] coords = getPos();
     int r = coords[0];
     int c = coords[1];
@@ -189,6 +192,7 @@ public class King extends Piece{
     }
     //printBoard(board);
     super.moveTo(row, col);
+    //println("called");
     firstMove = false;
     if (firstMoveTime == -1){
       firstMoveTime = boardHistory.size() - 1;
