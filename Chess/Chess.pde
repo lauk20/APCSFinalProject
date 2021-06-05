@@ -410,6 +410,7 @@ void mouseClicked(){
       eaten = eatenHistory.remove(eatenHistory.size()-1);
       whosMove *= -1;
       orientation = orientation * -1;
+      winner = 0;
       board = getRotatedBoard();
       newThreatMaps();
       updateMoves();
