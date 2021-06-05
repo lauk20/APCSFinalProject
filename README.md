@@ -19,6 +19,9 @@
 3. Stalemates that are supported: basic stalemate (no valid move for King and not in check), 50-move rule, and 3-fold repetition.
 
 ## Development Log
+### 6/4/21
+**Kenny Lau:** Fixed the 3-fold repetition stalemate. Implemented the undo feature.
+
 ### 6/3/21
 **Kenny Lau:** Updated menu to reflect new stalemate condition. Fixed end game screen so that pieces are no longer selectable after a player has won. Fixed some bugs with the new stalemate. Added the 3-fold repetition stalemate.
 
