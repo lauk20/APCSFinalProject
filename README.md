@@ -19,6 +19,9 @@
 3. Stalemates that are supported: basic stalemate (no valid move for King and not in check), 50-move rule, and 3-fold repetition.
 
 ## Development Log
+### 6/5/21
+**Kenny Lau:** Made the Chess 960 mode setup. Spent time fixing the castling for the time.
+
 ### 6/4/21
 **Kenny Lau:** Fixed the 3-fold repetition stalemate. Implemented the undo feature.
 
