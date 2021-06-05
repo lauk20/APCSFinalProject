@@ -89,7 +89,7 @@ public class King extends Piece{
               canCastleLeft = false;
             }
           }
-          if (canCastleLeft && whiteLeftRook.hypotheticalMove(row, 3) && (board[row][3] == null || board[row][3] == whiteLeftRook)){
+          if ((canCastleLeft && whiteLeftRook.hypotheticalMove(row, 3) && (board[row][3] == null || board[row][3] == whiteLeftRook)) || (firstMove && col == 3 && whiteLeftRook.isFirstMove() && whiteLeftRook.getPos()[1] == 2)){
             moves.add(new int[]{row, 2});
           }
           //old castling code
@@ -111,7 +111,7 @@ public class King extends Piece{
               canCastleRight = false;
             }
           }
-          if (canCastleRight && blackRightRook.hypotheticalMove(row, 4) && (board[row][4] == null || board[row][4] == blackRightRook)){
+          if ((canCastleRight && blackRightRook.hypotheticalMove(row, 4) && (board[row][4] == null || board[row][4] == blackRightRook)) || (firstMove && col == 4 && blackRightRook.isFirstMove() && blackRightRook.getPos()[1] == 5)){
             moves.add(new int[]{row, 5});
           }
           boolean canCastleLeft = true;
@@ -126,7 +126,7 @@ public class King extends Piece{
               canCastleLeft = false;
             }
           }
-          if (canCastleLeft && blackLeftRook.hypotheticalMove(row, 2) && (board[row][2] == null || board[row][2] == blackLeftRook)){
+          if ((canCastleLeft && blackLeftRook.hypotheticalMove(row, 2) && (board[row][2] == null || board[row][2] == blackLeftRook)) || (firstMove && col == 2 && blackLeftRook.isFirstMove() && blackLeftRook.getPos()[1] == 1)){
             moves.add(new int[]{row, 1});
           }
         }  
@@ -187,12 +187,13 @@ public class King extends Piece{
         board[r][2] = rookInQuestion;        
       }
     }
+    //printBoard(board);
     super.moveTo(row, col);
     firstMove = false;
     if (firstMoveTime == -1){
       firstMoveTime = boardHistory.size() - 1;
     }
-    printBoard(board);
+    //printBoard(board);
   }
   
   public ArrayList<int[]> getValidMoves(){

@@ -44,14 +44,15 @@ public abstract class Piece{
     if (madeMove){
       return;
     }
+    //printBoard(board);
     Piece pieceThere = board[row][col];
-    if (pieceThere == whiteRightRook){
+    if (pieceThere == whiteRightRook && colorP == 1){
       whiteRightRook = null;
-    }else if (pieceThere == whiteLeftRook){
+    }else if (pieceThere == whiteLeftRook && colorP == 1){
       whiteLeftRook = null;
-    }else if (pieceThere == blackRightRook){
+    }else if (pieceThere == blackRightRook && colorP == -1){
       blackRightRook = null;
-    }else if (pieceThere == blackLeftRook){
+    }else if (pieceThere == blackLeftRook && colorP == -1){
       blackLeftRook = null;
     }
     eatenHistory.add(eaten);
@@ -61,10 +62,15 @@ public abstract class Piece{
     else{
       eaten++;
     }
-    board[this.row][this.col] = null;
+    if (board[this.row][this.col] != null && board[this.row][this.col].getColor() != colorP){
+      board[this.row][this.col] = null;
+    }else if (board[this.row][this.col] == this){
+      board[this.row][this.col] = null;
+    }
     this.row = row;
     this.col = col;
     board[row][col] = this;
+    //printBoard(board);
     if (!mode.equals("timed") || auto){
       endTurn();
       madeMove = false;
