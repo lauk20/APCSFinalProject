@@ -63,7 +63,6 @@ void setup(){
   createBoard();
 }
 
-String gameMode = "normal";
 void createBoard(){
   whiteTime = new float[] {0, timerAmount}; 
   blackTime = new float[] {0, timerAmount};  
@@ -80,7 +79,7 @@ void createBoard(){
     }
   }
   
-  if (gameMode.equals("normal")){
+  if (!mode.equals("chess960")){
     for (int i = 0; i < board[0].length; i++){
       board[1][i] = new Pawn(1, 1, i);
       board[6][i] = new Pawn(-1, 6, i);
@@ -115,7 +114,7 @@ void createBoard(){
   }else{
     boolean[] availableColumns = new boolean[]{true, true, true, true, true, true, true, true};
     
-    int kingCol = (int)(Math.random() * 3 + 2);
+    int kingCol = (int)(Math.random() * 6 + 1);
     availableColumns[kingCol] = false;
     whiteKing = new King(-1, 7, kingCol);
     board[7][kingCol] = whiteKing;
@@ -530,6 +529,8 @@ void mouseClicked(){
     
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 535 && mouseY <= 585){ //AREA OF TOGGLE MODE BUTTON
       if (mode.equals("timed")){
+        mode = "chess960";
+      }else if (mode.equals("chess960")){
         mode = "casual";
       }else{
         mode = "timed";
@@ -763,6 +764,8 @@ void updateMenu(){
   String modeText = "CASUAL";
   if (mode.equals("timed")){
     modeText = "TIMED";
+  }else if (mode.equals("chess960")){
+    modeText = "CHESS 960";
   }
   text("MODE: " + modeText, 900, 525);
   
