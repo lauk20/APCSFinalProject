@@ -63,6 +63,7 @@ void setup(){
   createBoard();
 }
 
+String gameMode = "normal";
 void createBoard(){
   whiteTime = new float[] {0, timerAmount}; 
   blackTime = new float[] {0, timerAmount};  
@@ -79,37 +80,106 @@ void createBoard(){
     }
   }
   
-  for (int i = 0; i < board[0].length; i++){
-    board[1][i] = new Pawn(1, 1, i);
-    board[6][i] = new Pawn(-1, 6, i);
+  if (gameMode.equals("normal")){
+    for (int i = 0; i < board[0].length; i++){
+      board[1][i] = new Pawn(1, 1, i);
+      board[6][i] = new Pawn(-1, 6, i);
+    }
+    
+    board[0][1] = new Knight(1,0,1);
+    board[0][6] = new Knight(1,0,6);
+    board[7][1] = new Knight(-1,7,1);
+    board[7][6] = new Knight(-1,7,6);
+    
+    board[0][2] = new Bishop(1,0,2);
+    board[0][5] = new Bishop(1,0,5);
+    board[7][2] = new Bishop(-1,7,2);
+    board[7][5] = new Bishop(-1,7,5);
+    
+    whiteKing = new King(-1, 7, 4);
+    board[7][4] = whiteKing;
+    blackKing = new King(1, 0, 4);
+    board[0][4] = blackKing;
+    
+    whiteLeftRook = new Rook(-1, 7, 0);
+    board[7][0] = whiteLeftRook;
+    whiteRightRook = new Rook(-1, 7, 7);
+    board[7][7] = whiteRightRook;
+    blackRightRook = new Rook(1, 0, 0);
+    board[0][0] = blackRightRook;
+    blackLeftRook = new Rook(1, 0, 7);
+    board[0][7] = blackLeftRook;
+    
+    board[7][3] = new Queen(-1, 7, 3);
+    board[0][3] = new Queen(1, 0, 3);
+  }else{
+    boolean[] availableColumns = new boolean[]{true, true, true, true, true, true, true, true};
+    
+    int kingCol = (int)(Math.random() * 3 + 2);
+    availableColumns[kingCol] = false;
+    whiteKing = new King(-1, 7, kingCol);
+    board[7][kingCol] = whiteKing;
+    blackKing = new King(1, 0, kingCol);
+    board[0][kingCol] = blackKing;
+    
+    int leftRook = (int)(Math.random() * kingCol);
+    int rightRook = (int)(Math.random() * (7 - kingCol) + kingCol + 1);
+    availableColumns[leftRook] = false;
+    availableColumns[rightRook] = false;
+    whiteLeftRook = new Rook(-1, 7, leftRook);
+    board[7][leftRook] = whiteLeftRook;
+    whiteRightRook = new Rook(-1, 7, rightRook);
+    board[7][rightRook] = whiteRightRook;
+    blackRightRook = new Rook(1, 0, rightRook);
+    board[0][rightRook] = blackRightRook;
+    blackLeftRook = new Rook(1, 0, leftRook);
+    board[0][leftRook] = blackLeftRook;
+    
+    int bishopOdd = -1;
+    while ((bishopOdd == -1 || !availableColumns[bishopOdd]) || bishopOdd % 2 != 0){
+      bishopOdd = (int)(Math.random() * 8);
+    }
+    availableColumns[bishopOdd] = false;
+    int bishopEven = -1;
+    while ((bishopEven == -1 || !availableColumns[bishopEven]) || bishopEven % 2 == 0){
+      bishopEven = (int)(Math.random() * 8);
+    }
+    availableColumns[bishopEven] = false;
+    
+    board[0][bishopOdd] = new Bishop(1,0,bishopOdd);
+    board[0][bishopEven] = new Bishop(1,0,bishopEven);
+    board[7][bishopOdd] = new Bishop(-1,7,bishopOdd);
+    board[7][bishopEven] = new Bishop(-1,7,bishopEven);
+    
+    int firstKnight = -1;
+    while (firstKnight == -1 || !availableColumns[firstKnight]){
+      firstKnight = (int)(Math.random() * 8);
+    }
+    availableColumns[firstKnight] = false;
+    int secondKnight = -1;
+    while (secondKnight == -1 || !availableColumns[secondKnight]){
+      secondKnight = (int)(Math.random() * 8);
+    }
+    availableColumns[secondKnight] = false;
+    
+    board[0][firstKnight] = new Knight(1,0,firstKnight);
+    board[0][secondKnight] = new Knight(1,0,secondKnight);
+    board[7][firstKnight] = new Knight(-1,7,firstKnight);
+    board[7][secondKnight] = new Knight(-1,7,secondKnight);
+    
+    int queenCol = -1;
+    while (queenCol == -1 || !availableColumns[queenCol]){
+      queenCol = (int)(Math.random() * 8);
+    }
+    
+    board[7][queenCol] = new Queen(-1, 7, queenCol);
+    board[0][queenCol] = new Queen(1, 0, queenCol);    
+    
+    for (int i = 0; i < board[0].length; i++){
+      board[1][i] = new Pawn(1, 1, i);
+      board[6][i] = new Pawn(-1, 6, i);
+    }
   }
-  
-  board[0][1] = new Knight(1,0,1);
-  board[0][6] = new Knight(1,0,6);
-  board[7][1] = new Knight(-1,7,1);
-  board[7][6] = new Knight(-1,7,6);
-  
-  board[0][2] = new Bishop(1,0,2);
-  board[0][5] = new Bishop(1,0,5);
-  board[7][2] = new Bishop(-1,7,2);
-  board[7][5] = new Bishop(-1,7,5);
-  
-  whiteKing = new King(-1, 7, 4);
-  board[7][4] = whiteKing;
-  blackKing = new King(1, 0, 4);
-  board[0][4] = blackKing;
-  
-  whiteLeftRook = new Rook(-1, 7, 0);
-  board[7][0] = whiteLeftRook;
-  whiteRightRook = new Rook(-1, 7, 7);
-  board[7][7] = whiteRightRook;
-  blackRightRook = new Rook(1, 0, 0);
-  board[0][0] = blackRightRook;
-  blackLeftRook = new Rook(1, 0, 7);
-  board[0][7] = blackLeftRook;
-  
-  board[7][3] = new Queen(-1, 7, 3);
-  board[0][3] = new Queen(1, 0, 3);
   
   updateBoard();
   updateMoves();
