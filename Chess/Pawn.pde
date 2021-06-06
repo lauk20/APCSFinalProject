@@ -156,6 +156,11 @@ public class Pawn extends Piece{
     return firstMove;
   }
   
+  public void setFirstMoveVariables(boolean is, int time){
+    firstMove = is;
+    firstMoveTime = time;
+  }
+  
   public int firstTurnTime(){
     return firstMoveTime;
   }
