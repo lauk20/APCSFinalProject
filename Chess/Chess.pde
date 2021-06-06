@@ -1,5 +1,6 @@
 import java.util.*;
-import java.io.FileWriter;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 //board
 Piece[][] board = new Piece[8][8];
@@ -606,18 +607,88 @@ void mouseClicked(){
       //history.println(boardHistory.size() + ",");
       for (Piece[][] boardHist : boardHistory){
         for (Piece[] row : boardHist){
-          for (Piece p : row){ //data format: CLASS,COLOR,ROW,COL,FIRSTTURN,FIRSTTURNTIME
+          for (Piece p : row){ //data format: CLASS COLOR ROW COL FIRSTTURN FIRSTTURNTIME
             if (p != null){
               String pieceString = p.toString();
-              history.println(pieceString + "," + p.getColor() + "," + p.getPos()[0] + "," + p.getPos()[1] + "," + p.isFirstMove() + "," + p.firstTurnTime());
+              history.println(pieceString + " " + p.getColor() + " " + p.getPos()[0] + " " + p.getPos()[1] + " " + p.isFirstMove() + " " + p.firstTurnTime());
             }
           }
         }
+        history.println("old");
       }
       history.flush();
       history.close();
     }
     if (mouseX >= 940 && mouseX <= 1000 && mouseY >= 760 && mouseY <= 800){ //AREA OF LOAD BUTTON
+      boardHistory.clear();
+      try{
+        File saved = new File("History.txt");
+        Scanner scan = new Scanner(saved);
+        
+        Piece[][] loadedBoard = new Piece[8][8];
+        println(scan.hasNext());
+        while(scan.hasNextLine()){
+          println("hello2");
+          String text = scan.nextLine();
+          println("hello");
+          if (!text.equals("old")){
+            Scanner line = new Scanner(text);
+            String pieceType = line.next();
+            int pieceColor = Integer.parseInt(line.next());
+            int pieceRow = Integer.parseInt(line.next());
+            int pieceCol = Integer.parseInt(line.next());
+            String firstMove = line.next();
+            int firstTime = Integer.parseInt(line.next());
+            
+            if (pieceType.equals("Pawn")){
+              Pawn newPiece = new Pawn(pieceColor, pieceRow, pieceCol);
+              board[pieceRow][pieceCol] = newPiece;
+              boolean isFirst = true;
+              if (firstMove.equals("false")){
+                isFirst = false;
+              }
+              newPiece.setFirstMoveVariables(isFirst, firstTime);
+            }else if (pieceType.equals("King")){
+              King newPiece = new King(pieceColor, pieceRow, pieceCol);
+              board[pieceRow][pieceCol] = newPiece;
+              boolean isFirst = true;
+              if (firstMove.equals("false")){
+                isFirst = false;
+              }
+              newPiece.setFirstMoveVariables(isFirst, firstTime);
+            }else if (pieceType.equals("Rook")){
+              Rook newPiece = new Rook(pieceColor, pieceRow, pieceCol);
+              board[pieceRow][pieceCol] = newPiece;
+              boolean isFirst = true;
+              if (firstMove.equals("false")){
+                isFirst = false;
+              }
+              newPiece.setFirstMoveVariables(isFirst, firstTime);
+            }else if (pieceType.equals("Queen")){
+              Queen newPiece = new Queen(pieceColor, pieceRow, pieceCol);
+              board[pieceRow][pieceCol] = newPiece;
+            }else if (pieceType.equals("Knight")){
+              Knight newPiece = new Knight(pieceColor, pieceRow, pieceCol);
+              board[pieceRow][pieceCol] = newPiece;
+            }else if (pieceType.equals("Bishop")){
+              Bishop newPiece = new Bishop(pieceColor, pieceRow, pieceCol);
+              board[pieceRow][pieceCol] = newPiece;
+            }else{
+              System.out.println("ERROR??");
+            }
+          }else{
+            boardHistory.add(loadedBoard);
+            println("added");
+            historyIndex = historyIndex + 1;
+            loadedBoard = new Piece[8][8];
+          }
+        }
+        board = copyArray(boardHistory.get(historyIndex));
+        updateBoard();
+        scan.close();
+      }catch(FileNotFoundException e){
+        
+      }
     }
     
     if (mouseX <= 800 && mode.equals("timed") && paused){ //Start screen for timed mode
