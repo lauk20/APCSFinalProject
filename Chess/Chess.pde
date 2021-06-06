@@ -603,12 +603,14 @@ void mouseClicked(){
     }
     
     if (mouseX >= 870 && mouseX <= 930 && mouseY >= 760 && mouseY <= 800){ //AREA OF SAVE BUTTON
-      history.println(boardHistory.size() + ",");
+      //history.println(boardHistory.size() + ",");
       for (Piece[][] boardHist : boardHistory){
         for (Piece[] row : boardHist){
           for (Piece p : row){ //data format: CLASS,COLOR,ROW,COL,FIRSTTURN,FIRSTTURNTIME
-            String pieceString = p.toString();
-            history.println(pieceString + "," + p.getColor() + "," + p.getPos()[0] + "," + p.getPos()[1] + "," + p.isFirstMove() + "," + p.firstTurnTime());
+            if (p != null){
+              String pieceString = p.toString();
+              history.println(pieceString + "," + p.getColor() + "," + p.getPos()[0] + "," + p.getPos()[1] + "," + p.isFirstMove() + "," + p.firstTurnTime());
+            }
           }
         }
       }

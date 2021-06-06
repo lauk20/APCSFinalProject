@@ -152,6 +152,10 @@ public class Pawn extends Piece{
     return justMovedTwo;
   }
   
+  public boolean isFirstMove(){
+    return firstMove;
+  }
+  
   public int firstTurnTime(){
     return firstMoveTime;
   }

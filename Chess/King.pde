@@ -224,6 +224,10 @@ public class King extends Piece{
     }
   }
   
+  public boolean isFirstMove(){
+    return firstMove;
+  }
+  
   public int firstTurnTime(){
     return firstMoveTime;
   }
