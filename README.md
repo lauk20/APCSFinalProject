@@ -19,6 +19,9 @@
 3. Stalemates that are supported: basic stalemate (no valid move for King and not in check), 50-move rule, and 3-fold repetition.
 
 ## Development Log
+### 6/6/21
+**Kenny Lau:** Implemented the redo feature, allowing for redoes. Made a working saving and loading current board feature that also supports redoing and undoing from the saved state.
+
 ### 6/5/21
 **Kenny Lau:** Made the Chess 960 mode setup. Spent time fixing the castling for the time. Chess 960 mode is also selectable with the change mode button.
 
