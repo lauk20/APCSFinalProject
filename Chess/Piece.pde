@@ -55,7 +55,6 @@ public abstract class Piece{
     }else if (pieceThere == blackLeftRook && colorP == -1){
       blackLeftRook = null;
     }
-    eatenHistory.add(eaten);
     if (board[row][col] != null){
       eaten = 0;
     }
@@ -72,8 +71,9 @@ public abstract class Piece{
     board[row][col] = this;
     //printBoard(board);
     setSelected(false); //unselect after move
-    for (int i = boardHistory.size() - 1; i > historyIndex + 1; i--){
+    for (int i = boardHistory.size() - 1; i > historyIndex; i--){
       boardHistory.remove(i);
+      eatenHistory.remove(eatenHistory.size() - 1);
     }
     if (!mode.equals("timed") || auto){
       endTurn();

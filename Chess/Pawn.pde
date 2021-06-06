@@ -11,7 +11,7 @@ public class Pawn extends Piece{
     firstMoveTime = -1;
   }
  
-   public void setPos(int r, int c){
+  public void setPos(int r, int c){
     super.setPos(r, c);
     if (firstMoveTime > historyIndex){
       firstMove = true;

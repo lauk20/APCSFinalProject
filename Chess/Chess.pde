@@ -5,6 +5,7 @@ Piece[][] board = new Piece[8][8];
 ArrayList<Piece[][]> boardHistory = new ArrayList<Piece[][]>();
 int historyIndex = 0;
 ArrayList<Integer> eatenHistory;
+int eatenHistoryIndex = 0;
 PrintWriter history;
 
 //basic threat maps
@@ -73,6 +74,8 @@ void createBoard(){
   madeMove = false;
   eaten = 0;
   eatenHistory = new ArrayList<Integer>();
+  eatenHistory.add(0);
+  eatenHistoryIndex = 0;
   board = new Piece[8][8];
   for (int i = 0; i < 8; i++){
     for (int j = 0; j < 8; j++){
@@ -401,6 +404,8 @@ public void endTurn(){
   updateMoves(); // called a second time because for example: if a black queen just checked the king in a previous move and we have some white pieces that is past the black queen, their valid moves would not be correct because the queen's threat map has not been updated since the last move yet and the white pieces past the queen think that there's no check.
   isCheckmate(); 
   updateBoardHistory();
+  eatenHistory.add(eaten);
+  eatenHistoryIndex = eatenHistoryIndex + 1;
   madeMove = false;
   if (mode.equals("timed")){
     if (blackTime[0] == 0){
@@ -478,7 +483,8 @@ void mouseClicked(){
           }
         }
       }
-      //eaten = eatenHistory.remove(eatenHistory.size()-1); //needs to be changed probably
+      eatenHistoryIndex = eatenHistoryIndex - 1;
+      eaten = eatenHistory.get(eatenHistoryIndex);
       whosMove *= -1;
       orientation = orientation * -1;
       winner = 0;
@@ -514,7 +520,8 @@ void mouseClicked(){
           }
         }
       }
-      //eaten = eatenHistory.remove(eatenHistory.size()-1); //needs to be changed probably
+      eatenHistoryIndex = eatenHistoryIndex + 1;
+      eaten = eatenHistory.get(eatenHistoryIndex); //needs to be changed probably
       whosMove *= -1;
       orientation = orientation * -1;
       winner = 0;
@@ -522,6 +529,21 @@ void mouseClicked(){
       newThreatMaps();
       updateMoves();
       updateMoves(); 
+      int counter = 0;
+      int index = 0;
+      for (Piece[][] oldBoard : boardHistory){
+        if (isEqualBoard(oldBoard, board) && index < historyIndex){
+          counter = counter + 1;
+        }//else{
+          //printBoard(oldBoard);
+          //printBoard(addBoard);
+        //}
+        index = index + 1;
+      }
+      
+      if (counter >= 2){
+        winner = 2;
+      }
     }
     
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400 && mode.equals("timed") && madeMove && !paused){ //AREA OF END TURN BUTTON, ONLY WORKS WHEN TIMED MODE
