@@ -224,6 +224,10 @@ public class King extends Piece{
     }
   }
   
+  public int firstTurnTime(){
+    return firstMoveTime;
+  }
+  
   public String toString(){
     return "King";
   }

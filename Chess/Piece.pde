@@ -186,6 +186,14 @@ public abstract class Piece{
     return "Piece";
   }
   
+  public boolean isFirstMove(){
+    return false;
+  }
+  
+  public int firstTurnTime(){
+    return -1;
+  }
+  
   abstract void updateValidMoves();
   abstract ArrayList<Piece>[][] rawThreatMap(int row, int col, Piece movedPiece);
   abstract ArrayList<int[]> getValidMoves();

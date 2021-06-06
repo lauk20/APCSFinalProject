@@ -152,6 +152,10 @@ public class Pawn extends Piece{
     return justMovedTwo;
   }
   
+  public int firstTurnTime(){
+    return firstMoveTime;
+  }
+  
   public String toString(){
     return "Pawn";
   }

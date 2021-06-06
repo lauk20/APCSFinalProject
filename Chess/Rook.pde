@@ -130,6 +130,10 @@ public class Rook extends Piece{
     return firstMove;
   }
   
+  public int firstTurnTime(){
+    return firstMoveTime;
+  }
+  
   public String toString(){
     return "Rook";
   }
