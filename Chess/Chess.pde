@@ -786,4 +786,20 @@ void updateMenu(){
   textSize(10);
   text("ROUNDS WITHOUT CAPTURES\nOR PAWN MOVEMENT ON BOTH SIDES", 900, 675);
   text("STALEMATE AT 50: 50-MOVE RULE", 900, 710);
+  
+  //save and load
+  fill(56, 76, 87);
+  if (mouseX >= 870 && mouseX <= 930 && mouseY >= 760 && mouseY <= 800){ //AREA OF SAVE BUTTON
+    fill(56, 75, 150);
+  }
+  rect(900, 780, 60, 40);
+  fill(56, 76, 87);
+  if (mouseX >= 940 && mouseX <= 1000 && mouseY >= 760 && mouseY <= 800){ //AREA OF LOAD BUTTON
+    fill(56, 75, 150);
+  }
+  rect(970, 780, 60, 40);
+  fill(255);
+  textSize(15);
+  text("SAVE", 900, 785);
+  text("LOAD", 970, 785);
 }
