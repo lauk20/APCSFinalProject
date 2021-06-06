@@ -72,6 +72,9 @@ public abstract class Piece{
     board[row][col] = this;
     //printBoard(board);
     setSelected(false); //unselect after move
+    for (int i = boardHistory.size() - 1; i > historyIndex + 1; i--){
+      boardHistory.remove(i);
+    }
     if (!mode.equals("timed") || auto){
       endTurn();
       madeMove = false;

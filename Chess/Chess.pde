@@ -451,10 +451,10 @@ void mouseClicked(){
       createBoard();
     }
     
-    if (mouseX >= 808 && mouseX <= 893 && mouseY >= 162 && mouseY <= 187 && boardHistory.size() >= 2 && !mode.equals("timed")){// AREA OF UNDO BOARD BUTTON
-      boardHistory.remove(boardHistory.size()-1);
-      board = copyArray(boardHistory.get(boardHistory.size()-1));
-      //printBoard(board);
+    if (mouseX >= 808 && mouseX <= 893 && mouseY >= 162 && mouseY <= 187 && historyIndex >= 1 && !mode.equals("timed")){// AREA OF UNDO BOARD BUTTON
+      //boardHistory.remove(boardHistory.size()-1);
+      historyIndex = historyIndex - 1;
+      board = copyArray(boardHistory.get(historyIndex));
       Piece[][] changeBoard = copyArray(board);
       if (whosMove == 1){
         Piece[][] newBoard = new Piece[8][8];
@@ -478,7 +478,7 @@ void mouseClicked(){
           }
         }
       }
-      eaten = eatenHistory.remove(eatenHistory.size()-1);
+      //eaten = eatenHistory.remove(eatenHistory.size()-1); //needs to be changed probably
       whosMove *= -1;
       orientation = orientation * -1;
       winner = 0;
@@ -488,7 +488,40 @@ void mouseClicked(){
       updateMoves();
     }
     
-    if (mouseX >= 908 && mouseX <= 993 && mouseY >= 162 && mouseY <= 187 && !mode.equals("timed")){ //AREA OF REDO BOARD BUTTON
+    if (mouseX >= 908 && mouseX <= 993 && mouseY >= 162 && mouseY <= 187 && !mode.equals("timed") && historyIndex + 1 <= boardHistory.size() - 1){ //AREA OF REDO BOARD BUTTON
+      historyIndex = historyIndex + 1;
+      board = copyArray(boardHistory.get(historyIndex));
+      Piece[][] changeBoard = copyArray(board);
+      if (whosMove == 1){
+        Piece[][] newBoard = new Piece[8][8];
+        int originalRow = 0;
+        int originalCol = 0;
+        for (int i = 7; i >= 0 && originalRow < 8; i--){
+          for (int j = 7; j >= 0 && originalCol < 8; j--){
+            newBoard[i][j] = changeBoard[originalRow][originalCol];
+            originalCol = originalCol + 1;
+          }
+          originalCol = 0;
+          originalRow = originalRow + 1;
+        }
+        changeBoard = newBoard; 
+      }
+      board = changeBoard;
+      for (int i = 0; i < 8; i++){
+        for (int j = 0; j < 8; j++){
+          if (board[i][j] != null){
+            board[i][j].setPos(i, j);
+          }
+        }
+      }
+      //eaten = eatenHistory.remove(eatenHistory.size()-1); //needs to be changed probably
+      whosMove *= -1;
+      orientation = orientation * -1;
+      winner = 0;
+      board = getRotatedBoard();
+      newThreatMaps();
+      updateMoves();
+      updateMoves(); 
     }
     
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400 && mode.equals("timed") && madeMove && !paused){ //AREA OF END TURN BUTTON, ONLY WORKS WHEN TIMED MODE

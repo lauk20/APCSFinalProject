@@ -14,7 +14,7 @@ public class King extends Piece{
   
   public void setPos(int r, int c){
     super.setPos(r, c);
-    if (firstMoveTime > boardHistory.size() - 1){
+    if (firstMoveTime > historyIndex){
       firstMove = true;
       firstMoveTime = -1;
     }
