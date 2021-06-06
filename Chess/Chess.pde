@@ -606,6 +606,7 @@ void mouseClicked(){
     if (mouseX >= 870 && mouseX <= 930 && mouseY >= 760 && mouseY <= 800){ //AREA OF SAVE BUTTON
       //history.println(boardHistory.size() + ",");
       history = createWriter("History.txt");
+      history.println(whosMove + " " + orientation);
       for (Piece[][] boardHist : boardHistory){
         for (Piece[] row : boardHist){
           for (Piece p : row){ //data format: CLASS COLOR ROW COL FIRSTTURN FIRSTTURNTIME
@@ -627,8 +628,13 @@ void mouseClicked(){
       BufferedReader saved = createReader("History.txt");
       Scanner scan = new Scanner(saved);
       
+      if (scan.hasNextLine()){
+        Scanner turn = new Scanner(scan.nextLine());
+        whosMove = Integer.parseInt(turn.next());
+        orientation = Integer.parseInt(turn.next());
+        turn.close();
+      }
       Piece[][] loadedBoard = new Piece[8][8];
-      println(scan.hasNextLine());
       while(scan.hasNextLine()){
         String text = scan.nextLine();
         if (!text.equals("old")){
@@ -682,9 +688,10 @@ void mouseClicked(){
           loadedBoard = new Piece[8][8];
         }
       }
-      //historyIndex = historyIndex - 1;
       board = copyArray(boardHistory.get(historyIndex - 1));
       updateBoard();
+      updateMoves();
+      updateMoves();
       scan.close();
     }
     
