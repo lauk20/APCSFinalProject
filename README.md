@@ -22,8 +22,12 @@
 ### 6/5/21
 **Kenny Lau:** Made the Chess 960 mode setup. Spent time fixing the castling for the time. Chess 960 mode is also selectable with the change mode button.
 
+**Timothy Sit:** Created appearance of save, load, and redo buttons.
+
 ### 6/4/21
 **Kenny Lau:** Fixed the 3-fold repetition stalemate. Implemented the undo feature.
+
+**Timothy Sit:** Fixed undo so it works with the 50 move stalemate.
 
 ### 6/3/21
 **Kenny Lau:** Updated menu to reflect new stalemate condition. Fixed end game screen so that pieces are no longer selectable after a player has won. Fixed some bugs with the new stalemate. Added the 3-fold repetition stalemate.
