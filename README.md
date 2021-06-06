@@ -20,7 +20,7 @@
 
 ## Development Log
 ### 6/5/21
-**Kenny Lau:** Made the Chess 960 mode setup. Spent time fixing the castling for the time.
+**Kenny Lau:** Made the Chess 960 mode setup. Spent time fixing the castling for the time. Chess 960 mode is also selectable with the change mode button.
 
 ### 6/4/21
 **Kenny Lau:** Fixed the 3-fold repetition stalemate. Implemented the undo feature.
