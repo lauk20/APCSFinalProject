@@ -669,7 +669,7 @@ void mouseClicked(){
             loadedBoard[pieceRow][pieceCol] = newPiece;
           }else if (pieceType.equals("Knight")){
             Knight newPiece = new Knight(pieceColor, pieceRow, pieceCol);
-            board[pieceRow][pieceCol] = newPiece;
+            loadedBoard[pieceRow][pieceCol] = newPiece;
           }else if (pieceType.equals("Bishop")){
             Bishop newPiece = new Bishop(pieceColor, pieceRow, pieceCol);
             loadedBoard[pieceRow][pieceCol] = newPiece;
