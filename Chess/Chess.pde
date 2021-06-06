@@ -5,6 +5,7 @@ Piece[][] board = new Piece[8][8];
 ArrayList<Piece[][]> boardHistory = new ArrayList<Piece[][]>();
 int historyIndex = 0;
 ArrayList<Integer> eatenHistory;
+PrintWriter history;
 
 //basic threat maps
 ArrayList<Piece>[][] whiteThreatMap = new ArrayList[8][8]; //squares white pieces threaten
@@ -60,6 +61,7 @@ void setup(){
   imageKing = loadImage("King.png");
   imageRook = loadImage("Rook.png");
   imageQueen = loadImage("Queen.png");
+  history = createWriter("History.txt");
   createBoard();
 }
 
@@ -541,6 +543,21 @@ void mouseClicked(){
       createBoard();
     }
     
+    if (mouseX >= 870 && mouseX <= 930 && mouseY >= 760 && mouseY <= 800){ //AREA OF SAVE BUTTON
+      history.println(boardHistory.size() + ",");
+      for (Piece[][] boardHist : boardHistory){
+        for (Piece[] row : boardHist){
+          for (Piece col : row){
+            
+          }
+        }
+      }
+      history.flush();
+      history.close();
+    }
+    if (mouseX >= 940 && mouseX <= 1000 && mouseY >= 760 && mouseY <= 800){ //AREA OF LOAD BUTTON
+    }
+    
     if (mouseX <= 800 && mode.equals("timed") && paused){ //Start screen for timed mode
       if (whiteTime[0] == 0){
         whiteTime[0] = millis();
@@ -675,14 +692,20 @@ void updateMenu(){
   textSize(15);
   text("RESET\nBOARD", 900, 118);
   
-  //undo button
+  //undo and redo button
   fill(56, 75, 87);
-  if (mouseX >= 850 && mouseX <= 950 && mouseY >= 162 && mouseY <= 187 && !mode.equals("timed")){ //AREA OF UNDO BOARD BUTTON
+  if (mouseX >= 808 && mouseX <= 893 && mouseY >= 162 && mouseY <= 187 && !mode.equals("timed")){ //AREA OF UNDO BOARD BUTTON
     fill(56, 75, 150);
   }
-  rect(900, 175, 100, 25);
+  rect(850, 175, 85, 25);
+  fill(56, 75, 87);
+  if (mouseX >= 908 && mouseX <= 993 && mouseY >= 162 && mouseY <= 187 && !mode.equals("timed")){ //AREA OF REDO BOARD BUTTON
+    fill(56, 75, 150);
+  }
+  rect(950, 175, 85, 25);
   fill(255);
-  text("UNDO", 900, 180);
+  text("UNDO", 850, 180);
+  text("REDO", 950, 180);
   
   //timers
   textSize(25);
