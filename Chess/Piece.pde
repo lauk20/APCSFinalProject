@@ -181,7 +181,11 @@ public abstract class Piece{
   public boolean getJustMovedTwo(){
     return false;
   }
- 
+  
+  public String toString(){
+    return "Piece";
+  }
+  
   abstract void updateValidMoves();
   abstract ArrayList<Piece>[][] rawThreatMap(int row, int col, Piece movedPiece);
   abstract ArrayList<int[]> getValidMoves();

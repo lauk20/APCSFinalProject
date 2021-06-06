@@ -129,4 +129,8 @@ public class Rook extends Piece{
   public boolean isFirstMove(){
     return firstMove;
   }
+  
+  public String toString(){
+    return "Rook";
+  }
 }

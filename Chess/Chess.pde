@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.FileWriter;
 
 //board
 Piece[][] board = new Piece[8][8];
@@ -605,8 +606,8 @@ void mouseClicked(){
       history.println(boardHistory.size() + ",");
       for (Piece[][] boardHist : boardHistory){
         for (Piece[] row : boardHist){
-          for (Piece col : row){
-            
+          for (Piece col : row){ //data format: CLASS,COLOR,ROW,COL,FIRSTTURN
+            history.println();
           }
         }
       }

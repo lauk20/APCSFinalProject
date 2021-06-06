@@ -151,4 +151,8 @@ public class Pawn extends Piece{
   public boolean getJustMovedTwo(){
     return justMovedTwo;
   }
+  
+  public String toString(){
+    return "Pawn";
+  }
 }
