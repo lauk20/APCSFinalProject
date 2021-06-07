@@ -609,6 +609,7 @@ void mouseClicked(){
       //history.println(boardHistory.size() + ",");
       history = createWriter("History.txt");
       history.println(whosMove + " " + orientation);
+      int indexOfHistory = 0;
       for (Piece[][] boardHist : boardHistory){
         for (Piece[] row : boardHist){
           for (Piece p : row){ //data format: CLASS COLOR ROW COL FIRSTTURN FIRSTTURNTIME
@@ -618,7 +619,8 @@ void mouseClicked(){
             }
           }
         }
-        history.write("old\n");
+        history.write("old " + eatenHistory.get(indexOfHistory) + "\n");
+        indexOfHistory = indexOfHistory + 1;
       }
       history.flush();
       history.close();
@@ -626,7 +628,9 @@ void mouseClicked(){
     }
     if (mouseX >= 940 && mouseX <= 1000 && mouseY >= 760 && mouseY <= 800){ //AREA OF LOAD BUTTON
       boardHistory.clear();
+      eatenHistory.clear();
       historyIndex = 0;
+      eatenHistoryIndex = 0;
       BufferedReader saved = createReader("History.txt");
       Scanner scan = new Scanner(saved);
       
@@ -639,7 +643,7 @@ void mouseClicked(){
       Piece[][] loadedBoard = new Piece[8][8];
       while(scan.hasNextLine()){
         String text = scan.nextLine();
-        if (!text.equals("old")){
+        if (!text.contains("old")){
           Scanner line = new Scanner(text);
           String pieceType = line.next();
           int pieceColor = Integer.parseInt(line.next());
@@ -685,12 +689,18 @@ void mouseClicked(){
             System.out.println("ERROR??");
           }
         }else{
+          Scanner findingEaten = new Scanner(text);
+          findingEaten.next();
+          eatenHistory.add(Integer.parseInt(findingEaten.next()));
           boardHistory.add(loadedBoard);
           historyIndex = historyIndex + 1;
+          eatenHistoryIndex = eatenHistoryIndex + 1;
           loadedBoard = new Piece[8][8];
+          findingEaten.close();
         }
       }
       board = copyArray(boardHistory.get(historyIndex - 1));
+      eaten = eatenHistory.get(eatenHistoryIndex - 1);
       updateBoard();
       updateMoves();
       updateMoves();
