@@ -146,11 +146,10 @@ public abstract class Piece{
     if (whosMove != getColor() || (paused && mode.equals("timed")) || winner != 0) return;
     int[] pos = getPos();
     if (isSelected()){
-      boolean found = false;
       for (int[] move : getValidMoves()){
-        if (move[1] == mouseX / 100 && move[0] == mouseY / 100 && !found){
+        if (move[1] == mouseX / 100 && move[0] == mouseY / 100){
           moveTo(move[0], move[1]);
-          found = true;
+          clickFound = true;
         }
       }
     }

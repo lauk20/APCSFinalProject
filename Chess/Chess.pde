@@ -441,15 +441,17 @@ void draw(){
   updateMenu();
 }
 
+boolean clickFound = false;
 void mouseClicked(){
   if (transformation == false){
-    for (int i = 0; i < board.length; i++){
-      for (int j = 0; j < board[0].length; j++){
-        if (board[i][j] != null){
+    for (int i = 0; i < board.length && !clickFound; i++){
+      for (int j = 0; j < board[0].length && !clickFound; j++){
+        if (board[i][j] != null && !clickFound){
           board[i][j].click();
         }
       }
     }
+    clickFound = false;
     
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 100 && mouseY <= 150){ //AREA OF RESET BOARD BUTTON
       whosMove = -1;
