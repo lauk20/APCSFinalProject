@@ -608,14 +608,15 @@ void mouseClicked(){
     if (mouseX >= 870 && mouseX <= 930 && mouseY >= 760 && mouseY <= 800){ //AREA OF SAVE BUTTON
       //history.println(boardHistory.size() + ",");
       history = createWriter("History.txt");
-      history.println(whosMove + " " + orientation);
+      history.println(whosMove + " " + orientation + " " + historyIndex);
       int indexOfHistory = 0;
       for (Piece[][] boardHist : boardHistory){
-        for (Piece[] row : boardHist){
-          for (Piece p : row){ //data format: CLASS COLOR ROW COL FIRSTTURN FIRSTTURNTIME
+        for (int i = 0; i < boardHist.length; i++){
+          for (int j = 0; j < boardHist[0].length; j++){ //data format: CLASS COLOR ROW COL FIRSTTURN FIRSTTURNTIME
+            Piece p = boardHist[i][j];
             if (p != null){
               String pieceString = p.toString();
-              history.write(pieceString + " " + p.getColor() + " " + p.getPos()[0] + " " + p.getPos()[1] + " " + p.isFirstMove() + " " + p.firstTurnTime() + "\n");
+              history.write(pieceString + " " + p.getColor() + " " + i + " " + j + " " + p.isFirstMove() + " " + p.firstTurnTime() + "\n");
             }
           }
         }
@@ -638,6 +639,8 @@ void mouseClicked(){
         Scanner turn = new Scanner(scan.nextLine());
         whosMove = Integer.parseInt(turn.next());
         orientation = Integer.parseInt(turn.next());
+        historyIndex = Integer.parseInt(turn.next());
+        eatenHistoryIndex = historyIndex;
         turn.close();
       }
       Piece[][] loadedBoard = new Piece[8][8];
@@ -693,14 +696,14 @@ void mouseClicked(){
           findingEaten.next();
           eatenHistory.add(Integer.parseInt(findingEaten.next()));
           boardHistory.add(loadedBoard);
-          historyIndex = historyIndex + 1;
-          eatenHistoryIndex = eatenHistoryIndex + 1;
+          //historyIndex = historyIndex + 1;
+          //eatenHistoryIndex = eatenHistoryIndex + 1;
           loadedBoard = new Piece[8][8];
           findingEaten.close();
         }
       }
-      board = copyArray(boardHistory.get(historyIndex - 1));
-      eaten = eatenHistory.get(eatenHistoryIndex - 1);
+      board = copyArray(boardHistory.get(historyIndex));
+      eaten = eatenHistory.get(eatenHistoryIndex);
       updateBoard();
       updateMoves();
       updateMoves();
