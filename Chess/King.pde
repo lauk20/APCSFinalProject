@@ -217,7 +217,7 @@ public class King extends Piece{
     }
     image(copy, pos[1] * 100, pos[0] * 100);
     
-    if (isSelected()){
+    if (isSelected() && getColor() == whosMove){
       for (Square s : getSquares()){
         s.display();
       }
