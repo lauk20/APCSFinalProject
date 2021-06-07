@@ -642,75 +642,75 @@ void mouseClicked(){
         historyIndex = Integer.parseInt(turn.next());
         eatenHistoryIndex = historyIndex;
         turn.close();
-      }
-      Piece[][] loadedBoard = new Piece[8][8];
-      while(scan.hasNextLine()){
-        String text = scan.nextLine();
-        if (!text.contains("old")){
-          Scanner line = new Scanner(text);
-          String pieceType = line.next();
-          int pieceColor = Integer.parseInt(line.next());
-          int pieceRow = Integer.parseInt(line.next());
-          int pieceCol = Integer.parseInt(line.next());
-          String firstMove = line.next();
-          int firstTime = Integer.parseInt(line.next());
-          
-          if (pieceType.equals("Pawn")){
-            Pawn newPiece = new Pawn(pieceColor, pieceRow, pieceCol);
-            loadedBoard[pieceRow][pieceCol] = newPiece;
-            boolean isFirst = true;
-            if (firstMove.equals("false")){
-              isFirst = false;
+        Piece[][] loadedBoard = new Piece[8][8];
+        while(scan.hasNextLine()){
+          String text = scan.nextLine();
+          if (!text.contains("old")){
+            Scanner line = new Scanner(text);
+            String pieceType = line.next();
+            int pieceColor = Integer.parseInt(line.next());
+            int pieceRow = Integer.parseInt(line.next());
+            int pieceCol = Integer.parseInt(line.next());
+            String firstMove = line.next();
+            int firstTime = Integer.parseInt(line.next());
+            
+            if (pieceType.equals("Pawn")){
+              Pawn newPiece = new Pawn(pieceColor, pieceRow, pieceCol);
+              loadedBoard[pieceRow][pieceCol] = newPiece;
+              boolean isFirst = true;
+              if (firstMove.equals("false")){
+                isFirst = false;
+              }
+              newPiece.setFirstMoveVariables(isFirst, firstTime);
+            }else if (pieceType.equals("King")){
+              King newPiece = new King(pieceColor, pieceRow, pieceCol);
+              loadedBoard[pieceRow][pieceCol] = newPiece;
+              boolean isFirst = true;
+              if (firstMove.equals("false")){
+                isFirst = false;
+              }
+              newPiece.setFirstMoveVariables(isFirst, firstTime);
+            }else if (pieceType.equals("Rook")){
+              Rook newPiece = new Rook(pieceColor, pieceRow, pieceCol);
+              loadedBoard[pieceRow][pieceCol] = newPiece;
+              boolean isFirst = true;
+              if (firstMove.equals("false")){
+                isFirst = false;
+              }
+              newPiece.setFirstMoveVariables(isFirst, firstTime);
+            }else if (pieceType.equals("Queen")){
+              Queen newPiece = new Queen(pieceColor, pieceRow, pieceCol);
+              loadedBoard[pieceRow][pieceCol] = newPiece;
+            }else if (pieceType.equals("Knight")){
+              Knight newPiece = new Knight(pieceColor, pieceRow, pieceCol);
+              loadedBoard[pieceRow][pieceCol] = newPiece;
+            }else if (pieceType.equals("Bishop")){
+              Bishop newPiece = new Bishop(pieceColor, pieceRow, pieceCol);
+              loadedBoard[pieceRow][pieceCol] = newPiece;
+            }else{
+              System.out.println("ERROR??");
             }
-            newPiece.setFirstMoveVariables(isFirst, firstTime);
-          }else if (pieceType.equals("King")){
-            King newPiece = new King(pieceColor, pieceRow, pieceCol);
-            loadedBoard[pieceRow][pieceCol] = newPiece;
-            boolean isFirst = true;
-            if (firstMove.equals("false")){
-              isFirst = false;
-            }
-            newPiece.setFirstMoveVariables(isFirst, firstTime);
-          }else if (pieceType.equals("Rook")){
-            Rook newPiece = new Rook(pieceColor, pieceRow, pieceCol);
-            loadedBoard[pieceRow][pieceCol] = newPiece;
-            boolean isFirst = true;
-            if (firstMove.equals("false")){
-              isFirst = false;
-            }
-            newPiece.setFirstMoveVariables(isFirst, firstTime);
-          }else if (pieceType.equals("Queen")){
-            Queen newPiece = new Queen(pieceColor, pieceRow, pieceCol);
-            loadedBoard[pieceRow][pieceCol] = newPiece;
-          }else if (pieceType.equals("Knight")){
-            Knight newPiece = new Knight(pieceColor, pieceRow, pieceCol);
-            loadedBoard[pieceRow][pieceCol] = newPiece;
-          }else if (pieceType.equals("Bishop")){
-            Bishop newPiece = new Bishop(pieceColor, pieceRow, pieceCol);
-            loadedBoard[pieceRow][pieceCol] = newPiece;
           }else{
-            System.out.println("ERROR??");
+            Scanner findingEaten = new Scanner(text);
+            findingEaten.next();
+            eatenHistory.add(Integer.parseInt(findingEaten.next()));
+            boardHistory.add(loadedBoard);
+            //historyIndex = historyIndex + 1;
+            //eatenHistoryIndex = eatenHistoryIndex + 1;
+            loadedBoard = new Piece[8][8];
+            findingEaten.close();
           }
-        }else{
-          Scanner findingEaten = new Scanner(text);
-          findingEaten.next();
-          eatenHistory.add(Integer.parseInt(findingEaten.next()));
-          boardHistory.add(loadedBoard);
-          //historyIndex = historyIndex + 1;
-          //eatenHistoryIndex = eatenHistoryIndex + 1;
-          loadedBoard = new Piece[8][8];
-          findingEaten.close();
         }
+        board = copyArray(boardHistory.get(historyIndex));
+        eaten = eatenHistory.get(eatenHistoryIndex);
+        if (whosMove == 1){
+          board = getRotatedBoard();
+        }
+        updateBoard();
+        updateMoves();
+        updateMoves();
+        scan.close();
       }
-      board = copyArray(boardHistory.get(historyIndex));
-      eaten = eatenHistory.get(eatenHistoryIndex);
-      if (whosMove == 1){
-        board = getRotatedBoard();
-      }
-      updateBoard();
-      updateMoves();
-      updateMoves();
-      scan.close();
     }
     
     if (mouseX <= 800 && mode.equals("timed") && paused){ //Start screen for timed mode
