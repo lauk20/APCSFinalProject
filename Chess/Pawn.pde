@@ -26,7 +26,9 @@ public class Pawn extends Piece{
     int col = coords[1];
     int colorP = getColor();
     
-    if (colorP == whosMove){
+    if (colorP == whosMove && !mode.equals("timed")){
+      justMovedTwo = false;
+    }else if (mode.equals("timed") && firstMoveTime < historyIndex){
       justMovedTwo = false;
     }
     
