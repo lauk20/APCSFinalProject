@@ -19,6 +19,9 @@
 3. Stalemates that are supported: basic stalemate (no valid move for King and not in check), 50-move rule, and 3-fold repetition.
 
 ## Development Log
+### 6/7/21
+**Kenny Lau:** Fixed the saving bug that kept saving the same board and a loading bug that would throw an error. Fixed En Passant for timed mode and the "undo" and "redo" buttons will no longer show up for timed mode.
+
 ### 6/6/21
 **Kenny Lau:** Implemented the redo feature, allowing for redoes. Made a working saving and loading current board feature that also supports redoing and undoing from the saved state.
 
