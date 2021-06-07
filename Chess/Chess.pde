@@ -704,6 +704,10 @@ void mouseClicked(){
       }
       board = copyArray(boardHistory.get(historyIndex));
       eaten = eatenHistory.get(eatenHistoryIndex);
+      if (historyIndex>=1){
+        board = copyArray(boardHistory.get(historyIndex - 1));
+        eaten = eatenHistory.get(eatenHistoryIndex - 1);
+      }
       updateBoard();
       updateMoves();
       updateMoves();
