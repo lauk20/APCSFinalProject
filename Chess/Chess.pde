@@ -852,15 +852,21 @@ void updateMenu(){
   if (mouseX >= 808 && mouseX <= 893 && mouseY >= 162 && mouseY <= 187 && !mode.equals("timed")){ //AREA OF UNDO BOARD BUTTON
     fill(56, 75, 150);
   }
-  rect(850, 175, 85, 25);
+  if (!mode.equals("timed")){
+    rect(850, 175, 85, 25);
+  }
   fill(56, 75, 87);
   if (mouseX >= 908 && mouseX <= 993 && mouseY >= 162 && mouseY <= 187 && !mode.equals("timed")){ //AREA OF REDO BOARD BUTTON
     fill(56, 75, 150);
   }
-  rect(950, 175, 85, 25);
+  if (!mode.equals("timed")){
+    rect(950, 175, 85, 25);
+  }
   fill(255);
-  text("UNDO", 850, 180);
-  text("REDO", 950, 180);
+  if (!mode.equals("timed")){
+    text("UNDO", 850, 180);
+    text("REDO", 950, 180);
+  }
   
   //timers
   textSize(25);
