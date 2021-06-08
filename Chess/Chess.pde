@@ -652,35 +652,7 @@ void mouseClicked(){
         history.write("old " + eatenHistory.get(indexOfHistory) + "\n");
         indexOfHistory = indexOfHistory + 1;
       }
-      for (int i = 0; i < board.length; i++){
-        for (int j = 0; j < board[i].length; j++){
-          Piece p = board[i][j];
-          if (p != null){
-            String pieceString = p.toString();
-            String result = pieceString + " " + p.getColor() + " " + i + " " + j + " " + p.isFirstMove() + " " + p.firstTurnTime() + " ";
-              if (pieceString == "Rook"){
-                if (p.getColor() == -1){
-                  if (p == whiteRightRook){
-                    result = result + "wRR";
-                  }else if (p == whiteLeftRook){
-                    result = result + "wLR";
-                  }else{
-                    result = result + "null";
-                  }
-                }else{
-                  if (p == blackRightRook){
-                    result = result + "bRR";
-                  }else if (p == blackLeftRook){
-                    result = result + "bLR";
-                  }else{
-                    result = result + "null";
-                  }
-                }
-              }
-              history.write(result + "\n");
-          }
-        }
-      }
+
       history.flush();
       history.close();
       println("Saved");
@@ -813,17 +785,20 @@ void mouseClicked(){
         else{
           board = copyArray(boardHistory.get(0));
         }*/
+        //println("SIZE: " + boardHistory.size() + " INDEX " + historyIndex);
         board = copyArray(boardHistory.get(historyIndex));
         eaten = eatenHistory.get(eatenHistoryIndex);
         if (whosMove == 1){
           board = getRotatedBoard();
         }
         newThreatMaps();
-        updateBoard();
         updateMoves();
         updateMoves();
+        /*for(Piece a : whiteThreatMap[7][3]){
+          print (a + " " + a.getColor());
+        }*/
         isCheckmate();
-        printBoard(board);
+        //printBoard(board);
         scan.close();
       }
     }
