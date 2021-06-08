@@ -607,7 +607,7 @@ void mouseClicked(){
     
     if (mouseX >= 870 && mouseX <= 930 && mouseY >= 760 && mouseY <= 800){ //AREA OF SAVE BUTTON
       //history.println(boardHistory.size() + ",");
-      if (mode.equals("casual")){
+      /*if (mode.equals("casual")){
         history = createWriter("Casual.txt");
       }
       else if (mode.equals("timed")){
@@ -615,10 +615,11 @@ void mouseClicked(){
       }
       else {
         history = createWriter("Chess960.txt");
-      }
-      if (mode.equals("timed")){
-        history.println(whosMove + " " + orientation + " " + 0 + " " + whiteTime[0] + " " + whiteTime[1] + " " + blackTime[0] + " " + blackTime[1] + " " + auto);
-        Piece[][] boardHist = boardHistory.get(boardHistory.size()-1);
+      }*/
+      history = createWriter("History.txt");
+      history.println(mode + " " + whosMove + " " + orientation + " " + historyIndex + " " + whiteTime[1] + " " + blackTime[1] + " " + auto);
+      int indexOfHistory = 0;
+      for (Piece[][] boardHist : boardHistory){
         for (int i = 0; i < boardHist.length; i++){
           for (int j = 0; j < boardHist[0].length; j++){ //data format: CLASS COLOR ROW COL FIRSTTURN FIRSTTURNTIME
             Piece p = boardHist[i][j];
@@ -628,40 +629,21 @@ void mouseClicked(){
             }
           }
         }
-        history.write("old " + "\n");
-        history.flush();
-        history.close();
-        println("Saved");
+        history.write("old " + eatenHistory.get(indexOfHistory) + "\n");
+        indexOfHistory = indexOfHistory + 1;
       }
-      else {
-        history.println(whosMove + " " + orientation + " " + historyIndex);
-        int indexOfHistory = 0;
-        for (Piece[][] boardHist : boardHistory){
-          for (int i = 0; i < boardHist.length; i++){
-            for (int j = 0; j < boardHist[0].length; j++){ //data format: CLASS COLOR ROW COL FIRSTTURN FIRSTTURNTIME
-              Piece p = boardHist[i][j];
-              if (p != null){
-                String pieceString = p.toString();
-                history.write(pieceString + " " + p.getColor() + " " + i + " " + j + " " + p.isFirstMove() + " " + p.firstTurnTime() + "\n");
-              }
-            }
-          }
-          history.write("old " + eatenHistory.get(indexOfHistory) + "\n");
-          indexOfHistory = indexOfHistory + 1;
-        }
-        history.flush();
-        history.close();
-        println("Saved");
-      }
+      history.flush();
+      history.close();
+      println("Saved");
     }
     if (mouseX >= 940 && mouseX <= 1000 && mouseY >= 760 && mouseY <= 800){ //AREA OF LOAD BUTTON
       boardHistory.clear();
       eatenHistory.clear();
       historyIndex = 0;
       eatenHistoryIndex = 0;
-      BufferedReader saved = null;
-      Scanner scan = null;
-      if (mode.equals("casual")){
+      BufferedReader saved = createReader("History.txt");
+      Scanner scan = new Scanner(saved);
+      /*if (mode.equals("casual")){
         saved = createReader("Casual.txt");
         if (saved == null){
           return;
@@ -681,15 +663,16 @@ void mouseClicked(){
           return;
         }
         scan = new Scanner(saved);
-      }
+      }*/
       if (scan.hasNextLine()){
         Scanner turn = new Scanner(scan.nextLine());
+        mode = turn.next();
         whosMove = Integer.parseInt(turn.next());
         orientation = Integer.parseInt(turn.next());
         historyIndex = Integer.parseInt(turn.next());
         if (mode.equals("timed")){
-          whiteTime = new float[]{Float.parseFloat(turn.next()), Float.parseFloat(turn.next())};
-          blackTime = new float[]{Float.parseFloat(turn.next()), Float.parseFloat(turn.next())};
+          whiteTime = new float[]{0, Float.parseFloat(turn.next())};
+          blackTime = new float[]{0, Float.parseFloat(turn.next())};
           auto = Boolean.parseBoolean(turn.next());
         }
         eatenHistoryIndex = historyIndex;
@@ -742,24 +725,25 @@ void mouseClicked(){
             }else{
               System.out.println("ERROR??");
             }
+            line.close();
           }else{
             Scanner findingEaten = new Scanner(text);
             findingEaten.next();
             eatenHistory.add(Integer.parseInt(findingEaten.next()));
             boardHistory.add(loadedBoard);
-            System.out.println(1);
             //historyIndex = historyIndex + 1;
             //eatenHistoryIndex = eatenHistoryIndex + 1;
             loadedBoard = new Piece[8][8];
             findingEaten.close();
           }
         }
-        if (!mode.equals("timed")){
+        /*if (!mode.equals("timed")){
           board = copyArray(boardHistory.get(historyIndex));
         }
         else{
           board = copyArray(boardHistory.get(0));
-        }
+        }*/
+        board = copyArray(boardHistory.get(historyIndex));
         eaten = eatenHistory.get(eatenHistoryIndex);
         if (whosMove == 1){
           board = getRotatedBoard();
