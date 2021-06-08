@@ -497,7 +497,7 @@ void mouseClicked(){
       orientation = orientation * -1;
       winner = 0;
       board = getRotatedBoard();
-      if (rookHistory.size() >= 1){
+      if (rookHistory.size() >= 1 && historyIndex <= rookHistory.size() - 1){
         Rook[] r = rookHistory.get(historyIndex);
         whiteRightRook = r[0];
         whiteLeftRook = r[1];
@@ -544,7 +544,7 @@ void mouseClicked(){
       orientation = orientation * -1;
       winner = 0;
       board = getRotatedBoard();
-      if (rookHistory.size() >= 1){
+      if (rookHistory.size() >= 1 && historyIndex <= rookHistory.size() - 1){
         Rook[] r = rookHistory.get(historyIndex);
         whiteRightRook = r[0];
         whiteLeftRook = r[1];
