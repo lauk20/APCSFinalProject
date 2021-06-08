@@ -607,7 +607,15 @@ void mouseClicked(){
     
     if (mouseX >= 870 && mouseX <= 930 && mouseY >= 760 && mouseY <= 800){ //AREA OF SAVE BUTTON
       //history.println(boardHistory.size() + ",");
-      history = createWriter("History.txt");
+      if (mode.equals("casual")){
+        history = createWriter("Casual.txt");
+      }
+      else if (mode.equals("timed")){
+        history = createWriter("Timed.txt");
+      }
+      else {
+        history = createWriter("Chess960.txt");
+      }
       history.println(whosMove + " " + orientation + " " + historyIndex);
       int indexOfHistory = 0;
       for (Piece[][] boardHist : boardHistory){
@@ -632,7 +640,13 @@ void mouseClicked(){
       eatenHistory.clear();
       historyIndex = 0;
       eatenHistoryIndex = 0;
-      BufferedReader saved = createReader("History.txt");
+      BufferedReader saved = createReader("Casual.txt");
+      if (mode.equals("timed")){
+        saved = createReader("Timed.txt");
+      }
+      else if (mode.equals("chess960")){
+        saved = createReader("Chess960.txt");
+      }
       Scanner scan = new Scanner(saved);
       
       if (scan.hasNextLine()){
