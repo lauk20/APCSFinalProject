@@ -10,6 +10,9 @@ int historyIndex = 0;
 ArrayList<Integer> eatenHistory;
 int eatenHistoryIndex = 0;
 PrintWriter history;
+//the following two variables are only used when loading a board
+ArrayList<Rook[]> rookHistory = new ArrayList<Rook[]>();
+ArrayList<King[]> kingHistory = new ArrayList<King[]>();
 
 //basic threat maps
 ArrayList<Piece>[][] whiteThreatMap = new ArrayList[8][8]; //squares white pieces threaten
@@ -78,6 +81,8 @@ void createBoard(){
   eatenHistory = new ArrayList<Integer>();
   eatenHistory.add(0);
   eatenHistoryIndex = 0;
+  rookHistory.clear();
+  kingHistory.clear();
   board = new Piece[8][8];
   for (int i = 0; i < 8; i++){
     for (int j = 0; j < 8; j++){
@@ -461,7 +466,6 @@ void mouseClicked(){
     }
     
     if (mouseX >= 808 && mouseX <= 893 && mouseY >= 162 && mouseY <= 187 && historyIndex >= 1 && !mode.equals("timed")){// AREA OF UNDO BOARD BUTTON
-      //boardHistory.remove(boardHistory.size()-1);
       historyIndex = historyIndex - 1;
       board = copyArray(boardHistory.get(historyIndex));
       Piece[][] changeBoard = copyArray(board);
@@ -493,6 +497,16 @@ void mouseClicked(){
       orientation = orientation * -1;
       winner = 0;
       board = getRotatedBoard();
+      if (rookHistory.size() >= 1){
+        Rook[] r = rookHistory.get(historyIndex);
+        whiteRightRook = r[0];
+        whiteLeftRook = r[1];
+        blackRightRook = r[2];
+        blackLeftRook = r[3];
+        King[] k = kingHistory.get(historyIndex);
+        whiteKing = k[0];
+        blackKing = k[1];
+      }
       newThreatMaps();
       updateMoves();
       updateMoves();
@@ -530,6 +544,16 @@ void mouseClicked(){
       orientation = orientation * -1;
       winner = 0;
       board = getRotatedBoard();
+      if (rookHistory.size() >= 1){
+        Rook[] r = rookHistory.get(historyIndex);
+        whiteRightRook = r[0];
+        whiteLeftRook = r[1];
+        blackRightRook = r[2];
+        blackLeftRook = r[3];
+        King[] k = kingHistory.get(historyIndex);
+        whiteKing = k[0];
+        blackKing = k[1];
+      }
       newThreatMaps();
       updateMoves();
       updateMoves(); 
@@ -662,6 +686,8 @@ void mouseClicked(){
       blackKing = null;
       boardHistory.clear();
       eatenHistory.clear();
+      rookHistory.clear();
+      kingHistory.clear();
       historyIndex = 0;
       eatenHistoryIndex = 0;
       BufferedReader saved = createReader("History.txt");
@@ -701,6 +727,8 @@ void mouseClicked(){
         eatenHistoryIndex = historyIndex;
         turn.close();
         Piece[][] loadedBoard = new Piece[8][8];
+        Rook[] tempRookHistory = new Rook[4];
+        King[] tempKingHistory = new King[2];
         while(scan.hasNextLine()){
           String text = scan.nextLine();
           if (!text.contains("old")){
@@ -730,8 +758,10 @@ void mouseClicked(){
               newPiece.setFirstMoveVariables(isFirst, firstTime);
               if (pieceColor == -1){
                 whiteKing = newPiece;
+                tempKingHistory[0] = newPiece;
               }else{
                 blackKing = newPiece;
+                tempKingHistory[1] = newPiece;
               }
             }else if (pieceType.equals("Rook")){
               Rook newPiece = new Rook(pieceColor, pieceRow, pieceCol);
@@ -745,14 +775,18 @@ void mouseClicked(){
               if (pieceColor == -1){
                 if (side.equals("wRR")){
                   whiteRightRook = newPiece;
+                  tempRookHistory[0] = newPiece;
                 }else if (side.equals("wLR")){
                   whiteLeftRook = newPiece;
+                  tempRookHistory[1] = newPiece;
                 }
               }else{
                 if (side.equals("bRR")){
                   blackRightRook = newPiece;
+                  tempRookHistory[2] = newPiece;
                 }else if (side.equals("bLR")){
                   blackLeftRook = newPiece;
+                  tempRookHistory[3] = newPiece;
                 }
               }
             }else if (pieceType.equals("Queen")){
@@ -775,6 +809,10 @@ void mouseClicked(){
             boardHistory.add(loadedBoard);
             //historyIndex = historyIndex + 1;
             //eatenHistoryIndex = eatenHistoryIndex + 1;
+            rookHistory.add(tempRookHistory);
+            kingHistory.add(tempKingHistory);
+            tempRookHistory = new Rook[4];
+            tempKingHistory = new King[2];
             loadedBoard = new Piece[8][8];
             findingEaten.close();
           }
@@ -800,6 +838,9 @@ void mouseClicked(){
         isCheckmate();
         //printBoard(board);
         scan.close();
+        println("Loaded");
+      }else{
+        createBoard();
       }
     }
     
