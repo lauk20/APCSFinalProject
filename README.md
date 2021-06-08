@@ -10,7 +10,7 @@
 
 **Run Instructions**
 1. Install Processing
-2. Open ```Chess.pde``` in Processing
+2. Open ```Chess.pde``` in Processing, which is in the directory named "Chess"
 3. Press Run
 
 **TIPS**
@@ -19,6 +19,9 @@
 3. Stalemates that are supported: basic stalemate (no valid move for King and not in check), 50-move rule, and 3-fold repetition.
 
 ## Development Log
+### 6/8/21
+**Kenny Lau:** Improved saving and loading so that they can save and load the mode with the mode's appropriate variables (timers for timed mode) and can support history castling (undoing and being able to castle after loading a board, was no supported until now).
+
 ### 6/7/21
 **Kenny Lau:** Fixed the saving bug that kept saving the same board and a loading bug that would throw an error. Fixed En Passant for timed mode and the "undo" and "redo" buttons will no longer show up for timed mode.
 
