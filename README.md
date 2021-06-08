@@ -22,8 +22,12 @@
 ### 6/7/21
 **Kenny Lau:** Fixed the saving bug that kept saving the same board and a loading bug that would throw an error. Fixed En Passant for timed mode and the "undo" and "redo" buttons will no longer show up for timed mode.
 
+**Timothy Sit:** Tried separating save files between modes. Tried to make time only save the most recent board since not being able to undo or redo makes having a history irrelevant. Did not manage to do it all."
+
 ### 6/6/21
 **Kenny Lau:** Implemented the redo feature, allowing for redoes. Made a working saving and loading current board feature that also supports redoing and undoing from the saved state.
+
+**Timothy Sit:** Changed some lines to save memory. Looked for the bug in save and load.
 
 ### 6/5/21
 **Kenny Lau:** Made the Chess 960 mode setup. Spent time fixing the castling for the time. Chess 960 mode is also selectable with the change mode button.
