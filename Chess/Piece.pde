@@ -181,7 +181,7 @@ public abstract class Piece{
     return false;
   }
   
-  abstract public String toString();
+  //abstract public String toString();
   
   public boolean isFirstMove(){
     return false;
