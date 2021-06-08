@@ -625,18 +625,69 @@ void mouseClicked(){
             Piece p = boardHist[i][j];
             if (p != null){
               String pieceString = p.toString();
-              history.write(pieceString + " " + p.getColor() + " " + i + " " + j + " " + p.isFirstMove() + " " + p.firstTurnTime() + "\n");
+              String result = pieceString + " " + p.getColor() + " " + i + " " + j + " " + p.isFirstMove() + " " + p.firstTurnTime() + " ";
+              if (pieceString == "Rook"){
+                if (p.getColor() == -1){
+                  if (p == whiteRightRook){
+                    result = result + "wRR";
+                  }else if (p == whiteLeftRook){
+                    result = result + "wLR";
+                  }else{
+                    result = result + "null";
+                  }
+                }else{
+                  if (p == blackRightRook){
+                    result = result + "bRR";
+                  }else if (p == blackLeftRook){
+                    result = result + "bLR";
+                  }else{
+                    result = result + "null";
+                  }
+                }
+              }
+              history.write(result + "\n");
             }
           }
         }
         history.write("old " + eatenHistory.get(indexOfHistory) + "\n");
         indexOfHistory = indexOfHistory + 1;
       }
+      for (int i = 0; i < board.length; i++){
+        for (int j = 0; j < board[i].length; j++){
+          Piece p = board[i][j];
+          if (p != null){
+            String pieceString = p.toString();
+            String result = pieceString + " " + p.getColor() + " " + i + " " + j + " " + p.isFirstMove() + " " + p.firstTurnTime() + " ";
+              if (pieceString == "Rook"){
+                if (p.getColor() == -1){
+                  if (p == whiteRightRook){
+                    result = result + "wRR";
+                  }else if (p == whiteLeftRook){
+                    result = result + "wLR";
+                  }else{
+                    result = result + "null";
+                  }
+                }else{
+                  if (p == blackRightRook){
+                    result = result + "bRR";
+                  }else if (p == blackLeftRook){
+                    result = result + "bLR";
+                  }else{
+                    result = result + "null";
+                  }
+                }
+              }
+              history.write(result + "\n");
+          }
+        }
+      }
       history.flush();
       history.close();
       println("Saved");
     }
     if (mouseX >= 940 && mouseX <= 1000 && mouseY >= 760 && mouseY <= 800){ //AREA OF LOAD BUTTON
+      whiteKing = null;
+      blackKing = null;
       boardHistory.clear();
       eatenHistory.clear();
       historyIndex = 0;
@@ -705,6 +756,11 @@ void mouseClicked(){
                 isFirst = false;
               }
               newPiece.setFirstMoveVariables(isFirst, firstTime);
+              if (pieceColor == -1){
+                whiteKing = newPiece;
+              }else{
+                blackKing = newPiece;
+              }
             }else if (pieceType.equals("Rook")){
               Rook newPiece = new Rook(pieceColor, pieceRow, pieceCol);
               loadedBoard[pieceRow][pieceCol] = newPiece;
@@ -713,6 +769,20 @@ void mouseClicked(){
                 isFirst = false;
               }
               newPiece.setFirstMoveVariables(isFirst, firstTime);
+              String side = line.next();
+              if (pieceColor == -1){
+                if (side.equals("wRR")){
+                  whiteRightRook = newPiece;
+                }else if (side.equals("wLR")){
+                  whiteLeftRook = newPiece;
+                }
+              }else{
+                if (side.equals("bRR")){
+                  blackRightRook = newPiece;
+                }else if (side.equals("bLR")){
+                  blackLeftRook = newPiece;
+                }
+              }
             }else if (pieceType.equals("Queen")){
               Queen newPiece = new Queen(pieceColor, pieceRow, pieceCol);
               loadedBoard[pieceRow][pieceCol] = newPiece;
@@ -748,9 +818,12 @@ void mouseClicked(){
         if (whosMove == 1){
           board = getRotatedBoard();
         }
+        newThreatMaps();
         updateBoard();
         updateMoves();
         updateMoves();
+        isCheckmate();
+        printBoard(board);
         scan.close();
       }
     }
