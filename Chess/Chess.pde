@@ -880,6 +880,7 @@ void mouseClicked(){
           newPiece = new Knight(whosMove*-1, 7, transforming);
         }
         board[7][transforming] = newPiece;
+        boardHistory.get(boardHistory.size() - 1)[0][7-transforming] = newPiece;
         newPiece.updateValidMoves();
         transforming = -1;
         transformation = false;
