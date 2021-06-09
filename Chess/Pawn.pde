@@ -129,7 +129,12 @@ public class Pawn extends Piece{
     }
     eaten = 0;
     if (firstMoveTime == -1){
-      firstMoveTime = boardHistory.size() - 1;
+      if (mode.equals("timed")){
+        firstMoveTime = boardHistory.size();
+      }else{
+        firstMoveTime = boardHistory.size() - 1;
+      }
+      println(firstMoveTime);
     }
   }
  
@@ -167,6 +172,9 @@ public class Pawn extends Piece{
   public void setFirstMoveVariables(boolean is, int time){
     firstMove = is;
     firstMoveTime = time;
+    if (historyIndex == firstMoveTime){
+      justMovedTwo = true;
+    }
   }
   
   public int firstTurnTime(){
