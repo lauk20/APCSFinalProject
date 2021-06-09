@@ -556,6 +556,49 @@ void redo(){
   isCheckmate();  
 }
 
+void saveBoard(){
+  history = createWriter("History.txt");
+  history.println(mode + " " + whosMove + " " + orientation + " " + historyIndex + " " + winner+ " " + whiteTime[1] + " " + blackTime[1] + " " + auto);
+  int indexOfHistory = 0;
+  for (Piece[][] boardHist : boardHistory){
+    for (int i = 0; i < boardHist.length; i++){
+      for (int j = 0; j < boardHist[0].length; j++){ //data format: CLASS COLOR ROW COL FIRSTTURN FIRSTTURNTIME
+        Piece p = boardHist[i][j];
+        if (p != null){
+          String pieceString = p.toString();
+          String result = pieceString + " " + p.getColor() + " " + i + " " + j + " " + p.isFirstMove() + " " + p.firstTurnTime() + " ";
+          if (pieceString == "Rook"){
+            if (p.getColor() == -1){
+              if (p == whiteRightRook){
+                result = result + "wRR";
+              }else if (p == whiteLeftRook){
+                result = result + "wLR";
+              }else{
+                result = result + "null";
+              }
+            }else{
+              if (p == blackRightRook){
+                result = result + "bRR";
+              }else if (p == blackLeftRook){
+                result = result + "bLR";
+              }else{
+                result = result + "null";
+              }
+            }
+          }
+          history.write(result + "\n");
+        }
+      }
+    }
+    history.write("old " + eatenHistory.get(indexOfHistory) + "\n");
+    indexOfHistory = indexOfHistory + 1;
+  }
+  
+  history.flush();
+  history.close();
+  println("Saved");
+}
+
 boolean clickFound = false;
 void mouseClicked(){
   if (transformation == false){
@@ -638,57 +681,9 @@ void mouseClicked(){
     }
     
     if (mouseX >= 870 && mouseX <= 930 && mouseY >= 760 && mouseY <= 800){ //AREA OF SAVE BUTTON
-      //history.println(boardHistory.size() + ",");
-      /*if (mode.equals("casual")){
-        history = createWriter("Casual.txt");
-      }
-      else if (mode.equals("timed")){
-        history = createWriter("Timed.txt");
-      }
-      else {
-        history = createWriter("Chess960.txt");
-      }*/
-      history = createWriter("History.txt");
-      history.println(mode + " " + whosMove + " " + orientation + " " + historyIndex + " " + winner+ " " + whiteTime[1] + " " + blackTime[1] + " " + auto);
-      int indexOfHistory = 0;
-      for (Piece[][] boardHist : boardHistory){
-        for (int i = 0; i < boardHist.length; i++){
-          for (int j = 0; j < boardHist[0].length; j++){ //data format: CLASS COLOR ROW COL FIRSTTURN FIRSTTURNTIME
-            Piece p = boardHist[i][j];
-            if (p != null){
-              String pieceString = p.toString();
-              String result = pieceString + " " + p.getColor() + " " + i + " " + j + " " + p.isFirstMove() + " " + p.firstTurnTime() + " ";
-              if (pieceString == "Rook"){
-                if (p.getColor() == -1){
-                  if (p == whiteRightRook){
-                    result = result + "wRR";
-                  }else if (p == whiteLeftRook){
-                    result = result + "wLR";
-                  }else{
-                    result = result + "null";
-                  }
-                }else{
-                  if (p == blackRightRook){
-                    result = result + "bRR";
-                  }else if (p == blackLeftRook){
-                    result = result + "bLR";
-                  }else{
-                    result = result + "null";
-                  }
-                }
-              }
-              history.write(result + "\n");
-            }
-          }
-        }
-        history.write("old " + eatenHistory.get(indexOfHistory) + "\n");
-        indexOfHistory = indexOfHistory + 1;
-      }
-
-      history.flush();
-      history.close();
-      println("Saved");
+      saveBoard();
     }
+    
     if (mouseX >= 940 && mouseX <= 1000 && mouseY >= 760 && mouseY <= 800){ //AREA OF LOAD BUTTON
       whiteKing = null;
       blackKing = null;
