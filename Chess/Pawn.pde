@@ -16,6 +16,8 @@ public class Pawn extends Piece{
     if (firstMoveTime > historyIndex){
       firstMove = true;
       //firstMoveTime = -1;
+    }else if (firstMoveTime != -1){
+      firstMove = false;
     }
     
     if (historyIndex == firstMoveTime){
@@ -32,7 +34,7 @@ public class Pawn extends Piece{
     
     if (colorP == whosMove && !mode.equals("timed")){
       justMovedTwo = false;
-    }else if (mode.equals("timed") && firstMoveTime < historyIndex - 1 && firstMoveTime != -1){
+    }else if (mode.equals("timed") && firstMoveTime < historyIndex && firstMoveTime != -1){
       justMovedTwo = false;
     }
     
