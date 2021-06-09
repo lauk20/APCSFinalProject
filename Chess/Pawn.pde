@@ -15,7 +15,11 @@ public class Pawn extends Piece{
     super.setPos(r, c);
     if (firstMoveTime > historyIndex){
       firstMove = true;
-      firstMoveTime = -1;
+      //firstMoveTime = -1;
+    }
+    
+    if (historyIndex == firstMoveTime){
+      justMovedTwo = true;
     }
   }
   
