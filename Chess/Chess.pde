@@ -599,6 +599,146 @@ void saveBoard(){
   println("Saved");
 }
 
+void loadBoard(){
+  whiteKing = null;
+  blackKing = null;
+  boardHistory.clear();
+  eatenHistory.clear();
+  rookHistory.clear();
+  kingHistory.clear();
+  historyIndex = 0;
+  eatenHistoryIndex = 0;
+  BufferedReader saved = createReader("History.txt");
+  if (saved == null){
+    whosMove = -1;
+    orientation = 1;
+    winner = 0;
+    createBoard();
+    return;
+  }
+  Scanner scan = new Scanner(saved);
+  if (scan.hasNextLine()){
+    Scanner turn = new Scanner(scan.nextLine());
+    mode = turn.next();
+    whosMove = Integer.parseInt(turn.next());
+    orientation = Integer.parseInt(turn.next());
+    historyIndex = Integer.parseInt(turn.next());
+    winner = Integer.parseInt(turn.next());
+    if (mode.equals("timed")){
+      whiteTime = new float[]{0, Float.parseFloat(turn.next())};
+      blackTime = new float[]{0, Float.parseFloat(turn.next())};
+      auto = Boolean.parseBoolean(turn.next());
+    }
+    eatenHistoryIndex = historyIndex;
+    turn.close();
+    Piece[][] loadedBoard = new Piece[8][8];
+    Rook[] tempRookHistory = new Rook[4];
+    King[] tempKingHistory = new King[2];
+    while(scan.hasNextLine()){
+      String text = scan.nextLine();
+      if (!text.contains("old")){
+        Scanner line = new Scanner(text);
+        String pieceType = line.next();
+        int pieceColor = Integer.parseInt(line.next());
+        int pieceRow = Integer.parseInt(line.next());
+        int pieceCol = Integer.parseInt(line.next());
+        String firstMove = line.next();
+        int firstTime = Integer.parseInt(line.next());
+        
+        if (pieceType.equals("Pawn")){
+          Pawn newPiece = new Pawn(pieceColor, pieceRow, pieceCol);
+          loadedBoard[pieceRow][pieceCol] = newPiece;
+          boolean isFirst = true;
+          if (firstMove.equals("false")){
+            isFirst = false;
+          }
+          newPiece.setFirstMoveVariables(isFirst, firstTime);
+        }else if (pieceType.equals("King")){
+          King newPiece = new King(pieceColor, pieceRow, pieceCol);
+          loadedBoard[pieceRow][pieceCol] = newPiece;
+          boolean isFirst = true;
+          if (firstMove.equals("false")){
+            isFirst = false;
+          }
+          newPiece.setFirstMoveVariables(isFirst, firstTime);
+          if (pieceColor == -1){
+            whiteKing = newPiece;
+            tempKingHistory[0] = newPiece;
+          }else{
+            blackKing = newPiece;
+            tempKingHistory[1] = newPiece;
+          }
+        }else if (pieceType.equals("Rook")){
+          Rook newPiece = new Rook(pieceColor, pieceRow, pieceCol);
+          loadedBoard[pieceRow][pieceCol] = newPiece;
+          boolean isFirst = true;
+          if (firstMove.equals("false")){
+            isFirst = false;
+          }
+          newPiece.setFirstMoveVariables(isFirst, firstTime);
+          String side = line.next();
+          if (pieceColor == -1){
+            if (side.equals("wRR")){
+              whiteRightRook = newPiece;
+              tempRookHistory[0] = newPiece;
+            }else if (side.equals("wLR")){
+              whiteLeftRook = newPiece;
+              tempRookHistory[1] = newPiece;
+            }
+          }else{
+            if (side.equals("bRR")){
+              blackRightRook = newPiece;
+              tempRookHistory[2] = newPiece;
+            }else if (side.equals("bLR")){
+              blackLeftRook = newPiece;
+              tempRookHistory[3] = newPiece;
+            }
+          }
+        }else if (pieceType.equals("Queen")){
+          Queen newPiece = new Queen(pieceColor, pieceRow, pieceCol);
+          loadedBoard[pieceRow][pieceCol] = newPiece;
+        }else if (pieceType.equals("Knight")){
+          Knight newPiece = new Knight(pieceColor, pieceRow, pieceCol);
+          loadedBoard[pieceRow][pieceCol] = newPiece;
+        }else if (pieceType.equals("Bishop")){
+          Bishop newPiece = new Bishop(pieceColor, pieceRow, pieceCol);
+          loadedBoard[pieceRow][pieceCol] = newPiece;
+        }else{
+          System.out.println("ERROR??");
+        }
+        line.close();
+      }else{
+        Scanner findingEaten = new Scanner(text);
+        findingEaten.next();
+        eatenHistory.add(Integer.parseInt(findingEaten.next()));
+        boardHistory.add(loadedBoard);
+        //historyIndex = historyIndex + 1;
+        //eatenHistoryIndex = eatenHistoryIndex + 1;
+        rookHistory.add(tempRookHistory);
+        kingHistory.add(tempKingHistory);
+        tempRookHistory = new Rook[4];
+        tempKingHistory = new King[2];
+        loadedBoard = new Piece[8][8];
+        findingEaten.close();
+      }
+    }
+    board = copyArray(boardHistory.get(historyIndex));
+    eaten = eatenHistory.get(eatenHistoryIndex);
+    if (whosMove == 1){
+      board = getRotatedBoard();
+    }
+    newThreatMaps();
+    updateMoves();
+    updateMoves();
+    isCheckmate();
+    //printBoard(board);
+    scan.close();
+    println("Loaded");
+  }else{
+    createBoard();
+  }  
+}
+
 boolean clickFound = false;
 void mouseClicked(){
   if (transformation == false){
@@ -685,174 +825,7 @@ void mouseClicked(){
     }
     
     if (mouseX >= 940 && mouseX <= 1000 && mouseY >= 760 && mouseY <= 800){ //AREA OF LOAD BUTTON
-      whiteKing = null;
-      blackKing = null;
-      boardHistory.clear();
-      eatenHistory.clear();
-      rookHistory.clear();
-      kingHistory.clear();
-      historyIndex = 0;
-      eatenHistoryIndex = 0;
-      BufferedReader saved = createReader("History.txt");
-      if (saved == null){
-        whosMove = -1;
-        orientation = 1;
-        winner = 0;
-        createBoard();
-        return;
-      }
-      Scanner scan = new Scanner(saved);
-      /*if (mode.equals("casual")){
-        saved = createReader("Casual.txt");
-        if (saved == null){
-          return;
-        }
-        scan = new Scanner(saved);
-      }
-      if (mode.equals("timed")){
-        saved = createReader("Timed.txt");
-        if (saved == null){
-          return;
-        }
-        scan = new Scanner(saved);
-      }
-      else if (mode.equals("chess960")){
-        saved = createReader("Chess960.txt");
-        if (saved == null){
-          return;
-        }
-        scan = new Scanner(saved);
-      }*/
-      if (scan.hasNextLine()){
-        Scanner turn = new Scanner(scan.nextLine());
-        mode = turn.next();
-        whosMove = Integer.parseInt(turn.next());
-        orientation = Integer.parseInt(turn.next());
-        historyIndex = Integer.parseInt(turn.next());
-        winner = Integer.parseInt(turn.next());
-        if (mode.equals("timed")){
-          whiteTime = new float[]{0, Float.parseFloat(turn.next())};
-          blackTime = new float[]{0, Float.parseFloat(turn.next())};
-          auto = Boolean.parseBoolean(turn.next());
-        }
-        eatenHistoryIndex = historyIndex;
-        turn.close();
-        Piece[][] loadedBoard = new Piece[8][8];
-        Rook[] tempRookHistory = new Rook[4];
-        King[] tempKingHistory = new King[2];
-        while(scan.hasNextLine()){
-          String text = scan.nextLine();
-          if (!text.contains("old")){
-            Scanner line = new Scanner(text);
-            String pieceType = line.next();
-            int pieceColor = Integer.parseInt(line.next());
-            int pieceRow = Integer.parseInt(line.next());
-            int pieceCol = Integer.parseInt(line.next());
-            String firstMove = line.next();
-            int firstTime = Integer.parseInt(line.next());
-            
-            if (pieceType.equals("Pawn")){
-              Pawn newPiece = new Pawn(pieceColor, pieceRow, pieceCol);
-              loadedBoard[pieceRow][pieceCol] = newPiece;
-              boolean isFirst = true;
-              if (firstMove.equals("false")){
-                isFirst = false;
-              }
-              newPiece.setFirstMoveVariables(isFirst, firstTime);
-            }else if (pieceType.equals("King")){
-              King newPiece = new King(pieceColor, pieceRow, pieceCol);
-              loadedBoard[pieceRow][pieceCol] = newPiece;
-              boolean isFirst = true;
-              if (firstMove.equals("false")){
-                isFirst = false;
-              }
-              newPiece.setFirstMoveVariables(isFirst, firstTime);
-              if (pieceColor == -1){
-                whiteKing = newPiece;
-                tempKingHistory[0] = newPiece;
-              }else{
-                blackKing = newPiece;
-                tempKingHistory[1] = newPiece;
-              }
-            }else if (pieceType.equals("Rook")){
-              Rook newPiece = new Rook(pieceColor, pieceRow, pieceCol);
-              loadedBoard[pieceRow][pieceCol] = newPiece;
-              boolean isFirst = true;
-              if (firstMove.equals("false")){
-                isFirst = false;
-              }
-              newPiece.setFirstMoveVariables(isFirst, firstTime);
-              String side = line.next();
-              if (pieceColor == -1){
-                if (side.equals("wRR")){
-                  whiteRightRook = newPiece;
-                  tempRookHistory[0] = newPiece;
-                }else if (side.equals("wLR")){
-                  whiteLeftRook = newPiece;
-                  tempRookHistory[1] = newPiece;
-                }
-              }else{
-                if (side.equals("bRR")){
-                  blackRightRook = newPiece;
-                  tempRookHistory[2] = newPiece;
-                }else if (side.equals("bLR")){
-                  blackLeftRook = newPiece;
-                  tempRookHistory[3] = newPiece;
-                }
-              }
-            }else if (pieceType.equals("Queen")){
-              Queen newPiece = new Queen(pieceColor, pieceRow, pieceCol);
-              loadedBoard[pieceRow][pieceCol] = newPiece;
-            }else if (pieceType.equals("Knight")){
-              Knight newPiece = new Knight(pieceColor, pieceRow, pieceCol);
-              loadedBoard[pieceRow][pieceCol] = newPiece;
-            }else if (pieceType.equals("Bishop")){
-              Bishop newPiece = new Bishop(pieceColor, pieceRow, pieceCol);
-              loadedBoard[pieceRow][pieceCol] = newPiece;
-            }else{
-              System.out.println("ERROR??");
-            }
-            line.close();
-          }else{
-            Scanner findingEaten = new Scanner(text);
-            findingEaten.next();
-            eatenHistory.add(Integer.parseInt(findingEaten.next()));
-            boardHistory.add(loadedBoard);
-            //historyIndex = historyIndex + 1;
-            //eatenHistoryIndex = eatenHistoryIndex + 1;
-            rookHistory.add(tempRookHistory);
-            kingHistory.add(tempKingHistory);
-            tempRookHistory = new Rook[4];
-            tempKingHistory = new King[2];
-            loadedBoard = new Piece[8][8];
-            findingEaten.close();
-          }
-        }
-        /*if (!mode.equals("timed")){
-          board = copyArray(boardHistory.get(historyIndex));
-        }
-        else{
-          board = copyArray(boardHistory.get(0));
-        }*/
-        //println("SIZE: " + boardHistory.size() + " INDEX " + historyIndex);
-        board = copyArray(boardHistory.get(historyIndex));
-        eaten = eatenHistory.get(eatenHistoryIndex);
-        if (whosMove == 1){
-          board = getRotatedBoard();
-        }
-        newThreatMaps();
-        updateMoves();
-        updateMoves();
-        /*for(Piece a : whiteThreatMap[7][3]){
-          print (a + " " + a.getColor());
-        }*/
-        isCheckmate();
-        //printBoard(board);
-        scan.close();
-        println("Loaded");
-      }else{
-        createBoard();
-      }
+      loadBoard();
     }
     
     if (mouseX <= 800 && mode.equals("timed") && paused){ //Start screen for timed mode
