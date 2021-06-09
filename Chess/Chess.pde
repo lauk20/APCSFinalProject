@@ -572,6 +572,7 @@ void mouseClicked(){
       if (counter >= 2){
         winner = 2;
       }
+      isCheckmate();
     }
     
     if (mouseX >= 850 && mouseX <= 950 && mouseY >= 350 && mouseY <= 400 && mode.equals("timed") && madeMove && !paused){ //AREA OF END TURN BUTTON, ONLY WORKS WHEN TIMED MODE
@@ -692,7 +693,10 @@ void mouseClicked(){
       eatenHistoryIndex = 0;
       BufferedReader saved = createReader("History.txt");
       if (saved == null){
-        System.out.println("No file. Please save first.");
+        whosMove = -1;
+        orientation = 1;
+        winner = 0;
+        createBoard();
         return;
       }
       Scanner scan = new Scanner(saved);
