@@ -691,6 +691,10 @@ void mouseClicked(){
       historyIndex = 0;
       eatenHistoryIndex = 0;
       BufferedReader saved = createReader("History.txt");
+      if (saved == null){
+        System.out.println("No file. Please save first.");
+        return;
+      }
       Scanner scan = new Scanner(saved);
       /*if (mode.equals("casual")){
         saved = createReader("Casual.txt");
