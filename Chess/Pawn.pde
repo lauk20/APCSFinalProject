@@ -134,7 +134,6 @@ public class Pawn extends Piece{
       }else{
         firstMoveTime = boardHistory.size() - 1;
       }
-      println(firstMoveTime);
     }
   }
  
