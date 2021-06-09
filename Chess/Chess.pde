@@ -9,7 +9,6 @@ ArrayList<Piece[][]> boardHistory = new ArrayList<Piece[][]>();
 int historyIndex = 0;
 ArrayList<Integer> eatenHistory;
 int eatenHistoryIndex = 0;
-PrintWriter history;
 //the following two variables are only used when loading a board
 ArrayList<Rook[]> rookHistory = new ArrayList<Rook[]>();
 ArrayList<King[]> kingHistory = new ArrayList<King[]>();
@@ -557,6 +556,7 @@ void redo(){
 }
 
 void saveBoard(){
+  PrintWriter history;
   history = createWriter("History.txt");
   history.println(mode + " " + whosMove + " " + orientation + " " + historyIndex + " " + winner+ " " + whiteTime[1] + " " + blackTime[1] + " " + auto);
   int indexOfHistory = 0;
