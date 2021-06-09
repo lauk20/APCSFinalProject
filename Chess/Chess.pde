@@ -641,7 +641,7 @@ void mouseClicked(){
         history = createWriter("Chess960.txt");
       }*/
       history = createWriter("History.txt");
-      history.println(mode + " " + whosMove + " " + orientation + " " + historyIndex + " " + whiteTime[1] + " " + blackTime[1] + " " + auto);
+      history.println(mode + " " + whosMove + " " + orientation + " " + historyIndex + " " + winner+ " " + whiteTime[1] + " " + blackTime[1] + " " + auto);
       int indexOfHistory = 0;
       for (Piece[][] boardHist : boardHistory){
         for (int i = 0; i < boardHist.length; i++){
@@ -719,6 +719,7 @@ void mouseClicked(){
         whosMove = Integer.parseInt(turn.next());
         orientation = Integer.parseInt(turn.next());
         historyIndex = Integer.parseInt(turn.next());
+        winner = Integer.parseInt(turn.next());
         if (mode.equals("timed")){
           whiteTime = new float[]{0, Float.parseFloat(turn.next())};
           blackTime = new float[]{0, Float.parseFloat(turn.next())};
