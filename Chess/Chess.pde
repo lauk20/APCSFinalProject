@@ -446,6 +446,53 @@ void draw(){
   updateMenu();
 }
 
+void undo(){
+  historyIndex = historyIndex - 1;
+  board = copyArray(boardHistory.get(historyIndex));
+  Piece[][] changeBoard = copyArray(board);
+  if (whosMove == 1){
+    Piece[][] newBoard = new Piece[8][8];
+    int originalRow = 0;
+    int originalCol = 0;
+    for (int i = 7; i >= 0 && originalRow < 8; i--){
+      for (int j = 7; j >= 0 && originalCol < 8; j--){
+        newBoard[i][j] = changeBoard[originalRow][originalCol];
+        originalCol = originalCol + 1;
+      }
+      originalCol = 0;
+      originalRow = originalRow + 1;
+    }
+    changeBoard = newBoard; 
+  }
+  board = changeBoard;
+  for (int i = 0; i < 8; i++){
+    for (int j = 0; j < 8; j++){
+      if (board[i][j] != null){
+        board[i][j].setPos(i, j);
+      }
+    }
+  }
+  eatenHistoryIndex = eatenHistoryIndex - 1;
+  eaten = eatenHistory.get(eatenHistoryIndex);
+  whosMove *= -1;
+  orientation = orientation * -1;
+  winner = 0;
+  board = getRotatedBoard();
+  if (rookHistory.size() >= 1 && historyIndex <= rookHistory.size() - 1){
+    Rook[] r = rookHistory.get(historyIndex);
+    whiteRightRook = r[0];
+    whiteLeftRook = r[1];
+    blackRightRook = r[2];
+    blackLeftRook = r[3];
+    King[] k = kingHistory.get(historyIndex);
+    whiteKing = k[0];
+    blackKing = k[1];
+  }
+  newThreatMaps();
+  updateMoves();
+  updateMoves();
+}
+
 boolean clickFound = false;
 void mouseClicked(){
   if (transformation == false){
@@ -466,50 +513,7 @@ void mouseClicked(){
     }
     
     if (mouseX >= 808 && mouseX <= 893 && mouseY >= 162 && mouseY <= 187 && historyIndex >= 1 && !mode.equals("timed")){// AREA OF UNDO BOARD BUTTON
-      historyIndex = historyIndex - 1;
-      board = copyArray(boardHistory.get(historyIndex));
-      Piece[][] changeBoard = copyArray(board);
-      if (whosMove == 1){
-        Piece[][] newBoard = new Piece[8][8];
-        int originalRow = 0;
-        int originalCol = 0;
-        for (int i = 7; i >= 0 && originalRow < 8; i--){
-          for (int j = 7; j >= 0 && originalCol < 8; j--){
-            newBoard[i][j] = changeBoard[originalRow][originalCol];
-            originalCol = originalCol + 1;
-          }
-          originalCol = 0;
-          originalRow = originalRow + 1;
-        }
-        changeBoard = newBoard; 
-      }
-      board = changeBoard;
-      for (int i = 0; i < 8; i++){
-        for (int j = 0; j < 8; j++){
-          if (board[i][j] != null){
-            board[i][j].setPos(i, j);
-          }
-        }
-      }
-      eatenHistoryIndex = eatenHistoryIndex - 1;
-      eaten = eatenHistory.get(eatenHistoryIndex);
-      whosMove *= -1;
-      orientation = orientation * -1;
-      winner = 0;
-      board = getRotatedBoard();
-      if (rookHistory.size() >= 1 && historyIndex <= rookHistory.size() - 1){
-        Rook[] r = rookHistory.get(historyIndex);
-        whiteRightRook = r[0];
-        whiteLeftRook = r[1];
-        blackRightRook = r[2];
-        blackLeftRook = r[3];
-        King[] k = kingHistory.get(historyIndex);
-        whiteKing = k[0];
-        blackKing = k[1];
-      }
-      newThreatMaps();
-      updateMoves();
-      updateMoves();
+      undo();
     }
     
     if (mouseX >= 908 && mouseX <= 993 && mouseY >= 162 && mouseY <= 187 && !mode.equals("timed") && historyIndex + 1 <= boardHistory.size() - 1){ //AREA OF REDO BOARD BUTTON
