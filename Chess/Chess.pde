@@ -196,6 +196,9 @@ void createBoard(){
   boardHistory.clear();
   boardHistory.add(copyArray(board));
   historyIndex = 0;
+  
+  rookHistory.add(new Rook[]{whiteRightRook, whiteLeftRook, blackRightRook, blackLeftRook});
+  kingHistory.add(new King[]{whiteKing, blackKing});
 }
 
 void drawSquares(){
@@ -938,7 +941,12 @@ void mouseClicked(){
           newPiece = new Knight(whosMove*-1, 7, transforming);
         }
         board[7][transforming] = newPiece;
-        boardHistory.get(boardHistory.size() - 1)[0][7-transforming] = newPiece;
+        if (newPiece.getColor() == -1){
+          boardHistory.get(boardHistory.size() - 1)[0][7-transforming] = newPiece;
+        }else{
+          boardHistory.get(boardHistory.size() - 1)[7][transforming] = newPiece;
+        }
+        printBoard(boardHistory.get(boardHistory.size() - 1));
         newPiece.updateValidMoves();
         transforming = -1;
         transformation = false;
