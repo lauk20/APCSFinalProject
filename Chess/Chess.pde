@@ -946,7 +946,6 @@ void mouseClicked(){
         }else{
           boardHistory.get(boardHistory.size() - 1)[7][transforming] = newPiece;
         }
-        printBoard(boardHistory.get(boardHistory.size() - 1));
         newPiece.updateValidMoves();
         transforming = -1;
         transformation = false;
