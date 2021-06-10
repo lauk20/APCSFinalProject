@@ -9,7 +9,6 @@ ArrayList<Piece[][]> boardHistory = new ArrayList<Piece[][]>();
 int historyIndex = 0;
 ArrayList<Integer> eatenHistory;
 int eatenHistoryIndex = 0;
-//the following two variables are only used when loading a board
 ArrayList<Rook[]> rookHistory = new ArrayList<Rook[]>();
 ArrayList<King[]> kingHistory = new ArrayList<King[]>();
 
@@ -350,6 +349,21 @@ void updateBoardHistory(){
     }
     addBoard = newBoard;
   }
+  
+  Rook[] tempRookHistory = new Rook[4];
+  tempRookHistory[0] = whiteRightRook;
+  tempRookHistory[1] = whiteLeftRook;
+  tempRookHistory[2] = blackRightRook;
+  tempRookHistory[3] = blackLeftRook;
+  
+  rookHistory.add(tempRookHistory);
+  
+  King[] tempKingHistory = new King[2];
+  tempKingHistory[0] = whiteKing;
+  tempKingHistory[1] = blackKing;
+  
+  kingHistory.add(tempKingHistory);
+  
   
   int counter = 0;
   for (Piece[][] oldBoard : boardHistory){
@@ -903,6 +917,7 @@ void mouseClicked(){
           newPiece = new Knight(whosMove, 0, transforming);
         }
         board[0][transforming] = newPiece;
+        boardHistory.get(boardHistory.size() - 1)[0][transforming] = newPiece;
         newPiece.updateValidMoves();
         transforming = -1;
         transformation = false;

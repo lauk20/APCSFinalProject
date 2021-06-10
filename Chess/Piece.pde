@@ -60,7 +60,6 @@ public abstract class Piece{
     }
     else{
       eaten++;
-      System.out.println(eaten);
     }
     if (board[this.row][this.col] != null && board[this.row][this.col].getColor() != colorP){
       board[this.row][this.col] = null;

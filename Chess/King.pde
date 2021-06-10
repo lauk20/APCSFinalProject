@@ -67,7 +67,7 @@ public class King extends Piece{
               canCastleRight = false;
             }
           }
-          if ((canCastleRight && whiteRightRook.hypotheticalMove(row, 5) && (board[row][5] == null || board[row][5] == whiteRightRook)) || (firstMove && col == 5 && whiteRightRook.isFirstMove() && whiteRightRook.getPos()[1] == 6)){
+          if ((canCastleRight && whiteRightRook.hypotheticalMove(row, 5) && (board[row][5] == null || board[row][5] == whiteRightRook)) || (canCastleRight && firstMove && col == 5 && whiteRightRook.isFirstMove() && whiteRightRook.getPos()[1] == 6)){
             moves.add(new int[]{row, 6});
           }
           if (!canCastleRight && mode.equals("chess960")){
@@ -89,7 +89,7 @@ public class King extends Piece{
               canCastleLeft = false;
             }
           }
-          if ((canCastleLeft && whiteLeftRook.hypotheticalMove(row, 3) && (board[row][3] == null || board[row][3] == whiteLeftRook)) || (firstMove && col == 3 && whiteLeftRook.isFirstMove() && whiteLeftRook.getPos()[1] == 2)){
+          if ((canCastleLeft && whiteLeftRook.hypotheticalMove(row, 3) && (board[row][3] == null || board[row][3] == whiteLeftRook)) || (canCastleLeft && firstMove && col == 3 && whiteLeftRook.isFirstMove() && whiteLeftRook.getPos()[1] == 2)){
             moves.add(new int[]{row, 2});
           }
           //old castling code
@@ -111,7 +111,7 @@ public class King extends Piece{
               canCastleRight = false;
             }
           }
-          if ((canCastleRight && blackRightRook.hypotheticalMove(row, 4) && (board[row][4] == null || board[row][4] == blackRightRook)) || (firstMove && col == 4 && blackRightRook.isFirstMove() && blackRightRook.getPos()[1] == 5)){
+          if ((canCastleRight && blackRightRook.hypotheticalMove(row, 4) && (board[row][4] == null || board[row][4] == blackRightRook)) || (canCastleRight && firstMove && col == 4 && blackRightRook.isFirstMove() && blackRightRook.getPos()[1] == 5)){
             moves.add(new int[]{row, 5});
           }
           boolean canCastleLeft = true;
@@ -126,7 +126,7 @@ public class King extends Piece{
               canCastleLeft = false;
             }
           }
-          if ((canCastleLeft && blackLeftRook.hypotheticalMove(row, 2) && (board[row][2] == null || board[row][2] == blackLeftRook)) || (firstMove && col == 2 && blackLeftRook.isFirstMove() && blackLeftRook.getPos()[1] == 1)){
+          if ((canCastleLeft && blackLeftRook.hypotheticalMove(row, 2) && (board[row][2] == null || board[row][2] == blackLeftRook)) || (canCastleLeft && firstMove && col == 2 && blackLeftRook.isFirstMove() && blackLeftRook.getPos()[1] == 1)){
             moves.add(new int[]{row, 1});
           }
         }  
