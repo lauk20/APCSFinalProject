@@ -364,7 +364,6 @@ void updateBoardHistory(){
   
   kingHistory.add(tempKingHistory);
   
-  
   int counter = 0;
   for (Piece[][] oldBoard : boardHistory){
     if (isEqualBoard(oldBoard, addBoard)){
@@ -620,7 +619,7 @@ void saveBoard(){
             whiteLeftRook = r[1];
             blackRightRook = r[2];
             blackLeftRook = r[3];
-            King[] k = kingHistory.get(historyIndex);
+            King[] k = kingHistory.get(counter);
             whiteKing = k[0];
             blackKing = k[1];
             counter = counter + 1;
