@@ -2,7 +2,7 @@
 
 **Team Name:** Chess Masters
 
-**Team Members:** Kenny Lau, Timothy Sit
+**Team Members:** Kenny Lau, Timothy Sit (Group 15)
 
 **Project Description:** This is just regular chess. There's an 8 by 8 board with all the pieces. The looks will be simplified though with a birds eye view. The pieces will look like simple sprites.
 
