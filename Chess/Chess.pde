@@ -476,16 +476,18 @@ public void endTurn(){
 }
 
 void draw(){
-  if (whiteTime[1] <= 0 || (whiteTime[1] - (millis() - whiteTime[0]))/1000 == 0){
-    whiteTime[1] = 0;
-    winner = 1;
-    paused = true;
-    updateBoard();
-  }else if (blackTime[1] <= 0 || (blackTime[1] - (millis() - blackTime[0]))/1000 == 0){
-    blackTime[1] = 0;
-    winner = -1;
-    paused = true;
-    updateBoard();
+  if (mode.equals("timed")){
+    if (whiteTime[1] <= 0 || (whiteTime[1] - (millis() - whiteTime[0]))/1000 == 0){
+      whiteTime[1] = 0;
+      winner = 1;
+      paused = true;
+      updateBoard();
+    }else if (blackTime[1] <= 0 || (blackTime[1] - (millis() - blackTime[0]))/1000 == 0){
+      blackTime[1] = 0;
+      winner = -1;
+      paused = true;
+      updateBoard();
+    }
   }
   if (eaten >= 100){
     winner = 2;
