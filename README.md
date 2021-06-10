@@ -19,9 +19,11 @@
 3. Stalemates that are supported: basic stalemate (no valid move for King and not in check), 50-move rule, and 3-fold repetition.
 
 ## Development Log
+### 6/10/21
+**Kenny Lau:** Fixed bugs with black's promotion history not being logged correctly. Fixed general bugs.
 
 ### 6/9/21
-**Kenny Lau:**
+**Kenny Lau:** Made the code for ```mouseClicked()``` cleaner by making methods for larger chunks of code. Fixed some bugs and overlooked functionality that are caused by the undo and redo features.
 
 **Timothy Sit:** Added black pieces to prmomote, which I thought I had done. Made pawn move set eaten to 0, instead of whatever Kenny did. Found some bugs.
 
