@@ -557,6 +557,7 @@ void redo(){
 
 void saveBoard(){
   PrintWriter history;
+  int counter = 0;
   history = createWriter("History.txt");
   history.println(mode + " " + whosMove + " " + orientation + " " + historyIndex + " " + winner+ " " + whiteTime[1] + " " + blackTime[1] + " " + auto);
   int indexOfHistory = 0;
@@ -567,6 +568,17 @@ void saveBoard(){
         if (p != null){
           String pieceString = p.toString();
           String result = pieceString + " " + p.getColor() + " " + i + " " + j + " " + p.isFirstMove() + " " + p.firstTurnTime() + " ";
+          if (rookHistory.size() >= 1 && counter <= rookHistory.size() - 1){
+            Rook[] r = rookHistory.get(counter);
+            whiteRightRook = r[0];
+            whiteLeftRook = r[1];
+            blackRightRook = r[2];
+            blackLeftRook = r[3];
+            King[] k = kingHistory.get(historyIndex);
+            whiteKing = k[0];
+            blackKing = k[1];
+            counter = counter + 1;
+          }
           if (pieceString == "Rook"){
             if (p.getColor() == -1){
               if (p == whiteRightRook){
