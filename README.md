@@ -19,8 +19,16 @@
 3. Stalemates that are supported: basic stalemate (no valid move for King and not in check), 50-move rule, and 3-fold repetition.
 
 ## Development Log
+
+### 6/9/21
+**Kenny Lau:**
+
+**Timothy Sit:** Added black pieces to prmomote, which I thought I had done. Made pawn move set eaten to 0, instead of whatever Kenny did. Found some bugs.
+
 ### 6/8/21
 **Kenny Lau:** Improved saving and loading so that they can save and load the mode with the mode's appropriate variables (timers for timed mode) and can support history castling (undoing and being able to castle after loading a board, was no supported until now).
+
+**Timothy Sit:** Added small code to methods to fix some bugs.
 
 ### 6/7/21
 **Kenny Lau:** Fixed the saving bug that kept saving the same board and a loading bug that would throw an error. Fixed En Passant for timed mode and the "undo" and "redo" buttons will no longer show up for timed mode.
