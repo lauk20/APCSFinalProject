@@ -797,6 +797,9 @@ void loadBoard(){
     scan.close();
     println("Loaded");
   }else{
+    whosMove = -1;
+    orientation = 1;
+    winner = 0;
     createBoard();
   }  
 }
