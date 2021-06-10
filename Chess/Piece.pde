@@ -75,6 +75,13 @@ public abstract class Piece{
       boardHistory.remove(i);
       eatenHistory.remove(eatenHistory.size() - 1);
     }
+    for (Piece[] rows : board){
+      for (Piece pieces : rows){
+        if (pieces != null && pieces.firstTurnTime() > historyIndex){
+          pieces.setFirstMoveVariables(true, -1);
+        }
+      }      
+    }
     if (!mode.equals("timed") || auto){
       endTurn();
       madeMove = false;
@@ -185,6 +192,10 @@ public abstract class Piece{
   
   public boolean isFirstMove(){
     return false;
+  }
+  
+  public void setFirstMoveVariables(boolean b, int i){
+    return;
   }
   
   public int firstTurnTime(){
