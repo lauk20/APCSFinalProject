@@ -55,11 +55,12 @@ public abstract class Piece{
     }else if (pieceThere == blackLeftRook && colorP == -1){
       blackLeftRook = null;
     }
-    if (board[row][col] != null){
+    if (board[row][col] != null || board[this.row][this.col].toString().equals("Pawn")){
       eaten = 0;
     }
     else{
       eaten++;
+      System.out.println(eaten);
     }
     if (board[this.row][this.col] != null && board[this.row][this.col].getColor() != colorP){
       board[this.row][this.col] = null;
