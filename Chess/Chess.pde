@@ -267,10 +267,42 @@ void updateBoard(){
     textAlign(CENTER);
     textSize(64);
     text("PROMOTE", 800*1/2, 800*5/11);
-    image(imageQueen.copy(), 200, 400);
-    image(imageBishop.copy(), 300, 400);
-    image(imageRook.copy(), 400, 400);
-    image(imageKnight.copy(), 500, 400);
+    if (whosMove == 1){
+      image(imageQueen.copy(), 200, 400);
+      image(imageBishop.copy(), 300, 400);
+      image(imageRook.copy(), 400, 400);
+      image(imageKnight.copy(), 500, 400);
+    }
+    else {
+      PImage copy = imageQueen.copy();
+      for (int i = 10; i < copy.width - 10; i++){
+        for (int j = 10; j < copy.height - 10; j++){
+          copy.set(i, j, invertColor(imageQueen.get(i, j)));
+        }
+      }
+      image(copy, 200, 400);
+      copy = imageBishop.copy();
+      for (int i = 10; i < copy.width - 10; i++){
+        for (int j = 8; j < copy.height - 10; j++){
+          copy.set(i, j, invertColor(imageBishop.get(i, j)));
+        }
+      }
+      image(copy, 300, 400);
+      copy = imageRook.copy();
+      for (int i = 12; i < copy.width-14; i++){
+        for (int j = 14; j < copy.height-10; j++){
+          copy.set(i, j, invertColor(imageRook.get(i, j)));
+        }
+      }
+      image(copy, 400, 400);
+      copy = imageKnight.copy();
+      for (int i = 10; i < copy.width-10; i++){
+        for (int j = 14; j < copy.height-10; j++){
+          copy.set(i, j, invertColor(imageKnight.get(i, j)));
+        }
+      }
+      image(copy, 500, 400);
+    }
     transformation = true;
   }
   
