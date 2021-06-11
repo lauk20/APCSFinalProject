@@ -14,7 +14,7 @@
 3. Press Run
 
 **TIPS**
-1. If you want to castle, select the King piece. The place where the king can castle to is light up as well as his regular moves.
+1. If you want to castle, select the King piece. The place where the king can castle to is lit up, as well as his regular moves.
 2. En Passant is also supported.
 3. Stalemates that are supported: basic stalemate (no valid move for King and not in check), 50-move rule, and 3-fold repetition.
 4. When saving and loading a board, you can confirm if it was saved or loaded by checking the output box in Processing.
